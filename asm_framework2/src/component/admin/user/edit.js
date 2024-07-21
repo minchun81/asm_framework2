@@ -1,4 +1,6 @@
 import React from 'react';
+import Header from "../layouts/header";
+import Footer from "../layouts/footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../../assets/css/styleEdit.css"
 
@@ -6,6 +8,9 @@ const EditUser = () => {
     
     return (
 <div>
+<Header />
+<div class="col-sm-11" style={{position: "relative", left: "241px"}}>
+
     <div className="card">
         <div className="card-body">
         <h4 className="card-title">Edit User</h4>
@@ -54,6 +59,7 @@ const EditUser = () => {
             </form>
         </div>
     </div>
+</div>
 </div>
 );
 };
