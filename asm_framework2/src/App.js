@@ -1,4 +1,7 @@
+import React from "react";
   import './App.css';
+  import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
+
   import Home from './component/client/home';
   import About from './component/client/about'
   import Shop from './component/client/shop';
@@ -27,7 +30,6 @@
   import './assets/css/meanmenu.min.css'
   import './assets/css/responsive.css'
 //admin
-import React from "react";
 import Profile from "./component/admin/profile/index";
 import Categories from "./component/admin/categories/list";
 import EditCategories from "./component/admin/categories/edit";
@@ -49,20 +51,15 @@ import "./assets/plugins/c3-master/c3.min.css";
 import "./assets/css/style.min.css";
 // import './assets/js/pages/dashboards/dashboard1';
 
-import {
-  RouterProvider,
-  Route,
-  createBrowserRouter,
-  createRoutesFromElements
-} from 'react-router-dom';
+  function App() {
+    
+    const router = createBrowserRouter(
+      createRoutesFromElements(
+        <Route>
+           <Route path="/admin" element={<Layout />} />    
+           <Route path="/admin/profile" element={<Profile />} />
 
-function App() {
-  const router = createBrowserRouter(
-    createRoutesFromElements(
-      <>
-        <Route path="/admin" element={<Layout />} />    
-        <Route path="/admin/profile" element={<Profile />} />
-        {/* category */}
+          {/* category */}
         <Route path="/admin/category" element={<Categories />} />
         <Route path="/admin/editCategory" element={<EditCategories />} />
         <Route path="/admin/addCategory" element={<AddCategories />} />
@@ -74,18 +71,6 @@ function App() {
         <Route path="/admin/user" element={<User />} />
         <Route path="/admin/addUser" element={<AddUser />} />
         <Route path="/admin/editUser" element={<EditUser />} />
- 
-  
-
-  import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
- 
-  function App() {
-    
-    const router = createBrowserRouter(
-      createRoutesFromElements(
-        <Route>
-           <Route path="/admin" element={<Layout />} />    
-           <Route path="/admin/profile" element={<Profile />} />
 
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -93,6 +78,7 @@ function App() {
           <Route path="/detail" element={<Detail />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/contact" element={<Contact />} />
+
         </Route>
       )
     );
