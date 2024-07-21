@@ -1,10 +1,10 @@
-import './App.css';
-
-import Listproduct from './component/admin/product/list';
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Admin from "./component/admin/index";
 function App() {
   return (
     <div className="App">
-      <Listproduct/>
+      <Admin />
     </div>
 
   );
