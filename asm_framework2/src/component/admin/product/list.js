@@ -20,20 +20,20 @@ const listProduct = () => {
                             <tr className='table-light'>
                                 <th className="border-top-0">ID</th>
                                 <th className="border-top-0">Name</th>
-                                <th className="border-top-0">Image</th>
                                 <th className="border-top-0">Price</th>
+                                <th className="border-top-0">Image</th>
                                 <th className="border-top-0">ID category</th>
                                 <th className="border-top-0">Description</th>
                                 <th className="border-top-0">Action</th>
                             </tr>
                         </thead>
                         <tbody className='align-middle'>
-                            <tr>
+                            <tr >
                                 <td >1</td>
                                 <td>táo xanh</td>
                                 <td>trung123</td>
-                                <td><img width={"150px"} src={"https://bizweb.dktcdn.net/thumb/large/100/390/808/products/uzs0n9j-400x400.png?v=1632211622160"} alt="Example" /></td>
-                                <td className='align-middle'>Huynh Minh Trung</td>
+                                <td><img width={"150px"} src={"https://themewagon.github.io/fruitkha/assets/img/products/product-img-5.jpg"} alt="Example" /></td>
+                                <td >Huynh Minh Trung</td>
                                 <td>01665202865</td>
                                 <td> 
                                     <div className="d-flex gap-2 justify-content-center">

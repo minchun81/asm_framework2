@@ -79,7 +79,7 @@ import "./assets/css/style.min.css";
           <Route path="/cart" element={<Cart />} />
           <Route path="/contact" element={<Contact />} />
 
-        </Route>
+        </Route> //chuyển trang
       )
     );
     return (
