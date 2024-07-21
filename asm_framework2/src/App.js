@@ -19,7 +19,6 @@
   import './assets/bootstrap/css/bootstrap.css.map'
   import './assets/bootstrap/css/bootstrap.min.css.map'
 
-
   import './assets/css/all.min.css'
   import './assets/css/animate.css'
   import './assets/css/magnific-popup.css'
@@ -27,7 +26,19 @@
   import './assets/css/owl.carousel.css'
   import './assets/css/meanmenu.min.css'
   import './assets/css/responsive.css'
-
+//admin
+import React from "react";
+import Profile from "./component/admin/profile/index";
+import Layout from './component/admin/index';
+// css
+// import "./assets/images/favicon.png";
+import './assets/plugins/chartist-js/dist/chartist.min.css';
+import './assets/plugins/chartist-js/dist/chartist-init.css';
+import './assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css';
+import "./assets/plugins/c3-master/c3.min.css";
+// import './assets/plugins/c3-master/c3.min.css';
+import "./assets/css/style.min.css";
+// import './assets/js/pages/dashboards/dashboard1';
  
   
 
@@ -38,6 +49,9 @@
     const router = createBrowserRouter(
       createRoutesFromElements(
         <Route>
+           <Route path="/admin" element={<Layout />} />    
+           <Route path="/admin/profile" element={<Profile />} />
+
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/shop" element={<Shop />} />
@@ -51,43 +65,5 @@
       <RouterProvider router={router} />
     );
   }
-import React from "react";
-import Profile from "./component/admin/profile/index";
-import Layout from './component/admin/index';
-// css
-// import "./assets/images/favicon.png";
-import './assets/plugins/chartist-js/dist/chartist.min.css';
-import './assets/plugins/chartist-js/dist/chartist-init.css';
-import './assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css';
-import "./assets/plugins/c3-master/c3.min.css";
-// import './assets/plugins/c3-master/c3.min.css';
-import "./assets/css/style.min.css";
-// import './assets/js/pages/dashboards/dashboard1';
-
-import {
-  RouterProvider,
-  Route,
-  createBrowserRouter,
-  createRoutesFromElements
-} from 'react-router-dom';
-
-function App() {
-  const router = createBrowserRouter(
-    createRoutesFromElements(
-      <>
-        <Route path="/admin" element={<Layout />} />    
-        <Route path="/admin/profile" element={<Profile />} />
-
-      </>
-    )
-  );
-
-  return (
-    <div className="App">
-    <RouterProvider router={router} />
-  </div>
-
-  );
-}
 
   export default App;
