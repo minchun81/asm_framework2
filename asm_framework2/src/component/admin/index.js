@@ -1,19 +1,16 @@
 import React from "react";
 import Header from "./layouts/header";
 import Footer from "./layouts/footer";
-
-const Admin = () => {
+import Dashboard from "./dashboard/index";
+const layout = () => {
   return (
-    <div>
+    <div className="">
       <Header />
-      <div className="content">
-        {/* Nội dung chính của bạn sẽ ở đây */}
-        
-        <Footer />
+      <Dashboard />
 
-      </div>
+        {/* <Footer /> */}
     </div>
   );
 };
 
-export default Admin;
+export default layout;

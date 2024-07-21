@@ -1,4 +1,7 @@
 import React from "react";
+import logo from '../../../assets/images/logo-light-icon.png';
+import logo2 from '../../../assets/images/logo-light-text.png';
+import avt from '../../../assets/images/users/1.jpg';
 
 import '../../../assets/css/styleEdit.css';
 
@@ -6,13 +9,8 @@ import '../../../assets/css/styleEdit.css';
 const Header = () => {
   return (
     
-    <div className="container">
-      <div className="preloader">
-        <div className="lds-ripple">
-          <div className="lds-pos"></div>
-          <div className="lds-pos"></div>
-        </div>
-      </div>
+    <div className="">
+
 
       <div
         id="main-wrapper"
@@ -26,17 +24,18 @@ const Header = () => {
         <header className="topbar" data-navbarbg="skin6">
           <nav className="navbar top-navbar navbar-expand-md navbar-dark">
             <div className="navbar-header" data-logobg="skin6">
-              <a className="navbar-brand ms-4" href="index.html">
+              <a className="navbar-brand ms-4" href="/admin">
                 <b className="logo-icon">
                   <img
-                    src="../assets/images/logo-light-icon.png"
+                    src={logo}
+                    
                     alt="homepage"
                     className="dark-logo"
                   />
                 </b>
                 <span className="logo-text">
                   <img
-                    src="../assets/images/logo-light-text.png"
+                    src={logo2}
                     alt="homepage"
                     className="dark-logo"
                   />
@@ -95,7 +94,7 @@ const Header = () => {
                     aria-expanded="false"
                   >
                     <img
-                      src="../assets/images/users/1.jpg"
+                      src={avt}
                       alt="user"
                       className="profile-pic me-2"
                     />
@@ -115,7 +114,7 @@ const Header = () => {
                 <li className="sidebar-item">
                   <a
                     className="sidebar-link waves-effect waves-dark sidebar-link"
-                    href="index.html"
+                    href="/admin"
                     aria-expanded="false"
                   >
                     <i className="mdi me-2 mdi-gauge"></i>
@@ -125,7 +124,7 @@ const Header = () => {
                 <li className="sidebar-item">
                   <a
                     className="sidebar-link waves-effect waves-dark sidebar-link"
-                    href="profile.html"
+                    href="/admin/profile"
                     aria-expanded="false"
                   >
                     <i className="mdi me-2 mdi-account-check"></i>
@@ -135,7 +134,7 @@ const Header = () => {
                 <li className="sidebar-item">
                   <a
                     className="sidebar-link waves-effect waves-dark sidebar-link"
-                    href="category.html"
+                    href="/admin/category"
                     aria-expanded="false"
                   >
                     <i className="mdi me-2 mdi-table"></i>
@@ -145,7 +144,7 @@ const Header = () => {
                 <li className="sidebar-item">
                   <a
                     className="sidebar-link waves-effect waves-dark sidebar-link"
-                    href="product.html"
+                    href="/admin/product"
                     aria-expanded="false"
                   >
                     <i className="mdi me-2 mdi-emoticon"></i>
@@ -155,7 +154,7 @@ const Header = () => {
                 <li className="sidebar-item">
                   <a
                     className="sidebar-link waves-effect waves-dark sidebar-link"
-                    href="user.html"
+                    href="/admin/user"
                     aria-expanded="false"
                   >
                     <i className="mdi me-2 mdi-earth"></i>
@@ -204,30 +203,7 @@ const Header = () => {
           </div>
         </aside>
 
-        <div className="page-wrapper">
-          <div className="page-breadcrumb">
-            <div className="row align-items-center">
-              <div className="col-md-6 col-8 align-self-center">
-                <h3 className="page-title mb-0 p-0">Dashboard</h3>
-                <div className="d-flex align-items-center">
-                  <nav aria-label="breadcrumb">
-                    <ol className="breadcrumb">
-                      <li className="breadcrumb-item">
-                        <a href="#">Home</a>
-                      </li>
-                      <li
-                        className="breadcrumb-item active"
-                        aria-current="page"
-                      >
-                        Dashboard
-                      </li>
-                    </ol>
-                  </nav>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        
       </div>
     </div>
   );
