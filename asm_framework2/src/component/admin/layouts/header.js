@@ -1,12 +1,6 @@
 import React from "react";
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import "../../../assets/css/style.min.css";
-import "../../../assets/plugins/c3-master/c3.min.css";
-// import "../../../assets/images/favicon.png";
-import '../../../assets/plugins/chartist-js/dist/chartist.min.css';
-import '../../../assets/plugins/chartist-js/dist/chartist-init.css';
-import '../../../assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css';
 
+import '../../../assets/css/styleEdit.css';
 
 
 const Header = () => {

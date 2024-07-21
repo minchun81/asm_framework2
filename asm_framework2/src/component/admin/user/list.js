@@ -1,38 +1,38 @@
 import React from 'react';
 
-const listProduct = () => {
+const ListUser = () => {
     
     return (
-<div className="container-fluid">
+<div class="container-fluid">
 {/* <!-- Start Page Content --> */}
-<div className="row ">
-    <div className="col-sm-12 ">
-        <div className="card">
-            <div className="card-body">
-                <h4 className="card-title">List Product</h4>
-                <div className="table-responsive">
-                    <table className="table user-table text-center">
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Danh sách người dùng</h4>
+                <div class="table-responsive">
+                    <table class="table user-table">
                         <thead>
-                            <tr className='table-light'>
-                                <th className="border-top-0">ID</th>
-                                <th className="border-top-0">Name</th>
-                                <th className="border-top-0">Image</th>
-                                <th className="border-top-0">Price</th>
-                                <th className="border-top-0">ID category</th>
-                                <th className="border-top-0">Description</th>
-                                <th className="border-top-0">Action</th>
+                            <tr>
+                                <th class="border-top-0">ID</th>
+                                <th class="border-top-0">Username</th>
+                                <th class="border-top-0">Password</th>
+                                <th class="border-top-0">Email</th>
+                                <th class="border-top-0">Full name</th>
+                                <th class="border-top-0">Phone number</th>
+                                <th class="border-top-0">Action</th>
                             </tr>
                         </thead>
-                        <tbody className='align-middle'>
+                        <tbody>
                             <tr>
-                                <td >1</td>
-                                <td>táo xanh</td>
+                                <td>1</td>
+                                <td>minhtrung</td>
                                 <td>trung123</td>
-                                <td><img width={"150px"} src={"https://bizweb.dktcdn.net/thumb/large/100/390/808/products/uzs0n9j-400x400.png?v=1632211622160"} alt="Example" /></td>
-                                <td className='align-middle'>Huynh Minh Trung</td>
+                                <td>@Genelia</td>
+                                <td>Huynh Minh Trung</td>
                                 <td>01665202865</td>
                                 <td> 
-                                    <div className="d-flex gap-2 justify-content-center">
+                                    <div className="d-flex gap-2 ">
                                     <span><button className="btn btn-primary">Edit</button></span>
                                     <span><button href className="btn btn-danger">Delete</button></span>
                                      </div>
@@ -42,11 +42,11 @@ const listProduct = () => {
                                 <td>2</td>
                                 <td>minhtrung</td>
                                 <td>trung123</td>
-                                <td><img width={"150px"} src={"https://themewagon.github.io/fruitkha/assets/img/products/product-img-5.jpg"} alt="Example" /></td>
+                                <td>@Ritesh</td>
                                 <td>Huynh Minh Trung</td>
                                 <td>01665202865</td>
                                 <td> 
-                                    <div className="d-flex gap-2 justify-content-center">
+                                    <div className="d-flex gap-2 ">
                                     <span><button className="btn btn-primary">Edit</button></span>
                                     <span><button href className="btn btn-danger">Delete</button></span>
                                      </div>
@@ -56,11 +56,11 @@ const listProduct = () => {
                                 <td>3</td>
                                 <td>minhtrung</td>
                                 <td>trung123</td>
-                                <td><img width={"150px"} src={"https://themewagon.github.io/fruitkha/assets/img/products/product-img-5.jpg"} alt="Example" /></td>
+                                <td>@Govinda</td>
                                 <td>Huynh Minh Trung</td>
                                 <td>01665202865</td>
                                 <td> 
-                                    <div className="d-flex gap-2 justify-content-center">
+                                    <div className="d-flex gap-2 ">
                                     <span><button className="btn btn-primary">Edit</button></span>
                                     <span><button href className="btn btn-danger">Delete</button></span>
                                      </div>
@@ -70,11 +70,11 @@ const listProduct = () => {
                                 <td>4</td>
                                 <td>minhtrung</td>
                                 <td>trung123</td>
-                                <td><img width={"150px"} src={"https://themewagon.github.io/fruitkha/assets/img/products/product-img-5.jpg"} alt="Example" /></td>
+                                <td>@Hritik</td>
                                 <td>Huynh Minh Trung</td>
                                 <td>01665202865</td>
                                 <td> 
-                                    <div className="d-flex gap-2 justify-content-center">
+                                    <div className="d-flex gap-2 ">
                                     <span><button className="btn btn-primary">Edit</button></span>
                                     <span><button href className="btn btn-danger">Delete</button></span>
                                      </div>
@@ -84,11 +84,11 @@ const listProduct = () => {
                                 <td>5</td>
                                 <td>minhtrung</td>
                                 <td>trung123</td>
-                                <td><img width={"150px"} src={"https://themewagon.github.io/fruitkha/assets/img/products/product-img-5.jpg"} alt="Example" /></td>
+                                <td>@Maruti</td>
                                 <td>Huynh Minh Trung</td>
                                 <td>01665202865</td>
                                 <td> 
-                                    <div className="d-flex gap-2 justify-content-center">
+                                    <div className="d-flex gap-2 ">
                                     <span><button className="btn btn-primary">Edit</button></span>
                                     <span><button href className="btn btn-danger">Delete</button></span>
                                      </div>
@@ -98,11 +98,11 @@ const listProduct = () => {
                                 <td>6</td>
                                 <td>minhtrung</td>
                                 <td>trung123</td>
-                                <td><img width={"150px"} src={"https://themewagon.github.io/fruitkha/assets/img/products/product-img-5.jpg"} alt="Example" /></td>
+                                <td>@Sonu</td>
                                 <td>Huynh Minh Trung</td>
                                 <td>01665202865</td>
                                 <td> 
-                                    <div className="d-flex gap-2 justify-content-center">
+                                    <div className="d-flex gap-2 ">
                                     <span><button className="btn btn-primary">Edit</button></span>
                                     <span><button href className="btn btn-danger">Delete</button></span>
                                      </div>
@@ -122,4 +122,4 @@ const listProduct = () => {
 );
 };
 
-export default listProduct;
+export default ListUser;
