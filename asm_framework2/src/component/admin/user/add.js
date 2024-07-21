@@ -9,6 +9,7 @@ const AddUser = () => {
     return (
 <div>
 <Header />
+<div class="col-sm-11" style={{position: "relative", left: "241px"}}>
 
     <div className="card">
         <div className="card-body">
@@ -58,6 +59,7 @@ const AddUser = () => {
             </form>
         </div>
     </div>
+</div>
 </div>
 );
 };

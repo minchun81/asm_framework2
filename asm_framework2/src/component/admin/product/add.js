@@ -9,7 +9,8 @@ const AddProduct = () => {
     return (
 <div>
 <Header />
-
+<div class="col-sm-11" style={{position: "relative", left: "241px"}}>
+        
     <div className="card">
         <div className="card-body">
         <h4 className="card-title">Add Product</h4>
@@ -57,6 +58,7 @@ const AddProduct = () => {
             </form>
         </div>
     </div>
+</div>
 </div>
 );
 };

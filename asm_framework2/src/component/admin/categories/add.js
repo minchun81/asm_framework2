@@ -9,7 +9,7 @@ const AddCategory = () => {
     return (
 <div>
 <Header />
-
+    <div class="col-sm-11" style={{position: "relative", left: "241px"}}>
     <div className="card">
         <div className="card-body">
         <h4 className="card-title">Add Category</h4>
@@ -29,6 +29,7 @@ const AddCategory = () => {
             </form>
         </div>
     </div>
+</div>
 </div>
 );
 };

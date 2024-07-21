@@ -9,7 +9,7 @@ const EditProduct = () => {
     return (
 <div>
 <Header />
-
+        <div class="col-sm-11" style={{position: "relative", left: "241px"}}>
     <div className="card">
         <div className="card-body">
         <h4 className="card-title">Edit Product</h4>
@@ -68,6 +68,7 @@ const EditProduct = () => {
             </form>
         </div>
     </div>
+</div>
 </div>
 );
 };

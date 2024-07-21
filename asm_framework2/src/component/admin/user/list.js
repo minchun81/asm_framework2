@@ -4,15 +4,17 @@ import Footer from "../layouts/footer";
 const ListUser = () => {
     
     return (
-<div class="container-fluid">
+<div class="">
 <Header />
 
 {/* <!-- Start Page Content --> */}
 <div class="row">
-    <div class="col-sm-12">
+<div class="col-sm-11" style={{position: "relative", left: "241px"}}>
+
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Danh sách người dùng</h4>
+                <span><a href='/admin/addUser' className="btn btn-primary">Add User</a></span>
                 <div class="table-responsive">
                     <table class="table user-table">
                         <thead>
@@ -36,7 +38,7 @@ const ListUser = () => {
                                 <td>01665202865</td>
                                 <td> 
                                     <div className="d-flex gap-2 ">
-                                    <span><button className="btn btn-primary">Edit</button></span>
+                                    <span><a href='/admin/editUser' className="btn btn-primary">Edit</a></span>
                                     <span><button href className="btn btn-danger">Delete</button></span>
                                      </div>
                                 </td>
@@ -50,7 +52,7 @@ const ListUser = () => {
                                 <td>01665202865</td>
                                 <td> 
                                     <div className="d-flex gap-2 ">
-                                    <span><button className="btn btn-primary">Edit</button></span>
+                                    <span><a href='/admin/editUser' className="btn btn-primary">Edit</a></span>
                                     <span><button href className="btn btn-danger">Delete</button></span>
                                      </div>
                                 </td>
@@ -64,7 +66,7 @@ const ListUser = () => {
                                 <td>01665202865</td>
                                 <td> 
                                     <div className="d-flex gap-2 ">
-                                    <span><button className="btn btn-primary">Edit</button></span>
+                                    <span><a href='/admin/editUser' className="btn btn-primary">Edit</a></span>
                                     <span><button href className="btn btn-danger">Delete</button></span>
                                      </div>
                                 </td>
@@ -78,7 +80,7 @@ const ListUser = () => {
                                 <td>01665202865</td>
                                 <td> 
                                     <div className="d-flex gap-2 ">
-                                    <span><button className="btn btn-primary">Edit</button></span>
+                                    <span><a href='/admin/editUser' className="btn btn-primary">Edit</a></span>
                                     <span><button href className="btn btn-danger">Delete</button></span>
                                      </div>
                                 </td>
@@ -92,7 +94,7 @@ const ListUser = () => {
                                 <td>01665202865</td>
                                 <td> 
                                     <div className="d-flex gap-2 ">
-                                    <span><button className="btn btn-primary">Edit</button></span>
+                                    <span><a href='/admin/editUser' className="btn btn-primary">Edit</a></span>
                                     <span><button href className="btn btn-danger">Delete</button></span>
                                      </div>
                                 </td>
@@ -106,7 +108,7 @@ const ListUser = () => {
                                 <td>01665202865</td>
                                 <td> 
                                     <div className="d-flex gap-2 ">
-                                    <span><button className="btn btn-primary">Edit</button></span>
+                                    <span><a href='/admin/editUser' className="btn btn-primary">Edit</a></span>
                                     <span><button href className="btn btn-danger">Delete</button></span>
                                      </div>
                                 </td>

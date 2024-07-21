@@ -4,15 +4,17 @@ import Footer from "../layouts/footer";
 const ListCategory = () => {
     
     return (
-<div class="container-fluid">
+<div class="">
 {/* <!-- Start Page Content --> */}
 <Header />
 
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-11" style={{position: "relative", left: "241px"}} >
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">List Categories</h4>
+                <span><a href='/admin/addCategory' className="btn btn-primary">Add Categories</a></span>
+
                 <div class="table-responsive ">
                     <table class="table user-table ">
                         <thead>
@@ -30,7 +32,7 @@ const ListCategory = () => {
 
                                 <td> 
                                     <div className="d-flex gap-2 ">
-                                    <span><button className="btn btn-primary">Edit</button></span>
+                                    <span><a href='/admin/editCategory' className="btn btn-primary">Edit</a></span>
                                     <span><button href className="btn btn-danger">Delete</button></span>
                                      </div>
                                 </td>
@@ -41,7 +43,7 @@ const ListCategory = () => {
 
                                 <td> 
                                     <div className="d-flex gap-2 ">
-                                    <span><button className="btn btn-primary">Edit</button></span>
+                                    <span><a href='/admin/editCategory' className="btn btn-primary">Edit</a></span>
                                     <span><button href className="btn btn-danger">Delete</button></span>
                                      </div>
                                 </td>
@@ -52,7 +54,7 @@ const ListCategory = () => {
 
                                 <td> 
                                     <div className="d-flex gap-2 ">
-                                    <span><button className="btn btn-primary">Edit</button></span>
+                                    <span><a href='/admin/editCategory' className="btn btn-primary">Edit</a></span>
                                     <span><button href className="btn btn-danger">Delete</button></span>
                                      </div>
                                 </td>
@@ -63,7 +65,7 @@ const ListCategory = () => {
      
                                 <td> 
                                     <div className="d-flex gap-2 ">
-                                    <span><button className="btn btn-primary">Edit</button></span>
+                                    <span><a href='/admin/editCategory' className="btn btn-primary">Edit</a></span>
                                     <span><button href className="btn btn-danger">Delete</button></span>
                                      </div>
                                 </td>
@@ -74,7 +76,7 @@ const ListCategory = () => {
                            
                                 <td> 
                                     <div className="d-flex gap-2 ">
-                                    <span><button className="btn btn-primary">Edit</button></span>
+                                    <span><a href='/admin/editCategory' className="btn btn-primary">Edit</a></span>
                                     <span><button href className="btn btn-danger">Delete</button></span>
                                      </div>
                                 </td>
@@ -85,7 +87,7 @@ const ListCategory = () => {
                             
                                 <td> 
                                     <div className="d-flex gap-2 ">
-                                    <span><button className="btn btn-primary">Edit</button></span>
+                                    <span><a href='/admin/editCategory' className="btn btn-primary">Edit</a></span>
                                     <span><button href className="btn btn-danger">Delete</button></span>
                                      </div>
                                 </td>

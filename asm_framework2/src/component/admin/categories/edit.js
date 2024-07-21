@@ -9,7 +9,8 @@ const EditCategory = () => {
     return (
 <div className=''>
 <Header />
-        <div className=''>
+        <div class="col-sm-11" style={{position: "relative", left: "241px"}}>
+            <div className=''>
     <div className="card">
         <div className="card-body">
         <h4 className="card-title">Edit Category</h4>
@@ -29,6 +30,7 @@ const EditCategory = () => {
             </form>
         </div>
     </div>
+</div>
 </div>
 </div>
 );
