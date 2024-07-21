@@ -1,9 +1,12 @@
 import React from 'react';
-
+import Header from "../layouts/header";
+import Footer from "../layouts/footer";
 const ListUser = () => {
     
     return (
 <div class="container-fluid">
+<Header />
+
 {/* <!-- Start Page Content --> */}
 <div class="row">
     <div class="col-sm-12">

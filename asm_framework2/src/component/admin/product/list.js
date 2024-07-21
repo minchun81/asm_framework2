@@ -1,10 +1,13 @@
 import React from 'react';
-
+import Header from "../layouts/header";
+import Footer from "../layouts/footer";
 const listProduct = () => {
     
     return (
 <div className="container-fluid">
 {/* <!-- Start Page Content --> */}
+<Header />
+
 <div className="row ">
     <div className="col-sm-12 ">
         <div className="card">

@@ -1,11 +1,15 @@
 import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
+import Header from "../layouts/header";
+import Footer from "../layouts/footer";
 import "../../../assets/css/styleEdit.css"
 
 const AddCategory = () => {
     
     return (
 <div>
+<Header />
+
     <div className="card">
         <div className="card-body">
         <h4 className="card-title">Add Category</h4>
