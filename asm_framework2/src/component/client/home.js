@@ -115,7 +115,7 @@ const Home = () =>{
                 <a href="cart.html" className="cart-btn"><i className="fas fa-shopping-cart"></i> Add to Cart</a>
               </div>
             </div>
-            <div className="col-lg-4 col-md-6 text-center">
+            {/* <div className="col-lg-4 col-md-6 text-center">
               <div className="single-product-item">
                 <div className="product-image">
                   <a href="/detail"><img src={produc2} alt="" /></a>
@@ -124,11 +124,21 @@ const Home = () =>{
                 <p className="/detail"><span>Per Kg</span> 70$ </p>
                 <a href="/cart" className="cart-btn"><i className="fas fa-shopping-cart"></i> Add to Cart</a>
               </div>
-            </div>
+            </div> */}
             <div className="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
               <div className="single-product-item">
                 <div className="product-image">
                   <a href="/detail"><img src={produc3} alt="" /></a>
+                </div>
+                <h3>Lemon</h3>
+                <p className="product-price"><span>Per Kg</span> 35$ </p>
+                <a href="/cart" className="cart-btn"><i className="fas fa-shopping-cart"></i> Add to Cart</a>
+              </div>
+            </div>
+            <div className="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
+              <div className="single-product-item">
+                <div className="product-image">
+                  <a href="/detail"><img src={produc2} alt="" /></a>
                 </div>
                 <h3>Lemon</h3>
                 <p className="product-price"><span>Per Kg</span> 35$ </p>
