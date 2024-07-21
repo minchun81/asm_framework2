@@ -31,8 +31,8 @@ function App() {
 
   return (
     <div className="App">
-      <Admin />
-    </div>
+    <RouterProvider router={router} />
+  </div>
 
   );
 }
