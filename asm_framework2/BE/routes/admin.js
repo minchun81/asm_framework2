@@ -39,14 +39,12 @@ module.exports = router;
 // router.get('/product/edit/:id',productController.edit);
 // router.post('/product/update/:id',upload.single('image'),productController.update);
 // router.get('/product/delete/:id',productController.delete);
+//router user
+router.get('/user/list', userController.list);
+router.post('/user/create',userController.create);
+router.get('/user/edit/:id',userController.edit);
+router.post('/user/update/:id',userController.update);
+router.get('/user/delete/:id',userController.delete);
 
-
-// //router user
-// router.get('/user/list', userController.list);
-// router.get('/user/create',userController.formCreate);
-// router.post('/user/create',userController.create);
-// router.get('/user/edit/:id',userController.edit);
-// router.post('/user/update/:id',userController.update);
-// router.get('/user/delete/:id',userController.delete);
 
 module.exports = router;

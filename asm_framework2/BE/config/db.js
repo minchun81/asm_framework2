@@ -5,7 +5,7 @@ const db = mysql.createPool({
   port: 3306, // Port mặc định của MySQL thường là 3306, không phải 3000
   user: 'root',
   password: '',
-  database: 'asm2fe2',
+  database: 'framework2',
 });
 
 db.getConnection((err, connection) => {
