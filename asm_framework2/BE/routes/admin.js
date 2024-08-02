@@ -2,7 +2,7 @@ const express = require('express');
 const categoriesController = require('../controllers/admin/category');
 const userController = require('../controllers/admin/user');
 const productController = require('../controllers/admin/product');
-const dashboardController = require('../controllers/admin/dashboard');
+// const dashboardController = require('../controllers/admin/dashboard');
 
 // const productController = require('../controllers/admin/product');
 
@@ -24,14 +24,14 @@ var upload = multer({ storage: storage })
 //router dashboard
 // router.get('/dashboard',dashboardController.dashboard);
 
-// // router category 
-// router.get('/category/list',categoriesController.list);
+// router category 
+router.get('/category/list',categoriesController.list);
 // router.get('/category/create',categoriesController.formCreate);
-// router.post('/category/create',categoriesController.create);
-// router.get('/category/edit/:id',categoriesController.edit);
-// router.post('/category/update/:id',categoriesController.update);
-// router.get('/category/delete/:id',categoriesController.delete);
-
+router.post('/category/create',categoriesController.create);
+router.get('/category/edit/:id',categoriesController.edit);
+router.post('/category/update/:id',categoriesController.update);
+router.delete('/category/delete/:id',categoriesController.delete);
+module.exports = router;
 // //router product
 // router.get('/product/list',productController.list);
 // router.get('/product/create',productController.formCreate);
