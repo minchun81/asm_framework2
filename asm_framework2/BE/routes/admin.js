@@ -46,5 +46,11 @@ router.get('/user/edit/:id',userController.edit);
 router.post('/user/update/:id',userController.update);
 router.get('/user/delete/:id',userController.delete);
 
+router.get('/product/list', productController.list);
+router.post('/product/create',productController.create);
+router.get('/product/edit/:id',productController.edit);
+router.post('/product/update/:id',productController.update);
+router.get('/product/delete/:id',productController.delete);
+
 
 module.exports = router;
