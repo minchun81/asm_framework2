@@ -46,20 +46,17 @@ module.exports = class Product {
     }
 
     // update
-    static async update(id, arr) {
-        return new Promise((resolve, reject) => {
-            const [name, category_id, unit, price, status, image, description] = arr;
-            let sql = '';
-            sql = 'UPDATE users SET name = ?, category_id = ?, unit = ?, price = ?,status = ? description = ? WHERE id = ?'
-            db.query(sql, [name, category_id, unit, price, status, description,id], function (err, data) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(data);
-                }
-            })
-        })
-    }
+    static async update(product, id) {
+            return new Promise((resolve, reject) => {
+                db.query('UPDATE products SET ? WHERE id=?', [product, id], function(err, data) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(data);
+                    }
+                });
+            });
+        }
 
     // delete 
     static async delete(id) {
