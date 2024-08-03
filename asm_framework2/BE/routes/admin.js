@@ -45,7 +45,7 @@ router.post('/user/create',userController.create);
 router.get('/user/edit/:id',userController.edit);
 router.post('/user/update/:id',userController.update);
 router.get('/user/delete/:id',userController.delete);
-
+//router product
 router.get('/product/list', productController.list);
 router.post('/product/create',productController.create);
 router.get('/product/edit/:id',productController.edit);

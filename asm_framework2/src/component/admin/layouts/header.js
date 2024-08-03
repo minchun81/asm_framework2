@@ -5,12 +5,9 @@ import avt from '../../../assets/images/users/1.jpg';
 
 import '../../../assets/css/styleEdit.css';
 
-
 const Header = () => {
   return (
-    
     <div className="">
-
 
       <div
         id="main-wrapper"
@@ -28,15 +25,14 @@ const Header = () => {
                 <b className="logo-icon">
                   <img
                     src={logo}
-                    
-                    alt="homepage"
+                    alt="trang chủ"
                     className="dark-logo"
                   />
                 </b>
                 <span className="logo-text">
                   <img
                     src={logo2}
-                    alt="homepage"
+                    alt="trang chủ"
                     className="dark-logo"
                   />
                 </span>
@@ -75,7 +71,7 @@ const Header = () => {
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="Search &amp; enter"
+                      placeholder="Tìm kiếm &amp; nhấn enter"
                     />
                     <a className="srh-btn">
                       <i className="ti-close"></i>
@@ -95,7 +91,7 @@ const Header = () => {
                   >
                     <img
                       src={avt}
-                      alt="user"
+                      alt="người dùng"
                       className="profile-pic me-2"
                     />
                     Markarn Doe
@@ -118,7 +114,7 @@ const Header = () => {
                     aria-expanded="false"
                   >
                     <i className="mdi me-2 mdi-gauge"></i>
-                    <span className="hide-menu">Dashboard</span>
+                    <span className="hide-menu">Bảng Điều Khiển</span>
                   </a>
                 </li>
                 <li className="sidebar-item">
@@ -128,7 +124,7 @@ const Header = () => {
                     aria-expanded="false"
                   >
                     <i className="mdi me-2 mdi-account-check"></i>
-                    <span className="hide-menu">Profile</span>
+                    <span className="hide-menu">Hồ Sơ</span>
                   </a>
                 </li>
                 <li className="sidebar-item">
@@ -138,7 +134,7 @@ const Header = () => {
                     aria-expanded="false"
                   >
                     <i className="mdi me-2 mdi-table"></i>
-                    <span className="hide-menu">Category</span>
+                    <span className="hide-menu">Danh Mục</span>
                   </a>
                 </li>
                 <li className="sidebar-item">
@@ -148,7 +144,7 @@ const Header = () => {
                     aria-expanded="false"
                   >
                     <i className="mdi me-2 mdi-emoticon"></i>
-                    <span className="hide-menu">Product</span>
+                    <span className="hide-menu">Sản Phẩm</span>
                   </a>
                 </li>
                 <li className="sidebar-item">
@@ -158,7 +154,7 @@ const Header = () => {
                     aria-expanded="false"
                   >
                     <i className="mdi me-2 mdi-earth"></i>
-                    <span className="hide-menu">User</span>
+                    <span className="hide-menu">Người Dùng</span>
                   </a>
                 </li>
               </ul>
@@ -171,8 +167,7 @@ const Header = () => {
                   href=""
                   className="link"
                   data-toggle="tooltip"
-                  title=""
-                  data-original-title="Settings"
+                  title="Cài Đặt"
                 >
                   <i className="ti-settings"></i>
                 </a>
@@ -182,8 +177,7 @@ const Header = () => {
                   href=""
                   className="link"
                   data-toggle="tooltip"
-                  title=""
-                  data-original-title="Email"
+                  title="Email"
                 >
                   <i className="mdi mdi-gmail"></i>
                 </a>
@@ -193,8 +187,7 @@ const Header = () => {
                   href=""
                   className="link"
                   data-toggle="tooltip"
-                  title=""
-                  data-original-title="Logout"
+                  title="Đăng Xuất"
                 >
                   <i className="mdi mdi-power"></i>
                 </a>
@@ -203,7 +196,6 @@ const Header = () => {
           </div>
         </aside>
 
-        
       </div>
     </div>
   );

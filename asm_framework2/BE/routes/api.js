@@ -4,11 +4,11 @@ const userAPIController = require('../controllers/api/user')
 const productAPIController = require ('../controllers/api/product');
 const router = express.Router();
 //router category
-router.get('/category/list', categoryAPIController.list)
-router.post('/category/create', categoryAPIController.create);
-router.get('/category/edit/:id', categoryAPIController.edit);
-router.put('/category/update/:id', categoryAPIController.update);
-router.delete('/category/delete/:id', categoryAPIController.delete);
+router.get('/category/', categoryAPIController.list)
+router.post('/category/', categoryAPIController.create);
+router.get('/category/:id', categoryAPIController.edit);
+router.put('/category/:id', categoryAPIController.update);
+router.delete('/category/:id', categoryAPIController.delete);
 
 // router user
 router.get('/user',userAPIController.list);
