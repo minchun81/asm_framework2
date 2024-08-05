@@ -1,5 +1,4 @@
 const express = require('express');
-const axios = require('axios');
 const bcrypt = require('bcrypt');
 const Product = require('../../models/product')
 exports.list = async (req, res, next) => {
@@ -17,23 +16,17 @@ exports.formCreate = async (req, res, next) => {
 exports.create = async (req, res, next) => {
     try {
         console.log(req.body); // Check the structure of req.body
-
+        let file = req.file;    
         const data = {
             name: req.body.name,
             category_id: req.body.category_id,
-            unit:req.body.unit,
             price: req.body.price,
             status: req.body.status,
             image: file.filename,
             description: req.body.description
         };
 
-        // Check if any fields are null or undefined
-        for (const key in data) {
-            if (data[key] === null || data[key] === undefined) {
-                console.error(`Missing value for ${key}`);
-            }
-        }
+
 
         const result = await Product.create(data);
         if (result) {
@@ -49,35 +42,27 @@ exports.create = async (req, res, next) => {
 
 
 
-exports.update = async (req, res, next) => {
-    try {
-        const name= req.body.name;
-        const category_id= req.body.category_id;
-        const unit = req.body.unit;
-        const price = req.body.price;
-        const status = req.body.status;
-        const image = file.filename;
-        const description = req.body.description;
+exports.update = async(req, res, next) => {
+    try{
+    let id = req.params.id;
+    let file = req.file;    
+    const data = {
+        name: req.body.name,
+        category_id: req.body.category_id,
+        price: req.body.price,
+        status: req.body.status,
+        image: file.filename,
+        description: req.body.description
+    };
+    // console.log(result);
+    let result = await Product.update(data, id);
+    res.status(201).json({ result: result, data: data });
 
-        // Prepare the array of values to update
-        const arr = [name, category_id, unit, price, status, image, description];
-
-        // Call the User model's update method
-        const result = await Product.update(id, arr);
-
-        if (result.affectedRows > 0) {
-            res.status(200).json({
-                message: "User updated successfully",
-                data: result
-            });
-        } else {
-            res.status(404).json({ message: "User not found" });
-        }
-    } catch (error) {
-        console.error('Error updating user:', error);
-        res.status(500).json({ message: 'Failed to update user', error: error.message });
-    }
+}catch (err) {
+    res.status(500).json({ error: 'Internal Server Error' });
 }
+   
+};
 
 
 exports.delete = async (req, res, next) => {
@@ -98,7 +83,7 @@ exports.delete = async (req, res, next) => {
 exports.fetchProductDetails = async (req, res, next) => {
     const id = req.params.id;
     try {
-        const result = await User.fetchProductDetails(id);
+        const result = await Product.fetchProductDetails(id);
         if (result.length > 0) {
             res.status(200).json({ data: result[0] }); // result[0] as fetchUserDetails returns an array
         } else {

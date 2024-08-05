@@ -1,20 +1,13 @@
-// db.js
-const mysql = require('mysql');
-const db = mysql.createPool({
-  host: 'localhost',
-  port: 3306, // Port mặc định của MySQL thường là 3306, không phải 3000
-  user: 'root',
-  password: '',
-  database: 'framework2',
+var mysql = require('mysql');
+var db = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'asm2fe2'
 });
 
-db.getConnection((err, connection) => {
-  if (err) {
-    console.error('Error connecting to the database:', err);
-    return;
-  }
-  if (connection) connection.release();
-  console.log('Connected to MySQL');
+db.connect(function(err) {
+    if (err) throw err;
+    console.log('Database is connected successfully !');
 });
-
 module.exports = db;

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const express = require('express');
 const categoriesController = require('../controllers/admin/category');
 const userController = require('../controllers/admin/user');
@@ -54,3 +55,5 @@ router.get('/product/delete/:id',productController.delete);
 
 
 module.exports = router;
+=======
+>>>>>>> nhanntpc03225
