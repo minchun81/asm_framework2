@@ -2,7 +2,7 @@ import axios from "axios";
 import { Cookies } from "react-cookie";
 
 // Đặt URL cơ bản cho API của bạn
-const BASE_URL = "http://localhost:5000/api/user/list";
+const BASE_URL = "http://localhost:5000/api";
 
 const request = async ({
   method = "GET",

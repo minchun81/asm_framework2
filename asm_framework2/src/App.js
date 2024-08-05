@@ -50,7 +50,7 @@ import "./assets/plugins/c3-master/c3.min.css";
 // import './assets/plugins/c3-master/c3.min.css';
 import "./assets/css/style.min.css";
 // import './assets/js/pages/dashboards/dashboard1';
-
+import StudentList from './pages/user'
   function App() {
     
     const router = createBrowserRouter(
@@ -78,6 +78,7 @@ import "./assets/css/style.min.css";
           <Route path="/detail" element={<Detail />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="student-list" element={<StudentList />} />
 
         </Route> //chuyển trang
       )

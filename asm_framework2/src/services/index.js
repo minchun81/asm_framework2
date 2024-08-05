@@ -1,4 +1,4 @@
-import request from "../config/Api/index";
+import request from "../config/Api";
 
 // Hàm để lấy danh sách người dùng
 const users = async () => {
