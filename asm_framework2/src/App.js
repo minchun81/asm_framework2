@@ -41,6 +41,7 @@ import User from "./component/admin/user/list";
 import EditUser from "./component/admin/user/edit";
 import AddUser from "./component/admin/user/add";
 import Layout from './component/admin/index';
+
 // css
 // import "./assets/images/favicon.png";
 import './assets/plugins/chartist-js/dist/chartist.min.css';
@@ -50,7 +51,6 @@ import "./assets/plugins/c3-master/c3.min.css";
 // import './assets/plugins/c3-master/c3.min.css';
 import "./assets/css/style.min.css";
 // import './assets/js/pages/dashboards/dashboard1';
-import StudentList from './pages/user'
   function App() {
     
     const router = createBrowserRouter(
@@ -70,7 +70,7 @@ import StudentList from './pages/user'
         {/* user */}
         <Route path="/admin/user" element={<User />} />
         <Route path="/admin/addUser" element={<AddUser />} />
-        <Route path="/admin/editUser" element={<EditUser />} />
+        <Route path="/admin/editUser/:id" element={<EditUser />} />
 
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -78,7 +78,6 @@ import StudentList from './pages/user'
           <Route path="/detail" element={<Detail />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="student-list" element={<StudentList />} />
 
         </Route> //chuyển trang
       )

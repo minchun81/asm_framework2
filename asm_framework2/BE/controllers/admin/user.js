@@ -2,7 +2,7 @@ const axios = require('axios');
 
 exports.list = async (req, res, next) => {
     try {
-        const response = await axios.get('http://localhost:5000/api/user/list');
+        const response = await axios.get('http://localhost:3000/api/users/list');
         res.render('admin/user/list', { data: response.data.data });
     } catch (err) {
         console.error("Error", err);
@@ -18,12 +18,12 @@ exports.create = async (req, res, next) => {
     const data = {
         username: req.body.username,
         email: req.body.email,
-        password: password,
+        password: req.body.password,
         role: req.body.role,
         status: req.body.status
     };
     try {
-        const response = await axios.post("http://localhost:5000/api/user/create", data);
+        const response = await axios.post("http://localhost:3000/api/user/create", data);
         if (response.status === 200) {
             res.redirect("/admin/user/list?success=true&action=create");
         }
@@ -36,7 +36,7 @@ exports.create = async (req, res, next) => {
 exports.edit = async (req, res, next) => {
     const id = req.params.id;
     try {
-        const response = await axios.get(`http://localhost:5000/api/user/edit/${id}`);
+        const response = await axios.get(`http://localhost:3000/api/user/edit/${id}`);
         res.render('admin/user/edit', { data: response.data.data });
     } catch (err) {
         console.error("Error", err);
@@ -54,7 +54,7 @@ exports.update = async (req, res, next) => {
         status: req.body.status,
     }
     try {
-        const response = await axios.put(`http://localhost:5000/api/user/update/${id}`, data);
+        const response = await axios.put(`http://localhost:3000/api/user/update/${id}`, data);
         if (response.status === 200) {
             res.redirect("/admin/user/list?success=true&action=update");
         }
@@ -69,7 +69,7 @@ exports.update = async (req, res, next) => {
 exports.delete = async (req, res, next) => {
     const id = req.params.id;
     try {
-        const response = await axios.delete(`http://localhost:5000/api/user/delete/${id}`);
+        const response = await axios.delete(`http://localhost:3000/api/user/delete/${id}`);
        
         // Kiểm tra xem `response.data.data` có phải là false không
         if (response.data.data === 200) {

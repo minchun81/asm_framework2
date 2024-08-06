@@ -4,7 +4,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv'); // Import dotenv
-const db = require('./config/db'); 
+const port = 3000;
 // Gọi hàm config từ dotenv để tải các biến môi trường
 dotenv.config();
 app.use(express.json()); // 
@@ -19,9 +19,6 @@ app.use(express.static('assets')); // Chỉ định thư mục gốc cho tài ng
 app.set('view engine', 'ejs'); // Thiết lập view engine
 app.use(cors()); // Sử dụng cors
 
-// Call router
-// const clientRoutes = require('./routes/client');
-// app.use(clientRoutes); // Sử dụng router client
 
 const adminRoutes = require('./routes/admin');
 app.use('/admin', adminRoutes); // Sử dụng router admin
@@ -30,6 +27,6 @@ const apiRoutes = require('./routes/api');
 app.use('/api', apiRoutes); // Sử dụng router api
 
 // Khởi động server
-app.listen(5000, () => {
-    console.log("Server is running on port 5000"); // Thông báo server đang chạy
-});
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+})

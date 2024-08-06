@@ -1,67 +1,157 @@
-import React from 'react';
+import React, { useState } from 'react';
+import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../layouts/header";
 import Footer from "../layouts/footer";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../../../assets/css/styleEdit.css"
+import "../../../assets/css/styleEdit.css";
+import { useNavigate } from 'react-router-dom';
+import { addUsers } from '../../../services/user';
+import CryptoJS from 'crypto-js';
 
 const AddUser = () => {
-    
-    return (
-<div>
-<Header />
-<div class="col-sm-11" style={{position: "relative", left: "241px"}}>
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [role, setRole] = useState('');
+  const [status, setStatus] = useState('');
+  const [formErrors, setFormErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
-    <div className="card">
-        <div className="card-body">
-        <h4 className="card-title">Add User</h4>
-            <form class="form-horizontal form-material mx-2">
-                <div className="form-group mb-3">
-                    <label className="col-md-12 mb-0">Username</label>
-                    <div class="col-md-12">
-                    <input type="text" id="fullname" placeholder=""
-                        className=" form-control-line border-input"/>
-                    </div>
+  const validateForm = () => {
+    const errors = {};
+    if (!username) errors.username = "Tên đăng nhập là bắt buộc.";
+    if (!email) {
+      errors.email = "Email là bắt buộc.";
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      errors.email = "Email không hợp lệ.";
+    }
+    if (!password) errors.password = "Mật khẩu là bắt buộc.";
+    if (!role) errors.role = "Vai trò là bắt buộc.";
+    if (!status) errors.status = "Trạng thái là bắt buộc.";
+    return errors;
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const errors = validateForm();
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+    setFormErrors({});
+
+    // Mã hóa mật khẩu bằng MD5
+    const hashedPassword = CryptoJS.MD5(password).toString();
+
+    const userData = { username, email, password: hashedPassword, role, status };
+
+    addUsers(userData, (response) => {
+      setSuccessMessage('User added successfully!');
+      setErrorMessage('');
+      navigate('/admin/user'); // Clear any previous errors
+    }, (error) => {
+      setSuccessMessage(''); // Clear any previous success message
+      setErrorMessage(error);
+    });
+  };
+
+  return (
+    <div>
+      <Header />
+      <div className="col-sm-11" style={{ position: "relative", left: "241px" }}>
+        <div className="card">
+          <div className="card-body">
+            <h4 className="card-title">Thêm Người Dùng</h4>
+            <form className="form-horizontal form-material mx-2" onSubmit={handleSubmit}>
+              <div className="form-group mb-3">
+                <label className="col-md-12 mb-0">Tên Đăng Nhập</label>
+                <div className="col-md-12">
+                  <input 
+                    type="text" 
+                    id="username" 
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)} 
+                    className="form-control-line border-input" 
+                    placeholder="Nhập tên đăng nhập"
+                  />
+                  {formErrors.username && <p className="text-danger">{formErrors.username}</p>}
                 </div>
-                
-                <div class="form-group mb-3">
-                    <label class="col-md-12 mb-0">Password</label>
-                    <div class="col-md-12">
-                        <input type="text"class="form-control-line border-input"/>
-                    </div>
+              </div>
+              <div className="form-group mb-3">
+                <label className="col-md-12 mb-0">Email</label>
+                <div className="col-md-12">
+                  <input 
+                    type="email" 
+                    id="email" 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)} 
+                    className="form-control-line border-input" 
+                    placeholder="Nhập email"
+                  />
+                  {formErrors.email && <p className="text-danger">{formErrors.email}</p>}
                 </div>
-                <div class="form-group mb-3">
-                    <label class="col-md-12 mb-0">Email</label>
-                    <div class="col-md-12">
-                        <input type="email" 
-                            class="form-control-line border-input"/>
-                    </div>
+              </div>
+              <div className="form-group mb-3">
+                <label className="col-md-12 mb-0">Mật Khẩu</label>
+                <div className="col-md-12">
+                  <input 
+                    type="password" 
+                    id="password" 
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)} 
+                    className="form-control-line border-input" 
+                    placeholder="Nhập mật khẩu"
+                  />
+                  {formErrors.password && <p className="text-danger">{formErrors.password}</p>}
                 </div>
-                <div class="form-group mb-3">
-                    <label class="col-md-12 mb-0">Full name</label>
-                    <div class="col-md-12">
-                        <input type="email" 
-                            class="form-control-line border-input"/>
-                    </div>
+              </div>
+              <div className="form-group mb-3">
+                <label className="col-md-12 mb-0">Vai Trò</label>
+                <div className="col-md-12">
+                  <select
+                    id="role"
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                    className="form-control-line border-input"
+                  >
+                    <option value="">Chọn vai trò</option>
+                    <option value="admin">Admin</option>
+                    <option value="user">User</option>
+                  </select>
+                  {formErrors.role && <p className="text-danger">{formErrors.role}</p>}
                 </div>
-                <div class="form-group mb-3">
-                    <label class="col-md-12 mb-0">Phone number</label>
-                    <div class="col-md-12">
-                        <input type="email" 
-                            class="form-control-line border-input"/>
-                    </div>
+              </div>
+              <div className="form-group mb-3">
+                <label className="col-md-12 mb-0">Trạng Thái</label>
+                <div className="col-md-12">
+                  <select
+                    id="status"
+                    value={status}
+                    onChange={(e) => setStatus(e.target.value)}
+                    className="form-control-line border-input"
+                  >
+                    <option value="">Chọn trạng thái</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
+                  {formErrors.status && <p className="text-danger">{formErrors.status}</p>}
                 </div>
-                
-                <div class="form-group">
-                    <div class="col-sm-12 d-flex">
-                        <button class="btn btn-success mx-auto mx-md-0 text-white">Add Product</button>
-                    </div>
+              </div>
+              <div className="form-group">
+                <div className="col-sm-12 d-flex">
+                  <button type="submit" className="btn btn-success mx-auto mx-md-0 text-white">Thêm Người Dùng</button>
                 </div>
+              </div>
             </form>
+            {successMessage && <p className="text-success">{successMessage}</p>}
+            {errorMessage && <p className="text-danger">{errorMessage}</p>}
+          </div>
         </div>
+      </div>
+      <Footer />
     </div>
-</div>
-</div>
-);
+  );
 };
 
 export default AddUser;
