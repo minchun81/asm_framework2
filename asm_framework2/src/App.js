@@ -43,6 +43,8 @@ import AddUser from "./component/admin/user/add";
 import Layout from './component/admin/index';
 import ListCategory from "./component/admin/categories/list"
 import EditCategory from "./component/admin/categories/edit"
+import ListCategorys from "./component/admin/thongkedanhmuc";
+
 // css
 // import "./assets/images/favicon.png";
 import './assets/plugins/chartist-js/dist/chartist.min.css';
@@ -63,6 +65,7 @@ import "./assets/css/style.min.css";
 
           {/* category */}
         <Route path="/admin/category" element={<Categories />} />
+        <Route path="/admin/category/thongke" element={<ListCategorys />} />
         <Route path="/admin/category/list" element={<ListCategory />} />
         <Route path="/admin/editCategory/:id" element={<EditCategory />} />
         <Route path="/admin/addCategory" element={<AddCategories />} />

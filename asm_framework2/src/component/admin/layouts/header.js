@@ -1,14 +1,13 @@
 import React from "react";
-import logo from '../../../assets/images/logo-light-icon.png';
-import logo2 from '../../../assets/images/logo-light-text.png';
-import avt from '../../../assets/images/users/1.jpg';
+import logo from "../../../assets/images/logo-light-icon.png";
+import logo2 from "../../../assets/images/logo-light-text.png";
+import avt from "../../../assets/images/users/1.jpg";
 
-import '../../../assets/css/styleEdit.css';
+import "../../../assets/css/styleEdit.css";
 
 const Header = () => {
   return (
     <div className="">
-
       <div
         id="main-wrapper"
         data-layout="vertical"
@@ -23,18 +22,10 @@ const Header = () => {
             <div className="navbar-header" data-logobg="skin6">
               <a className="navbar-brand ms-4" href="/admin">
                 <b className="logo-icon">
-                  <img
-                    src={logo}
-                    alt="trang chủ"
-                    className="dark-logo"
-                  />
+                  <img src={logo} alt="trang chủ" className="dark-logo" />
                 </b>
                 <span className="logo-text">
-                  <img
-                    src={logo2}
-                    alt="trang chủ"
-                    className="dark-logo"
-                  />
+                  <img src={logo2} alt="trang chủ" className="dark-logo" />
                 </span>
               </a>
               <a
@@ -61,10 +52,7 @@ const Header = () => {
               </ul>
               <ul className="navbar-nav me-auto mt-md-0">
                 <li className="nav-item search-box">
-                  <a
-                    className="nav-link text-muted"
-                    href="javascript:void(0)"
-                  >
+                  <a className="nav-link text-muted" href="javascript:void(0)">
                     <i className="ti-search"></i>
                   </a>
                   <form className="app-search" style={{ display: "none" }}>
@@ -96,7 +84,10 @@ const Header = () => {
                     />
                     Markarn Doe
                   </a>
-                  <ul className="dropdown-menu" aria-labelledby="navbarDropdown"></ul>
+                  <ul
+                    className="dropdown-menu"
+                    aria-labelledby="navbarDropdown"
+                  ></ul>
                 </li>
               </ul>
             </div>
@@ -136,6 +127,14 @@ const Header = () => {
                     <i className="mdi me-2 mdi-table"></i>
                     <span className="hide-menu">Danh Mục</span>
                   </a>
+                  <a
+                    className="sidebar-link waves-effect waves-dark sidebar-link"
+                    href="/admin/category/thongke"
+                    aria-expanded="false"
+                  >
+                    <i className="mdi me-2 mdi-chart-bar"></i>
+                    <span className="hide-menu"> Thống Kê Danh Mục</span>
+                  </a>
                 </li>
                 <li className="sidebar-item">
                   <a
@@ -173,12 +172,7 @@ const Header = () => {
                 </a>
               </div>
               <div className="col-4 link-wrap">
-                <a
-                  href=""
-                  className="link"
-                  data-toggle="tooltip"
-                  title="Email"
-                >
+                <a href="" className="link" data-toggle="tooltip" title="Email">
                   <i className="mdi mdi-gmail"></i>
                 </a>
               </div>
@@ -195,7 +189,6 @@ const Header = () => {
             </div>
           </div>
         </aside>
-
       </div>
     </div>
   );

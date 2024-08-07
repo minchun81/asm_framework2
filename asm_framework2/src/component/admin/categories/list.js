@@ -60,7 +60,7 @@ const ListCategory = () => {
                                 category.status === 1 ? 'bg-success ' : 'bg-danger'
                               }`}
                             >
-                              {category.status === 1 ? 'Còn hàng' : 'Hết hàng'}
+                              {category.status === 1 ? 'Đang hoạt động' : 'Không hoạt động'}
                             </span>
                           </td>
                           <td>

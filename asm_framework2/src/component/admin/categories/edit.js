@@ -81,8 +81,8 @@ const EditCategory = () => {
                       required
                     >
                       <option value="">Chọn trạng thái</option>
-                      <option value="1">Còn hàng</option>
-                      <option value="0">Hết hàng</option>
+                      <option value="1">Đang hoạt động</option>
+                      <option value="0">Không hoạt động</option>
                     </select>
                   </div>
                 </div>
