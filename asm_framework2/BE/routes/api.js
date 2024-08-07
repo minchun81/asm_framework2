@@ -19,14 +19,13 @@ const categoryAPIController = require('../controllers/api/category');
 const userAPIController = require('../controllers/api/user')
 const productAPIController = require ('../controllers/api/product');
 const router = express.Router();
+
 //router category
-<<<<<<< HEAD
+
 router.get('/category/', categoryAPIController.list)
 router.post('/category/', categoryAPIController.create);
-=======
 router.get('/category', categoryAPIController.list)
 router.post('/category', categoryAPIController.create);
->>>>>>> nhanntpc03225
 router.get('/category/:id', categoryAPIController.edit);
 router.put('/category/:id', categoryAPIController.update);
 router.delete('/category/:id', categoryAPIController.delete);

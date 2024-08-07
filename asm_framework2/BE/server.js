@@ -4,6 +4,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv'); // Import dotenv
+const port = 3000;
 // Gọi hàm config từ dotenv để tải các biến môi trường
 dotenv.config();
 app.use(express.json()); // 
@@ -26,6 +27,6 @@ const apiRoutes = require('./routes/api');
 app.use('/api', apiRoutes); // Sử dụng router api
 
 // Khởi động server
-app.listen(3000, () => {
-    console.log("Server is running on port 3000"); // Thông báo server đang chạy
-});
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+})

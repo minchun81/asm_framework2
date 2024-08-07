@@ -135,31 +135,7 @@ const Cart = () => {
       </div>
       
       {/* Phần Carousel logo */}
-      <div className="logo-carousel-section">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="logo-carousel-inner">
-                <div className="single-logo-item">
-                  <img src="assets/img/company-logos/1.png" alt="Logo 1" />
-                </div>
-                <div className="single-logo-item">
-                  <img src="assets/img/company-logos/2.png" alt="Logo 2" />
-                </div>
-                <div className="single-logo-item">
-                  <img src="assets/img/company-logos/3.png" alt="Logo 3" />
-                </div>
-                <div className="single-logo-item">
-                  <img src="assets/img/company-logos/4.png" alt="Logo 4" />
-                </div>
-                <div className="single-logo-item">
-                  <img src="assets/img/company-logos/5.png" alt="Logo 5" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+     
       <Footer/>
     </>
   );
