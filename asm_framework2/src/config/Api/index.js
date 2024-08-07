@@ -2,7 +2,9 @@ import axios from "axios";
 import { Cookies } from "react-cookie";
 
 // Đặt URL cơ bản cho API của bạn
-const BASE_URL = "http://localhost:3000/api";
+
+export const BASE_URL = "http://localhost:3000";
+
 
 const request = async ({
   method = "GET",

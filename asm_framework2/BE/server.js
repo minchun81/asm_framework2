@@ -20,8 +20,8 @@ app.set('view engine', 'ejs'); // Thiết lập view engine
 app.use(cors()); // Sử dụng cors
 
 
-const adminRoutes = require('./routes/admin');
-app.use('/admin', adminRoutes); // Sử dụng router admin
+// const adminRoutes = require('./routes/admin');
+// app.use('/admin', adminRoutes); // Sử dụng router admin
 
 const apiRoutes = require('./routes/api');
 app.use('/api', apiRoutes); // Sử dụng router api

@@ -11,6 +11,7 @@ exports.create = async (req, res, next) => {
             name: req.body.name,
             status: req.body.status
         }
+        
         const result = await Category.create(data);
         if (result) {
             res.status(200).json({ data: result })

@@ -1,29 +1,15 @@
 // src/Header.js
 import React from 'react';
-// import './Header.css'; // Nếu bạn có CSS riêng cho header
+import '../../assets/bootstrap/css/bootstrap.min.css'; // Gộp các tệp CSS Bootstrap
+import '../../assets/css/all.min.css';
+import '../../assets/css/animate.css';
+import '../../assets/css/magnific-popup.css';
+import '../../assets/css/main.css';
+import '../../assets/css/owl.carousel.css';
+import '../../assets/css/meanmenu.min.css';
+import '../../assets/css/responsive.css';
+import logo from "../../assets/img/logo.png";
 
-import '../../assets/bootstrap/css/bootstrap-grid.css.map'
-  import '../../assets/bootstrap/css/bootstrap-grid.css'
-  import '../../assets/bootstrap/css/bootstrap-grid.min.css'
-  import '../../assets/bootstrap/css/bootstrap-grid.min.css.map'
-  import '../../assets/bootstrap/css/bootstrap-reboot.css'
-  import '../../assets/bootstrap/css/bootstrap-reboot.css.map'
-  import '../../assets/bootstrap/css/bootstrap-reboot.min.css'
-  import '../../assets/bootstrap/css/bootstrap-reboot.min.css.map'
-  import '../../assets/bootstrap/css/bootstrap.css'
-  import '../../assets/bootstrap/css/bootstrap.css.map'
-  import '../../assets/bootstrap/css/bootstrap.css.map'
-  import '../../assets/bootstrap/css/bootstrap.min.css.map'
- 
-
-  import '../../assets/css/all.min.css'
-  import '../../assets/css/animate.css'
-  import '../../assets/css/magnific-popup.css'
-  import '../../assets/css/main.css'
-  import '../../assets/css/owl.carousel.css'
-  import '../../assets/css/meanmenu.min.css'
-  import '../../assets/css/responsive.css'
-  import logo from "../../assets/img/logo.png"
 const Header = () => {
     return (
         <>
@@ -34,44 +20,35 @@ const Header = () => {
                             <div className="main-menu-wrap">
                                 <div className="site-logo">
                                     <a href="/">
-                                    <img src={logo} alt="Logo" />
+                                        <img src={logo} alt="Logo" />
                                     </a>
                                 </div>
                                 <nav className="main-menu">
                                     <ul>
                                         <li className="current-list-item">
-                                            <a href="/">Home</a>
-                                           
+                                            <a href="/">Trang chủ</a>
                                         </li>
-                                        <li><a href="/about">About</a></li>
+                                        <li><a href="/about">Giới thiệu</a></li>
                                         <li>
-                                            <a href="#">Pages</a>
+                                            <a href="#">Trang</a>
                                             <ul className="sub-menu">
-                                               
-                                                <li><a href="/about">About</a></li>
-                                                <li><a href="/cart">Cart</a></li>
-                                                
-                                                <li><a href="/contact">Contact</a></li>
-                                                <li><a href="news.html">News</a></li>
-                                                <li><a href="/shop">Shop</a></li>
+                                                <li><a href="/about">Giới thiệu</a></li>
+                                                <li><a href="/cart">Giỏ hàng</a></li>
+                                                <li><a href="/contact">Liên hệ</a></li>
+                                                <li><a href="/news">Tin tức</a></li>
+                                                <li><a href="/shop">Cửa hàng</a></li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="#">News</a>
+                                            <a href="#">Tin tức</a>
                                             <ul className="sub-menu">
-                                                <li><a href="news.html">News</a></li>
-                                                <li><a href="single-news.html">Single News</a></li>
+                                                <li><a href="/news">Tin tức</a></li>
+                                                <li><a href="/single-news">Tin tức chi tiết</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="/contact">Contact</a></li>
+                                        <li><a href="/contact">Liên hệ</a></li>
                                         <li>
-                                            <a href="/shop">Shop</a>
-                                            {/* <ul className="sub-menu">
-                                                <li><a href="shop.html">Shop</a></li>
-                                                <li><a href="checkout.html">Check Out</a></li>
-                                                <li><a href="single-product.html">Single Product</a></li>
-                                                <li><a href="cart.html">Cart</a></li>
-                                            </ul> */}
+                                            <a href="/shop">Cửa hàng</a>
                                         </li>
                                         <li>
                                             <div className="header-icons">

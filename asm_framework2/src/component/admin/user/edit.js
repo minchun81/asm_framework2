@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from "../layouts/header";
 import Footer from "../layouts/footer";
+
 import { getUserById, updateUser } from '../../../services/user';
 
 const EditUser = () => {
@@ -128,6 +129,6 @@ const EditUser = () => {
       <Footer />
     </div>
   );
-};
+}
 
 export default EditUser;

@@ -41,6 +41,9 @@ import User from "./component/admin/user/list";
 import EditUser from "./component/admin/user/edit";
 import AddUser from "./component/admin/user/add";
 import Layout from './component/admin/index';
+import ListCategory from "./component/admin/categories/list"
+import EditCategory from "./component/admin/categories/edit"
+import ListCategorys from "./component/admin/thongkedanhmuc";
 
 // css
 // import "./assets/images/favicon.png";
@@ -51,6 +54,7 @@ import "./assets/plugins/c3-master/c3.min.css";
 // import './assets/plugins/c3-master/c3.min.css';
 import "./assets/css/style.min.css";
 // import './assets/js/pages/dashboards/dashboard1';
+
   function App() {
     
     const router = createBrowserRouter(
@@ -61,7 +65,9 @@ import "./assets/css/style.min.css";
 
           {/* category */}
         <Route path="/admin/category" element={<Categories />} />
-        <Route path="/admin/editCategory" element={<EditCategories />} />
+        <Route path="/admin/category/thongke" element={<ListCategorys />} />
+        <Route path="/admin/category/list" element={<ListCategory />} />
+        <Route path="/admin/editCategory/:id" element={<EditCategory />} />
         <Route path="/admin/addCategory" element={<AddCategories />} />
         {/*product */}
         <Route path="/admin/product" element={<Product />} />
@@ -78,6 +84,7 @@ import "./assets/css/style.min.css";
           <Route path="/detail" element={<Detail />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/contact" element={<Contact />} />
+          {/* <Route path="student-list" element={<StudentList />} /> */}
 
         </Route> //chuyển trang
       )

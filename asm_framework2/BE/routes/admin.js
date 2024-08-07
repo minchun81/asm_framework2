@@ -1,3 +1,4 @@
+
 const express = require('express');
 const categoriesController = require('../controllers/admin/category');
 const userController = require('../controllers/admin/user');
@@ -31,7 +32,6 @@ router.post('/category/create',categoriesController.create);
 router.get('/category/edit/:id',categoriesController.edit);
 router.post('/category/update/:id',categoriesController.update);
 router.delete('/category/delete/:id',categoriesController.delete);
-module.exports = router;
 // //router product
 // router.get('/product/list',productController.list);
 // router.get('/product/create',productController.formCreate);
@@ -45,7 +45,7 @@ router.post('/user/create',userController.create);
 router.get('/user/edit/:id',userController.edit);
 router.post('/user/update/:id',userController.update);
 router.get('/user/delete/:id',userController.delete);
-
+//router product
 router.get('/product/list', productController.list);
 router.post('/product/create',productController.create);
 router.get('/product/edit/:id',productController.edit);

@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <div className="footer">
     
-    <footer class="footer"> © 2021 Material Pro Admin by <a href="https://www.wrappixel.com/">wrappixel.com </a>
+    <footer className="footer text-center"> © 2024 Material Pro Admin by <a href="https://www.wrappixel.com/">wrappixel.com </a>
     </footer>
     </div>
   );
