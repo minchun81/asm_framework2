@@ -12,12 +12,13 @@ exports.formCreate = async (req, res, next) => {
     res.render('admin/user/add');
 }
 
-
+//add
 exports.create = async (req, res, next) => {
     try {
         console.log(req.body); // Check the structure of req.body
 
         const data = {
+            name: req.body.name,
             username: req.body.username,
             email: req.body.email,
             password: req.body.password,
@@ -45,10 +46,10 @@ exports.create = async (req, res, next) => {
 }
 
 
-
 exports.update = async (req, res, next) => {
     try {
         const id = req.params.id;
+        const name = req.body.name;
         const username = req.body.username;
         const email = req.body.email;
         const password = req.body.password; // Ensure password is handled securely
@@ -57,7 +58,7 @@ exports.update = async (req, res, next) => {
         
 
         // Prepare the array of values to update
-        const arr = [username, email, password , role, status];
+        const arr = [name, username, email, password , role, status];
 
         // Call the User model's update method
         const result = await User.update(id, arr);

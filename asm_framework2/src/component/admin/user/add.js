@@ -9,6 +9,7 @@ import CryptoJS from 'crypto-js';
 
 const AddUser = () => {
   const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
@@ -44,7 +45,7 @@ const AddUser = () => {
     // Mã hóa mật khẩu bằng MD5
     const hashedPassword = CryptoJS.MD5(password).toString();
 
-    const userData = { username, email, password: hashedPassword, role, status };
+    const userData = {name, username, email, password: hashedPassword, role, status };
 
     addUsers(userData, (response) => {
       setSuccessMessage('Thêm người dùng thành công!');
@@ -76,6 +77,20 @@ const AddUser = () => {
                     placeholder="Nhập tên đăng nhập"
                   />
                   {formErrors.username && <p className="text-danger">{formErrors.username}</p>}
+                </div>
+              </div>
+              <div className="form-group mb-3">
+                <label className="col-md-12 mb-0">Tên</label>
+                <div className="col-md-12">
+                  <input 
+                    type="text" 
+                    id="username" 
+                    value={username}
+                    onChange={(e) => setName(e.target.value)} 
+                    className="form-control-line border-input" 
+                    placeholder="Nhập tên đăng nhập"
+                  />
+                  {formErrors.name && <p className="text-danger">{formErrors.name}</p>}
                 </div>
               </div>
               <div className="form-group mb-3">

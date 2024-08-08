@@ -5,7 +5,7 @@ const db = mysql.createConnection ({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'framework2'
+    database: 'asm2fe2'
 });
 db.connect(function(err) {
     if (err) throw err;

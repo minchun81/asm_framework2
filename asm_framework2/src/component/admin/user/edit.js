@@ -10,6 +10,7 @@ const EditUser = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('');
   const [status, setStatus] = useState('');
@@ -23,6 +24,7 @@ const EditUser = () => {
         if (userData) {
           setUser(userData);
           setUsername(userData.username);
+          setName(userData.name);
           setEmail(userData.email);
           setRole(userData.role);
           setStatus(userData.status);
@@ -43,7 +45,7 @@ const EditUser = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const updatedUser = { username, email, role, status };
+    const updatedUser = {name, username, email, role, status };
 
     updateUser(id, updatedUser, (response) => {
       setSuccessMessage('User updated successfully');
@@ -81,6 +83,16 @@ const EditUser = () => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
+                  />
+                </div>
+                <div className="form-group mb-3">
+                  <label className="col-md-12 mb-0">Tên</label>
+                  <input
+                    type="text"
+                    className="form-control-line border-input"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    require
                   />
                 </div>
                 <div className="form-group mb-3">
