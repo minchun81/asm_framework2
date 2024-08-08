@@ -21,15 +21,22 @@ const AddUser = () => {
 
   const validateForm = () => {
     const errors = {};
-    if (!username) errors.username = "Tên đăng nhập là bắt buộc.";
+    const namePattern = /^[a-zA-Z0-9]*$/;
+
+    if (!username) errors.username = "Tên đăng nhập không được để trống!";
+    if (!name) {
+      errors.name = "Tên không được để trống!";
+    } else if (!namePattern.test(name)) {
+      errors.name = "Tên chỉ được viết liền không dấu và không có khoảng trắng!";
+    }
     if (!email) {
-      errors.email = "Email là bắt buộc.";
+      errors.email = "Email không được để trống!";
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       errors.email = "Email không hợp lệ.";
     }
-    if (!password) errors.password = "Mật khẩu là bắt buộc.";
-    if (!role) errors.role = "Vai trò là bắt buộc.";
-    if (!status) errors.status = "Trạng thái là bắt buộc.";
+    if (!password) errors.password = "Mật khẩu không được để trống!";
+    if (!role) errors.role = "Vui lòng chọn vai trò!";
+    if (!status) errors.status = "Vui lòng chọn trạng thái!";
     return errors;
   };
 
@@ -84,11 +91,11 @@ const AddUser = () => {
                 <div className="col-md-12">
                   <input 
                     type="text" 
-                    id="username" 
-                    value={username}
+                    id="name" 
+                    value={name}
                     onChange={(e) => setName(e.target.value)} 
                     className="form-control-line border-input" 
-                    placeholder="Nhập tên đăng nhập"
+                    placeholder="Nhập tên"
                   />
                   {formErrors.name && <p className="text-danger">{formErrors.name}</p>}
                 </div>

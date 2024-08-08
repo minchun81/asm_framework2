@@ -47,7 +47,6 @@ const EditCategory = () => {
 
     updateCategory(id, { name, description, status: parseInt(status) }, () => {
       setSuccess(true);
-      alert('Cập nhật danh mục thành công!');
     }, setError); // Đảm bảo setError là một hàm
   };
 

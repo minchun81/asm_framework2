@@ -65,8 +65,8 @@ const ListUser = () => {
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
 
-  // Change page
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  // Tính tổng số trang
+  const totalPages = Math.ceil(users.length / usersPerPage);
 
   return (
     <div>
@@ -137,34 +137,29 @@ const ListUser = () => {
                       ))
                     ) : (
                       <tr>
-                        <td colSpan="6">Không có người dùng nào</td>
+                        <td colSpan="7">Không có người dùng nào</td>
                       </tr>
                     )}
                   </tbody>
                 </table>
               </div>
-              <nav>
-                <ul className="pagination">
-                  {Array.from(
-                    { length: Math.ceil(users.length / usersPerPage) },
-                    (_, index) => (
-                      <li
-                        key={index + 1}
-                        className={`page-item ${
-                          currentPage === index + 1 ? "active" : ""
-                        }`}
-                      >
-                        <button
-                          onClick={() => paginate(index + 1)}
-                          className="page-link"
-                        >
-                          {index + 1}
-                        </button>
-                      </li>
-                    )
-                  )}
-                </ul>
-              </nav>
+              <div className="pagination">
+                <button
+                  className="btn btn-primary mx-3"
+                  onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                  disabled={currentPage === 1}
+                >
+                  &lt; Previous
+                </button>
+                <span>Page {currentPage} of {totalPages}</span>
+                <button
+                  className="btn btn-primary mx-3"
+                  onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                  disabled={currentPage === totalPages}
+                >
+                  Next &gt;
+                </button>
+              </div>
             </div>
           </div>
         </div>
