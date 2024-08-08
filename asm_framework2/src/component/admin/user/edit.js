@@ -90,45 +90,44 @@ const EditUser = () => {
                     className="form-control-line border-input"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
+                    required/>
+                    </div>
+                    <div className="form-group mb-3">
+                      <label className="col-md-12 mb-0">Vai Trò</label>
+                      <select
+                        className="form-control-line border-input"
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
+                        required
+                      >
+                        <option value="">Chọn vai trò</option>
+                        <option value="1">Admin</option>
+                        <option value="0">User</option>
+                      </select>
+                    </div>
+                    <div className="form-group mb-3">
+                      <label className="col-md-12 mb-0">Trạng Thái</label>
+                      <select
+                        className="form-control-line border-input"
+                        value={status}
+                        onChange={(e) => setStatus(e.target.value)}
+                        required
+                      >
+                        <option value="">Chọn trạng thái</option>
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                      </select>
+                    </div>
+                    <button type="submit" className="btn btn-success">Cập Nhật</button>
+                  </form>
                 </div>
-                <div className="form-group mb-3">
-                  <label className="col-md-12 mb-0">Vai Trò</label>
-                  <select
-                    className="form-control-line border-input"
-                    value={role}
-                    onChange={(e) => setRole(e.target.value)}
-                    required
-                  >
-                    <option value="">Chọn vai trò</option>
-                    <option value="1">Admin</option>
-                    <option value="0">User</option>
-                  </select>
-                </div>
-                <div className="form-group mb-3">
-                  <label className="col-md-12 mb-0">Trạng Thái</label>
-                  <select
-                    className="form-control-line border-input"
-                    value={status}
-                    onChange={(e) => setStatus(e.target.value)}
-                    required
-                  >
-                    <option value="">Chọn trạng thái</option>
-                    <option value="1">Active</option>
-                    <option value="0">Inactive</option>
-                  </select>
-                </div>
-                <button type="submit" className="btn btn-success">Cập Nhật</button>
-              </form>
+              </div>
             </div>
           </div>
+    
+          <Footer />
         </div>
-      </div>
-
-      <Footer />
-    </div>
-  );
-}
-
-export default EditUser;
+      );
+    }
+    
+    export default EditUser;

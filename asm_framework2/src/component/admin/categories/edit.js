@@ -35,6 +35,16 @@ const EditCategory = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Validation
+    if (!name || !status) {
+      setError('Tên danh mục và trạng thái không được để trống');
+      return;
+    }
+
+    // Reset error before making update request
+    setError(null);
+
     updateCategory(id, { name, description, status: parseInt(status) }, () => {
       setSuccess(true);
       alert('Cập nhật danh mục thành công!');
@@ -65,11 +75,9 @@ const EditCategory = () => {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       className="form-control-line border-input"
-                      required
                     />
                   </div>
                 </div>
-               
                 <div className="form-group mb-3">
                   <label className="col-md-12 mb-0">Trạng Thái</label>
                   <div className="col-md-12">
@@ -78,7 +86,6 @@ const EditCategory = () => {
                       value={status}
                       onChange={(e) => setStatus(e.target.value)}
                       className="form-control-line border-input"
-                      required
                     >
                       <option value="">Chọn trạng thái</option>
                       <option value="1">Đang hoạt động</option>

@@ -1,10 +1,10 @@
 // services/user.js
-export const apiUrl = 'http://localhost:3000/api/user';
+export const apiUrl = 'http://localhost:3000/api';
 
 // Lấy danh sách người dùng
 export const getUsers = (apiUrl, setUsersData, setError) => {
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', `${apiUrl}`, true);
+  xhr.open('GET', `${apiUrl}/user`, true);
 
   xhr.onload = () => {
     if (xhr.status >= 200 && xhr.status < 300) {
@@ -33,7 +33,7 @@ export const getUsers = (apiUrl, setUsersData, setError) => {
 // Thêm người dùng
 export const addUsers = (userData, setSuccess, setError) => {
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', `${apiUrl}`, true);
+  xhr.open('POST', `${apiUrl}/user`, true);
   xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
 
   xhr.onload = () => {
@@ -59,10 +59,11 @@ export const addUsers = (userData, setSuccess, setError) => {
 
   xhr.send(JSON.stringify(userData));
 };
+
 // Xóa người dùng
 export const deleteUser = (userId, setSuccess, setError) => {
   const xhr = new XMLHttpRequest();
-  xhr.open('DELETE', `${apiUrl}/${userId}`, true);
+  xhr.open('DELETE', `${apiUrl}/user/${userId}`, true);
   xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
 
   xhr.onload = () => {
@@ -92,10 +93,9 @@ export const deleteUser = (userId, setSuccess, setError) => {
 // Cập nhật thông tin người dùng
 export const updateUser = (userId, userData, setSuccess, setError) => {
   const xhr = new XMLHttpRequest();
-  xhr.open('PUT', `${apiUrl}/${userId}`, true);
+  xhr.open('PUT', `${apiUrl}/user/${userId}`, true);
   xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-
-  xhr.onload = () => {
+xhr.onload = () => {
     if (xhr.status >= 200 && xhr.status < 300) {
       try {
         const response = JSON.parse(xhr.responseText);
@@ -122,7 +122,7 @@ export const updateUser = (userId, userData, setSuccess, setError) => {
 // Lấy thông tin người dùng theo ID
 export const getUserById = (userId, setUserData, setError) => {
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', `${apiUrl}/${userId}`, true);
+  xhr.open('GET', `${apiUrl}/user/${userId}`, true);
 
   xhr.onload = () => {
     if (xhr.status >= 200 && xhr.status < 300) {

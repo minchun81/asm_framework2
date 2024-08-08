@@ -18,7 +18,6 @@ exports.create = async (req, res, next) => {
         console.log(req.body); // Check the structure of req.body
 
         const data = {
-            name: req.body.name,
             username: req.body.username,
             email: req.body.email,
             password: req.body.password,
@@ -50,7 +49,6 @@ exports.create = async (req, res, next) => {
 exports.update = async (req, res, next) => {
     try {
         const id = req.params.id;
-        const name = req.body.name;
         const username = req.body.username;
         const email = req.body.email;
         const password = req.body.password; // Ensure password is handled securely
@@ -59,7 +57,7 @@ exports.update = async (req, res, next) => {
         
 
         // Prepare the array of values to update
-        const arr = [name,username, email, password , role, status];
+        const arr = [username, email, password , role, status];
 
         // Call the User model's update method
         const result = await User.update(id, arr);
@@ -97,8 +95,7 @@ exports.delete = async (req, res, next) => {
 exports.fetchUserDetails = async (req, res, next) => {
     const id = req.params.id;
     try {
-        const result = await User.fetchUserDetails(id);
-        if (result.length > 0) {
+        const result = await User.fetchUserDetails(id);if (result.length > 0) {
             res.status(200).json({ data: result[0] }); // result[0] as fetchUserDetails returns an array
         } else {
             res.status(404).json({ message: "User not found" });

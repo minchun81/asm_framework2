@@ -47,11 +47,11 @@ const AddUser = () => {
     const userData = { username, email, password: hashedPassword, role, status };
 
     addUsers(userData, (response) => {
-      setSuccessMessage('User added successfully!');
+      setSuccessMessage('Thêm người dùng thành công!');
       setErrorMessage('');
-      navigate('/admin/user'); // Clear any previous errors
+      navigate('/admin/user'); // Điều hướng tới trang quản lý người dùng
     }, (error) => {
-      setSuccessMessage(''); // Clear any previous success message
+      setSuccessMessage('');
       setErrorMessage(error);
     });
   };
@@ -155,4 +155,3 @@ const AddUser = () => {
 };
 
 export default AddUser;
-
