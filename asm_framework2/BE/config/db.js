@@ -4,9 +4,10 @@ var mysql = require('mysql');
 const db = mysql.createConnection ({
     host: 'localhost',
     user: 'root',
-    password: '',
-    database: 'asm2fe2'
+    password: '321',
+    database: 'test_framework2'
 });
+
 db.connect(function(err) {
     if (err) throw err;
     console.log('Database is connected successfully !');

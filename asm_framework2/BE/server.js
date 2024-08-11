@@ -4,7 +4,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv'); // Import dotenv
-const port = 3000;
+const port = 3001;
 // Gọi hàm config từ dotenv để tải các biến môi trường
 dotenv.config();
 app.use(express.json()); // 

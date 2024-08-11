@@ -13,7 +13,7 @@ const ListCategorys = () => {
 
   useEffect(() => {
     const fetchCategories = () => {
-      getCategories('http://localhost:3000/api', setCategories, setError);
+      getCategories('http://localhost:3001/api', setCategories, setError);
     };
 
     fetchCategories();

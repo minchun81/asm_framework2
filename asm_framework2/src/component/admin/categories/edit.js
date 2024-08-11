@@ -17,7 +17,7 @@ const EditCategory = () => {
 
   useEffect(() => {
     const fetchCategory = () => {
-      getCategories('http://localhost:3000/api', (data) => {
+      getCategories('http://localhost:3001/api', (data) => {
         // Tìm danh mục theo id
         const category = data.find(cat => cat.id === parseInt(id));
         if (category) {

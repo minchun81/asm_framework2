@@ -1,4 +1,4 @@
-export const apiUrl = 'http://localhost:3000/api';
+export const apiUrl = 'http://localhost:3001/api';
 
 // Lấy danh mục với phân trang tùy chọn
 export const getCategories = (apiUrl, setCategoriesData, setError) => {

@@ -1,17 +1,17 @@
-// services/user.js
+// services/product.js
 export const apiUrl = 'http://localhost:3001/api';
 
 // Lấy danh sách người dùng
-export const getUsers = (apiUrl, setUsersData, setError) => {
+export const getProduct = (apiUrl, setProductData, setError) => {
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', `${apiUrl}/user`, true);
+  xhr.open('GET', `${apiUrl}/product`, true);
 
   xhr.onload = () => {
     if (xhr.status >= 200 && xhr.status < 300) {
       try {
         const response = JSON.parse(xhr.responseText);
-        setUsersData(response.data); // Giả sử response.data chứa danh sách người dùng
-        console.log('Fetched users:', response.data);
+        setProductData(response.data); // Giả sử response.data chứa danh sách người dùng
+        console.log('Fetched product:', response.data);
       } catch (e) {
         console.error('Error parsing JSON:', e);
         setError('Error parsing JSON');
@@ -31,9 +31,9 @@ export const getUsers = (apiUrl, setUsersData, setError) => {
 };
 
 // Thêm người dùng
-export const addUsers = (userData, setSuccess, setError) => {
+export const addProduct = (productData, setSuccess, setError) => {
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', `${apiUrl}/user`, true);
+  xhr.open('POST', `${apiUrl}/product`, true);
   xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
 
   xhr.onload = () => {
@@ -41,7 +41,7 @@ export const addUsers = (userData, setSuccess, setError) => {
       try {
         const response = JSON.parse(xhr.responseText);
         setSuccess(response); // Giả sử response chứa thông tin phản hồi từ server
-        console.log('User added successfully:', response);
+        console.log('product added successfully:', response);
       } catch (e) {
         console.error('Error parsing JSON:', e);
         setError('Error parsing JSON');
@@ -57,13 +57,13 @@ export const addUsers = (userData, setSuccess, setError) => {
     setError('Network error');
   };
 
-  xhr.send(JSON.stringify(userData));
+  xhr.send(JSON.stringify(productData));
 };
 
 // Xóa người dùng
-export const deleteUser = (userId, setSuccess, setError) => {
+export const deleteProduct = (productId, setSuccess, setError) => {
   const xhr = new XMLHttpRequest();
-  xhr.open('DELETE', `${apiUrl}/user/${userId}`, true);
+  xhr.open('DELETE', `${apiUrl}/product/${productId}`, true);
   xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
 
   xhr.onload = () => {
@@ -71,7 +71,7 @@ export const deleteUser = (userId, setSuccess, setError) => {
       try {
         const response = JSON.parse(xhr.responseText);
         setSuccess(response); // Giả sử response chứa thông tin phản hồi từ server
-        console.log('User deleted successfully:', response);
+        console.log('product deleted successfully:', response);
       } catch (e) {
         console.error('Error parsing JSON:', e);
         setError('Error parsing JSON');
@@ -91,16 +91,16 @@ export const deleteUser = (userId, setSuccess, setError) => {
 };
 
 // Cập nhật thông tin người dùng
-export const updateUser = (userId, userData, setSuccess, setError) => {
+export const updateProduct = (productId, productData, setSuccess, setError) => {
   const xhr = new XMLHttpRequest();
-  xhr.open('PUT', `${apiUrl}/user/${userId}`, true);
+  xhr.open('PUT', `${apiUrl}/product/${productId}`, true);
   xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
 xhr.onload = () => {
     if (xhr.status >= 200 && xhr.status < 300) {
       try {
         const response = JSON.parse(xhr.responseText);
         setSuccess(response); // Giả sử response chứa thông tin phản hồi từ server
-        console.log('User updated successfully:', response);
+        console.log('product updated successfully:', response);
       } catch (e) {
         console.error('Error parsing JSON:', e);
         setError('Error parsing JSON');
@@ -117,19 +117,19 @@ xhr.onload = () => {
   };
 
   // Gửi dữ liệu người dùng dưới dạng JSON
-  xhr.send(JSON.stringify(userData));
+  xhr.send(JSON.stringify(productData));
 };
 // Lấy thông tin người dùng theo ID
-export const getUserById = (userId, setUserData, setError) => {
+export const getProductById = (id, setProductData, setError) => {
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', `${apiUrl}/user/${userId}`, true);
+  xhr.open('GET', `${apiUrl}/product/${id}`, true);
 
   xhr.onload = () => {
     if (xhr.status >= 200 && xhr.status < 300) {
       try {
         const response = JSON.parse(xhr.responseText);
-        setUserData(response.data); // Giả sử response.data chứa thông tin người dùng
-        console.log('Fetched user:', response.data);
+        setProductData(response.data); // Giả sử response.data chứa thông tin người dùng
+        console.log('Fetched product:', response.data);
       } catch (e) {
         console.error('Error parsing JSON:', e);
         setError('Error parsing JSON');

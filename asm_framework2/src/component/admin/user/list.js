@@ -36,7 +36,7 @@ const ListUser = () => {
 
   useEffect(() => {
     const fetchUsers = () => {
-      getUsers("http://localhost:3000/api", setUsers, setError); // Đảm bảo đúng URL API
+      getUsers("http://localhost:3001/api", setUsers, setError); // Đảm bảo đúng URL API
     };
 
     fetchUsers();
@@ -50,7 +50,7 @@ const ListUser = () => {
           setSuccessMessage("User deleted successfully");
           setError(""); // Xóa bất kỳ lỗi nào trước đó
           // Làm mới danh sách người dùng sau khi xóa thành công
-          getUsers("http://localhost:3000/api", setUsers, setError); // Đảm bảo đúng URL API
+          getUsers("http://localhost:3001/api", setUsers, setError); // Đảm bảo đúng URL API
         },
         (error) => {
           setSuccessMessage(""); // Xóa bất kỳ thông báo thành công nào trước đó
