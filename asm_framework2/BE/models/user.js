@@ -88,4 +88,16 @@ module.exports = class User {
             });
         });
     }
+    static async findByUsername(username) {
+        return new Promise((resolve, reject) => {
+            let sql = `SELECT * FROM users WHERE username = ?`;
+            db.query(sql, [username], function (err, data) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(data);
+                }
+            });
+        });
+    }
 }

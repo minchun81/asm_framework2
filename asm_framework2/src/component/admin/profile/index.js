@@ -1,25 +1,27 @@
 import React from "react";
 import Header from "../layouts/header";
 import Footer from "../layouts/footer";
+
 import avt from '../../../assets/images/users/5.jpg';
 
 
 const Profile = () => {
+    
     return (
         <div className="">
             <Header />
             <div className="container">
 
-        <div class="page-wrapper">
-            <div class="page-breadcrumb">
-                <div class="row align-items-center">
-                    <div class="col-md-6 col-8 align-self-center">
-                        <h3 class="page-title mb-0 p-0">Profile</h3>
-                        <div class="d-flex align-items-center">
+        <div className="page-wrapper">
+            <div className="page-breadcrumb">
+                <div className="row align-items-center">
+                    <div className="col-md-6 col-8 align-self-center">
+                        <h3 className="page-title mb-0 p-0">Profile</h3>
+                        <div className="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                                <ol className="breadcrumb">
+                                    <li className="breadcrumb-item"><a href="/admin">Home</a></li>
+                                    <li className="breadcrumb-item active" aria-current="page">Profile</li>
                                 </ol>
                             </nav>
                         </div>
@@ -27,26 +29,27 @@ const Profile = () => {
                 </div>
             </div>
 
-            <div class="container-fluid">
+            <div className="container-fluid">
 
-                <div class="row">
-                    <div class="col-lg-4 col-xlg-3 col-md-5">
-                        <div class="card">
-                            <div class="card-body profile-card">
-                                <center class="mt-4"> <img src={avt}
-                                        class="rounded-circle" width="150" />
-                                    <h4 class="card-title mt-2">Hanna Gover</h4>
-                                    <h6 class="card-subtitle">Accoubts Manager Amix corp</h6>
-                                    <div class="row text-center justify-content-center">
-                                        <div class="col-4">
-                                            <a href="#" class="link">
-                                                <i class="icon-people" aria-hidden="true"></i>
-                                                <span class="value-digit">254</span>
+                <div className="row">
+                    <div className="col-lg-4 col-xlg-3 col-md-5">
+                        <div className="card">
+                            <div className="card-body profile-card">
+                                <center className="mt-4"> 
+                                    <img src={avt}
+                                        className="rounded-circle" width="150" alt="User Avatar"/>
+                                    <h4 className="card-title mt-2">Hanna Gover</h4>
+                                    <h6 className="card-subtitle">Accoubts Manager Amix corp</h6>
+                                    <div className="row text-center justify-content-center">
+                                        <div className="col-4">
+                                            <a href="#home" className="link">
+                                                <i className="icon-people" aria-hidden="true"></i>
+                                                <span className="value-digit">254</span>
                                             </a></div>
-                                        <div class="col-4">
-                                            <a href="#" class="link">
-                                                <i class="icon-picture" aria-hidden="true"></i>
-                                                <span class="value-digit">54</span>
+                                        <div className="col-4">
+                                            <a href="#home" className="link">
+                                                <i className="icon-picture" aria-hidden="true"></i>
+                                                <span className="value-digit">54</span>
                                             </a></div>
                                     </div>
                                 </center>
@@ -54,49 +57,49 @@ const Profile = () => {
                         </div>
                     </div>
 
-                    <div class="col-lg-8 col-xlg-9 col-md-7">
-                        <div class="card">
-                            <div class="card-body">
-                                <form class="form-horizontal form-material mx-2">
-                                    <div class="form-group">
-                                        <label class="col-md-12 mb-0">Full Name</label>
-                                        <div class="col-md-12">
+                    <div className="col-lg-8 col-xlg-9 col-md-7">
+                        <div className="card">
+                            <div className="card-body">
+                                <form className="form-horizontal form-material mx-2">
+                                    <div className="form-group">
+                                        <label className="col-md-12 mb-0">Full Name</label>
+                                        <div className="col-md-12">
                                             <input type="text" placeholder="Johnathan Doe"
-                                                class="form-control ps-0 form-control-line"/>
+                                                className="form-control ps-0 form-control-line"/>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="example-email" class="col-md-12">Email</label>
-                                        <div class="col-md-12">
+                                    <div className="form-group">
+                                        <label for="example-email" className="col-md-12">Email</label>
+                                        <div className="col-md-12">
                                             <input type="email" placeholder="johnathan@admin.com"
-                                                class="form-control ps-0 form-control-line" name="example-email"
+                                                className="form-control ps-0 form-control-line" name="example-email"
                                                 id="example-email"/>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12 mb-0">Password</label>
-                                        <div class="col-md-12">
+                                    <div className="form-group">
+                                        <label className="col-md-12 mb-0">Password</label>
+                                        <div className="col-md-12">
                                             <input type="password" value="password"
-                                                class="form-control ps-0 form-control-line"/>
+                                                className="form-control ps-0 form-control-line"/>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12 mb-0">Phone No</label>
-                                        <div class="col-md-12">
+                                    <div className="form-group">
+                                        <label className="col-md-12 mb-0">Phone No</label>
+                                        <div className="col-md-12">
                                             <input type="text" placeholder="123 456 7890"
-                                                class="form-control ps-0 form-control-line"/>
+                                                className="form-control ps-0 form-control-line"/>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12 mb-0">Message</label>
-                                        <div class="col-md-12">
-                                            <textarea rows="5" class="form-control ps-0 form-control-line"></textarea>
+                                    <div className="form-group">
+                                        <label className="col-md-12 mb-0">Message</label>
+                                        <div className="col-md-12">
+                                            <textarea rows="5" className="form-control ps-0 form-control-line"></textarea>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-12">Select Country</label>
-                                        <div class="col-sm-12 border-bottom">
-                                            <select class="form-select shadow-none ps-0 border-0 form-control-line">
+                                    <div className="form-group">
+                                        <label className="col-sm-12">Select Country</label>
+                                        <div className="col-sm-12 border-bottom">
+                                            <select className="form-select shadow-none ps-0 border-0 form-control-line">
                                                 <option>London</option>
                                                 <option>India</option>
                                                 <option>Usa</option>
@@ -105,9 +108,9 @@ const Profile = () => {
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-12 d-flex">
-                                            <button class="btn btn-success mx-auto mx-md-0 text-white">Update
+                                    <div className="form-group">
+                                        <div className="col-sm-12 d-flex">
+                                            <button className="btn btn-success mx-auto mx-md-0 text-white">Update
                                                 Profile</button>
                                         </div>
                                     </div>

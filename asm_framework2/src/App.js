@@ -1,6 +1,6 @@
 import React from "react";
   import './App.css';
-  import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
+  import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements,  Outlet,  Navigate  } from "react-router-dom";
 
   import Home from './component/client/home';
   import About from './component/client/about'
@@ -41,6 +41,8 @@ import User from "./component/admin/user/list";
 import EditUser from "./component/admin/user/edit";
 import AddUser from "./component/admin/user/add";
 import Layout from './component/admin/index';
+import Login from "./component/client/login";
+import Register from "./component/client/register";
 // css
 // import "./assets/images/favicon.png";
 import './assets/plugins/chartist-js/dist/chartist.min.css';
@@ -50,36 +52,53 @@ import "./assets/plugins/c3-master/c3.min.css";
 // import './assets/plugins/c3-master/c3.min.css';
 import "./assets/css/style.min.css";
 // import './assets/js/pages/dashboards/dashboard1';
-
+import { useSelector } from 'react-redux';
+const ProtectedRoute = ({ element, roleRequired }) => {
+  const {  role } = useSelector(state => state.auth);
+  if (role === roleRequired) {
+      return element;
+  }
+  return <Navigate to="/" />;
+};
   function App() {
     
     const router = createBrowserRouter(
       createRoutesFromElements(
         <Route>
-           <Route path="/admin" element={<Layout />} />    
-           <Route path="/admin/profile" element={<Profile />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/shop" element={<Shop />} />
+                <Route path="/detail" element={<Detail />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                {/* /admin */}
+                {/* <Route path="/admin" element={<ProtectedRoute element={<Layout />} roleRequired={1} />} />
+                <Route path="/admin/profile" element={<ProtectedRoute element={<Profile />} roleRequired={1} />} />
+                <Route path="/admin/category" element={<ProtectedRoute element={<Categories />} roleRequired={1} />} />
+                <Route path="/admin/editCategory" element={<ProtectedRoute element={<EditCategories />} roleRequired={1} />} />
+                <Route path="/admin/addCategory" element={<ProtectedRoute element={<AddCategories />} roleRequired={1} />} />
+                <Route path="/admin/product" element={<ProtectedRoute element={<Product />} roleRequired={1} />} />
+                <Route path="/admin/addProduct" element={<ProtectedRoute element={<AddProduct />} roleRequired={1} />} />
+                <Route path="/admin/editProduct" element={<ProtectedRoute element={<EditProduct />} roleRequired={1} />} />
+                <Route path="/admin/user" element={<ProtectedRoute element={<User />} roleRequired={1} />} />
+                <Route path="/admin/addUser" element={<ProtectedRoute element={<AddUser />} roleRequired={1} />} />
+                <Route path="/admin/editUser" element={<ProtectedRoute element={<EditUser />} roleRequired={1} />} /> */}
 
-          {/* category */}
-        <Route path="/admin/category" element={<Categories />} />
-        <Route path="/admin/editCategory" element={<EditCategories />} />
-        <Route path="/admin/addCategory" element={<AddCategories />} />
-        {/*product */}
-        <Route path="/admin/product" element={<Product />} />
-        <Route path="/admin/addProduct" element={<AddProduct />} />
-        <Route path="/admin/editProduct" element={<EditProduct />} />
-        {/* user */}
-        <Route path="/admin/user" element={<User />} />
-        <Route path="/admin/addUser" element={<AddUser />} />
-        <Route path="/admin/editUser" element={<EditUser />} />
-
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/detail" element={<Detail />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/contact" element={<Contact />} />
-
-        </Route> //chuyển trang
+                {/* /admin */}
+                <Route path="/admin" element={<Layout />} />
+                <Route path="/admin/profile" element={<Profile />} />
+                <Route path="/admin/category" element={<Categories />}/>
+                <Route path="/admin/editCategory"  element={<EditCategories />}/>
+                <Route path="/admin/addCategory" element={<AddCategories />}   />
+                <Route path="/admin/product"  element={<Product />} />
+                <Route path="/admin/addProduct"  element={<AddProduct />}  />
+                <Route path="/admin/editProduct"  element={<EditProduct />} />
+                <Route path="/admin/user" element={<User />} />
+                <Route path="/admin/addUser" element={<AddUser />} />
+                <Route path="/admin/editUser"  element={<EditUser />}/>
+            </Route>
       )
     );
     return (

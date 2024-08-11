@@ -33,6 +33,9 @@ router.get('/user/:id',userAPIController.fetchUserDetails);
 router.put('/user/:id',userAPIController.update);
 router.delete('/user/:id',userAPIController.delete);
 
+//login
+router.post('/login', userAPIController.login);
+
 //router product
 router.get('/product',productAPIController.list);
 router.post('/product', upload.single('image'),productAPIController.create);
