@@ -4,7 +4,6 @@ import Footer from "../layouts/footer";
 
 import avt from '../../../assets/images/users/5.jpg';
 
-
 const Profile = () => {
     
     return (
@@ -117,11 +116,12 @@ const Profile = () => {
                                 </form>
                             </div>
                         </div>
+
                     </div>
                 </div>
-
             </div>
-            </div>
+            <Footer />
+        </div>
         </div>
         </div>
     )

@@ -19,7 +19,11 @@ const categoryAPIController = require('../controllers/api/category');
 const userAPIController = require('../controllers/api/user')
 const productAPIController = require ('../controllers/api/product');
 const router = express.Router();
+
 //router category
+
+router.get('/category/', categoryAPIController.list)
+router.post('/category/', categoryAPIController.create);
 router.get('/category', categoryAPIController.list)
 router.post('/category', categoryAPIController.create);
 router.get('/category/:id', categoryAPIController.edit);

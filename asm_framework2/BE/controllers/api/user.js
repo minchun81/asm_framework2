@@ -17,7 +17,7 @@ exports.formCreate = async (req, res, next) => {
     res.render('admin/user/add');
 }
 
-
+//add
 exports.create = async (req, res, next) => {
     try {
         console.log(req.body); // Check the structure of req.body
@@ -51,7 +51,6 @@ exports.create = async (req, res, next) => {
 }
 
 
-
 exports.update = async (req, res, next) => {
     try {
         const id = req.params.id;
@@ -64,7 +63,7 @@ exports.update = async (req, res, next) => {
         
 
         // Prepare the array of values to update
-        const arr = [name,username, email, password , role, status];
+        const arr = [name, username, email, password , role, status];
 
         // Call the User model's update method
         const result = await User.update(id, arr);
@@ -102,8 +101,7 @@ exports.delete = async (req, res, next) => {
 exports.fetchUserDetails = async (req, res, next) => {
     const id = req.params.id;
     try {
-        const result = await User.fetchUserDetails(id);
-        if (result.length > 0) {
+        const result = await User.fetchUserDetails(id);if (result.length > 0) {
             res.status(200).json({ data: result[0] }); // result[0] as fetchUserDetails returns an array
         } else {
             res.status(404).json({ message: "User not found" });

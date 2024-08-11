@@ -16,13 +16,13 @@ exports.formCreate = async (req, res, next) => {
 exports.create = async (req, res, next) => {
     try {
         console.log(req.body); // Check the structure of req.body
-        let file = req.file;    
+        // let file = req.file;    
         const data = {
             name: req.body.name,
             category_id: req.body.category_id,
             price: req.body.price,
-            status: req.body.status,
-            image: file.filename,
+            status: req.body.status === "active" ? 1 : 0,
+            image: req.body.image,
             description: req.body.description
         };
 

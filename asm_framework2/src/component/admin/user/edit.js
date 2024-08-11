@@ -1,67 +1,145 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import Header from "../layouts/header";
 import Footer from "../layouts/footer";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../../../assets/css/styleEdit.css"
+
+import { getUserById, updateUser } from '../../../services/user';
 
 const EditUser = () => {
-    
-    return (
-<div>
-<Header />
-<div class="col-sm-11" style={{position: "relative", left: "241px"}}>
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [role, setRole] = useState('');
+  const [status, setStatus] = useState('');
+  const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [loading, setLoading] = useState(true);
 
-    <div className="card">
-        <div className="card-body">
-        <h4 className="card-title">Edit User</h4>
-            <form class="form-horizontal form-material mx-2">
+  useEffect(() => {
+    const fetchUser = () => {
+      getUserById(id, (userData) => {
+        if (userData) {
+          setUser(userData);
+          setUsername(userData.username);
+          setName(userData.name);
+          setEmail(userData.email);
+          setRole(userData.role);
+          setStatus(userData.status);
+          setLoading(false);
+        } else {
+          setError('User not found');
+          setLoading(false);
+        }
+      }, (error) => {
+        setError(error);
+        setLoading(false);
+      });
+    };
+
+    fetchUser();
+  }, [id]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const updatedUser = {name, username, email, role, status };
+
+    updateUser(id, updatedUser, (response) => {
+      setSuccessMessage('User updated successfully');
+      setError('');
+      navigate('/admin/user');
+    }, (error) => {
+      setSuccessMessage('');
+      setError(error);
+    });
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div>
+      <Header />
+
+      <div className="row">
+        <div className="col-sm-11" style={{ position: "relative", left: "241px" }}>
+          <div className="card">
+            <div className="card-body">
+              <h4 className="card-title">Chỉnh Sửa Người Dùng</h4>
+
+              {error && <div className="alert alert-danger">{error}</div>}
+              {successMessage && <div className="alert alert-success">{successMessage}</div>}
+
+              <form onSubmit={handleSubmit}>
                 <div className="form-group mb-3">
-                    <label className="col-md-12 mb-0">Username</label>
-                    <div class="col-md-12">
-                    <input type="text" id="fullname" placeholder=""
-                        className=" form-control-line border-input"/>
-                    </div>
+                  <label className="col-md-12 mb-0">Tên Đăng Nhập</label>
+                  <input
+                    type="text"
+                    className="form-control-line border-input"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                  />
                 </div>
-                
-                <div class="form-group mb-3">
-                    <label class="col-md-12 mb-0">Password</label>
-                    <div class="col-md-12">
-                        <input type="text"class="form-control-line border-input"/>
-                    </div>
+                <div className="form-group mb-3">
+                  <label className="col-md-12 mb-0">Tên</label>
+                  <input
+                    type="text"
+                    className="form-control-line border-input"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    require
+                  />
                 </div>
-                <div class="form-group mb-3">
-                    <label class="col-md-12 mb-0">Email</label>
-                    <div class="col-md-12">
-                        <input type="email" 
-                            class="form-control-line border-input"/>
+                <div className="form-group mb-3">
+                  <label className="col-md-12 mb-0">Email</label>
+                  <input
+                    type="email"
+                    className="form-control-line border-input"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required/>
                     </div>
-                </div>
-                <div class="form-group mb-3">
-                    <label class="col-md-12 mb-0">Full name</label>
-                    <div class="col-md-12">
-                        <input type="email" 
-                            class="form-control-line border-input"/>
+                    <div className="form-group mb-3">
+                      <label className="col-md-12 mb-0">Vai Trò</label>
+                      <select
+                        className="form-control-line border-input"
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
+                        required
+                      >
+                        <option value="">Chọn vai trò</option>
+                        <option value="1">Admin</option>
+                        <option value="0">User</option>
+                      </select>
                     </div>
-                </div>
-                <div class="form-group mb-3">
-                    <label class="col-md-12 mb-0">Phone number</label>
-                    <div class="col-md-12">
-                        <input type="email" 
-                            class="form-control-line border-input"/>
+                    <div className="form-group mb-3">
+                      <label className="col-md-12 mb-0">Trạng Thái</label>
+                      <select
+                        className="form-control-line border-input"
+                        value={status}
+                        onChange={(e) => setStatus(e.target.value)}
+                        required
+                      >
+                        <option value="">Chọn trạng thái</option>
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                      </select>
                     </div>
+                    <button type="submit" className="btn btn-success">Cập Nhật</button>
+                  </form>
                 </div>
-                
-                <div class="form-group">
-                    <div class="col-sm-12 d-flex">
-                        <button class="btn btn-success mx-auto mx-md-0 text-white">Save</button>
-                    </div>
-                </div>
-            </form>
+              </div>
+            </div>
+          </div>
+    
+          <Footer />
         </div>
-    </div>
-</div>
-</div>
-);
-};
-
-export default EditUser;
+      );
+    }
+    
+    export default EditUser;

@@ -1,130 +1,173 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import Header from "../layouts/header";
 import Footer from "../layouts/footer";
+import { getUsers, deleteUser } from "../../../services/user";
+
+// Hàm để lấy tên hiển thị của vai trò
+const getRoleDisplayName = (role) => {
+  switch (role) {
+    case 1:
+      return "Admin";
+    case 0:
+      return "User";
+    default:
+      return "Unknown";
+  }
+};
+
+// Hàm để lấy tên hiển thị của trạng thái
+const getStatusDisplayName = (status) => {
+  switch (status) {
+    case 1:
+      return "Active";
+    case 0:
+      return "Inactive";
+    default:
+      return "Unknown";
+  }
+};
+
 const ListUser = () => {
-    
-    return (
-<div class="">
-<Header />
+  const [users, setUsers] = useState([]);
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [usersPerPage] = useState(5); // Number of users per page
 
-{/* <!-- Start Page Content --> */}
-<div class="row">
-<div class="col-sm-11" style={{position: "relative", left: "241px"}}>
+  useEffect(() => {
+    const fetchUsers = () => {
+      getUsers("http://localhost:3001/api", setUsers, setError); // Đảm bảo đúng URL API
+    };
 
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Danh sách người dùng</h4>
-                <span><a href='/admin/addUser' className="btn btn-primary">Add User</a></span>
-                <div class="table-responsive">
-                    <table class="table user-table">
-                        <thead>
-                            <tr>
-                                <th class="border-top-0">ID</th>
-                                <th class="border-top-0">Username</th>
-                                <th class="border-top-0">Password</th>
-                                <th class="border-top-0">Email</th>
-                                <th class="border-top-0">Full name</th>
-                                <th class="border-top-0">Phone number</th>
-                                <th class="border-top-0">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>minhtrung</td>
-                                <td>trung123</td>
-                                <td>@Genelia</td>
-                                <td>Huynh Minh Trung</td>
-                                <td>01665202865</td>
-                                <td> 
-                                    <div className="d-flex gap-2 ">
-                                    <span><a href='/admin/editUser' className="btn btn-primary">Edit</a></span>
-                                    <span><button href className="btn btn-danger">Delete</button></span>
-                                     </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>minhtrung</td>
-                                <td>trung123</td>
-                                <td>@Ritesh</td>
-                                <td>Huynh Minh Trung</td>
-                                <td>01665202865</td>
-                                <td> 
-                                    <div className="d-flex gap-2 ">
-                                    <span><a href='/admin/editUser' className="btn btn-primary">Edit</a></span>
-                                    <span><button href className="btn btn-danger">Delete</button></span>
-                                     </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>minhtrung</td>
-                                <td>trung123</td>
-                                <td>@Govinda</td>
-                                <td>Huynh Minh Trung</td>
-                                <td>01665202865</td>
-                                <td> 
-                                    <div className="d-flex gap-2 ">
-                                    <span><a href='/admin/editUser' className="btn btn-primary">Edit</a></span>
-                                    <span><button href className="btn btn-danger">Delete</button></span>
-                                     </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>minhtrung</td>
-                                <td>trung123</td>
-                                <td>@Hritik</td>
-                                <td>Huynh Minh Trung</td>
-                                <td>01665202865</td>
-                                <td> 
-                                    <div className="d-flex gap-2 ">
-                                    <span><a href='/admin/editUser' className="btn btn-primary">Edit</a></span>
-                                    <span><button href className="btn btn-danger">Delete</button></span>
-                                     </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>minhtrung</td>
-                                <td>trung123</td>
-                                <td>@Maruti</td>
-                                <td>Huynh Minh Trung</td>
-                                <td>01665202865</td>
-                                <td> 
-                                    <div className="d-flex gap-2 ">
-                                    <span><a href='/admin/editUser' className="btn btn-primary">Edit</a></span>
-                                    <span><button href className="btn btn-danger">Delete</button></span>
-                                     </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>minhtrung</td>
-                                <td>trung123</td>
-                                <td>@Sonu</td>
-                                <td>Huynh Minh Trung</td>
-                                <td>01665202865</td>
-                                <td> 
-                                    <div className="d-flex gap-2 ">
-                                    <span><a href='/admin/editUser' className="btn btn-primary">Edit</a></span>
-                                    <span><button href className="btn btn-danger">Delete</button></span>
-                                     </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+    fetchUsers();
+  }, []);
+
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this user?")) {
+      deleteUser(
+        id,
+        (response) => {
+          setSuccessMessage("User deleted successfully");
+          setError(""); // Xóa bất kỳ lỗi nào trước đó
+          // Làm mới danh sách người dùng sau khi xóa thành công
+          getUsers("http://localhost:3001/api", setUsers, setError); // Đảm bảo đúng URL API
+        },
+        (error) => {
+          setSuccessMessage(""); // Xóa bất kỳ thông báo thành công nào trước đó
+          setError(error);
+        }
+      );
+    }
+  };
+
+  // Get current users
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+
+  // Tính tổng số trang
+  const totalPages = Math.ceil(users.length / usersPerPage);
+
+  return (
+    <div>
+      <Header />
+
+      <div className="row">
+        <div
+          className="col-sm-11"
+          style={{ position: "relative", left: "241px" }}
+        >
+          <div className="card">
+            <div className="card-body">
+              <h4 className="card-title">Danh Sách Người Dùng</h4>
+              {successMessage && (
+                <div className="alert alert-success">{successMessage}</div>
+              )}
+              {error && <div className="alert alert-danger">{error}</div>}
+              <span>
+                <a href="/admin/addUser" className="btn btn-primary mb-3">
+                  Thêm Người Dùng
+                </a>
+              </span>
+
+              <div className="table-responsive">
+                <table className="table user-table">
+                  <thead>
+                    <tr>
+                      <th className="border-top-0">ID</th>
+                      <th className="border-top-0">Tên Đăng Nhập</th>
+                      <th className="border-top-0">Tên</th>
+                      <th className="border-top-0">Email</th>
+                      <th className="border-top-0">Vai Trò</th>
+                      <th className="border-top-0">Trạng Thái</th>
+                      <th className="border-top-0">Hành Động</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {currentUsers.length > 0 ? (
+                      currentUsers.map((user) => (
+                        <tr key={user.id}>
+                          <td>{user.id}</td>
+                          <td>{user.username}</td>
+                          <td>{user.name}</td>
+                          <td>{user.email}</td>
+                          <td>{getRoleDisplayName(user.role)}</td>
+                          <td>{getStatusDisplayName(user.status)}</td>
+                          <td>
+                            <div className="d-flex gap-2">
+                              <span>
+                                <a
+                                  href={`/admin/editUser/${user.id}`}
+                                  className="btn btn-primary"
+                                >
+                                  Sửa
+                                </a>
+                              </span>
+                              <span>
+                                <button
+                                  className="btn btn-danger"
+                                  onClick={() => handleDelete(user.id)}
+                                >
+                                  Xóa
+                                </button>
+                              </span>
+                            </div>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan="7">Không có người dùng nào</td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+              <div className="pagination">
+                <button
+                  className="btn btn-primary mx-3"
+                  onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                  disabled={currentPage === 1}
+                >
+                  &lt; Previous
+                </button>
+                <span>Page {currentPage} of {totalPages}</span>
+                <button
+                  className="btn btn-primary mx-3"
+                  onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                  disabled={currentPage === totalPages}
+                >
+                  Next &gt;
+                </button>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+
+      <Footer />
     </div>
-</div>
-
-{/* End PAge Content  */}
-
-</div>
-);
+  );
 };
 
 export default ListUser;
