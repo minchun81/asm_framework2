@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./header";
 import Footer from "./footer";
+import { getProduct } from "../../services/product";
 import a from "../../assets/img/a.jpg";
-import produc1 from "../../assets/img/products/product-img-1.jpg";
-import produc2 from "../../assets/img/products/product-img-2.jpg";
-import produc3 from "../../assets/img/products/product-img-3.jpg";
 
 const Home = () => {
+  const [products, setProducts] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // Gọi API để lấy danh sách sản phẩm
+    getProduct("http://localhost:3001/api", setProducts, setError); // Đảm bảo đúng URL API
+  }, []);
+
   return (
     <>
       <Header />
@@ -102,36 +108,22 @@ const Home = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-4 col-md-6 text-center">
-              <div className="single-product-item">
-                <div className="product-image">
-                  <a href="/detail"><img src={produc1} alt="Sản phẩm 1" /></a>
+          {products.length > 0 ? (
+              products.map((product) => (
+                <div key={product.id} className="col-lg-4 col-md-6 text-center">
+                  <div className="single-product-item">
+                    <div className="product-image">
+                      <a href={`/detail/${product.id}`}><img src={product.image} alt={product.name} /></a>
+                    </div>
+                    <h3>{product.name}</h3>
+                    <p className="product-price"><span>Trên mỗi Kg</span> {product.price}đ </p>
+                    <a href="/cart" className="cart-btn"><i className="fas fa-shopping-cart"></i> Thêm vào giỏ hàng</a>
+                  </div>
                 </div>
-                <h3>Dâu tây</h3>
-                <p className="product-price"><span>Trên mỗi Kg</span> 85.000đ </p>
-                <a href="cart.html" className="cart-btn"><i className="fas fa-shopping-cart"></i> Thêm vào giỏ hàng</a>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
-              <div className="single-product-item">
-                <div className="product-image">
-                  <a href="/detail"><img src={produc3} alt="Sản phẩm 3" /></a>
-                </div>
-                <h3>Chanh</h3>
-                <p className="product-price"><span>Trên mỗi Kg</span> 35.000đ </p>
-                <a href="cart.html" className="cart-btn"><i className="fas fa-shopping-cart"></i> Thêm vào giỏ hàng</a>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6 text-center">
-              <div className="single-product-item">
-                <div className="product-image">
-                  <a href="/detail"><img src={produc2} alt="Sản phẩm 2" /></a>
-                </div>
-                <h3>Chanh</h3>
-                <p className="product-price"><span>Trên mỗi Kg</span> 35.000đ </p>
-                <a href="cart.html" className="cart-btn"><i className="fas fa-shopping-cart"></i> Thêm vào giỏ hàng</a>
-              </div>
-            </div>
+              ))
+            ) : (
+              <p className="col-12 text-center">Không có sản phẩm nào để hiển thị.</p>
+            )}
           </div>
         </div>
       </div>
@@ -179,3 +171,4 @@ const Home = () => {
 };
 
 export default Home;
+

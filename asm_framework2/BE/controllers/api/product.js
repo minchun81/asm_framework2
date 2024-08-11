@@ -45,13 +45,12 @@ exports.create = async (req, res, next) => {
 exports.update = async(req, res, next) => {
     try{
     let id = req.params.id;
-    let file = req.file;    
     const data = {
         name: req.body.name,
         category_id: req.body.category_id,
         price: req.body.price,
         status: req.body.status,
-        image: file.filename,
+        image: req.body.image,
         description: req.body.description
     };
     // console.log(result);
@@ -61,7 +60,6 @@ exports.update = async(req, res, next) => {
 }catch (err) {
     res.status(500).json({ error: 'Internal Server Error' });
 }
-   
 };
 
 

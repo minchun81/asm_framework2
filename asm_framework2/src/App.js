@@ -72,7 +72,7 @@ import "./assets/css/style.min.css";
         {/*product */}
         <Route path="/admin/product" element={<Product />} />
         <Route path="/admin/addProduct" element={<AddProduct />} />
-        <Route path="/admin/editProduct" element={<EditProduct />} />
+        <Route path="/admin/editProduct/:id" element={<EditProduct />} />
         {/* user */}
         <Route path="/admin/user" element={<User />} />
         <Route path="/admin/addUser" element={<AddUser />} />
