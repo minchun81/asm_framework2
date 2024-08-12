@@ -93,7 +93,7 @@ module.exports = class User {
       });
     });
   }
-};
+
     // 1 sản phẩm
     static async fetchUserDetails(id) {
         return new Promise((resolve, reject) => {

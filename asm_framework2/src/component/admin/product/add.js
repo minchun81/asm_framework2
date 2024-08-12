@@ -4,7 +4,7 @@ import Header from "../layouts/header";
 import Footer from "../layouts/footer";
 import "../../../assets/css/styleEdit.css";
 import { useNavigate } from 'react-router-dom';
-import { addProduct } from '../../../services/product'; // Import hàm addProduct từ service
+import { addProduct } from '../../../services/Product'; // Import hàm addProduct từ service
 
 const AddProduct = () => {
   const [name, setProductName] = useState('');

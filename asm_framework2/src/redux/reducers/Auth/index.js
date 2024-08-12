@@ -2,8 +2,6 @@ import { Auth } from "../../types";
 
 const stateInit = {
   profile: null,
-  token: null,
-  role: null,
 };
 
 const auth = (state = stateInit, action) => {
@@ -16,8 +14,6 @@ const auth = (state = stateInit, action) => {
         case Auth.AUTH_LOGIN:
             return {
                 ...state,
-                token: action.payload.token,
-                role: action.payload.role,
             };
         default:
             return { ...state };

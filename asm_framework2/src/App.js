@@ -52,14 +52,6 @@ import "./assets/plugins/c3-master/c3.min.css";
 // import './assets/plugins/c3-master/c3.min.css';
 import "./assets/css/style.min.css";
 // import './assets/js/pages/dashboards/dashboard1';
-import { useSelector } from 'react-redux';
-const ProtectedRoute = ({ element, roleRequired }) => {
-  const {  role } = useSelector(state => state.auth);
-  if (role === roleRequired) {
-      return element;
-  }
-  return <Navigate to="/" />;
-};
   function App() {
     
     const router = createBrowserRouter(
@@ -74,22 +66,10 @@ const ProtectedRoute = ({ element, roleRequired }) => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 {/* /admin */}
-                {/* <Route path="/admin" element={<ProtectedRoute element={<Layout />} roleRequired={1} />} />
-                <Route path="/admin/profile" element={<ProtectedRoute element={<Profile />} roleRequired={1} />} />
-                <Route path="/admin/category" element={<ProtectedRoute element={<Categories />} roleRequired={1} />} />
-                <Route path="/admin/editCategory" element={<ProtectedRoute element={<EditCategories />} roleRequired={1} />} />
-                <Route path="/admin/addCategory" element={<ProtectedRoute element={<AddCategories />} roleRequired={1} />} />
-                <Route path="/admin/product" element={<ProtectedRoute element={<Product />} roleRequired={1} />} />
-                <Route path="/admin/addProduct" element={<ProtectedRoute element={<AddProduct />} roleRequired={1} />} />
-                <Route path="/admin/editProduct" element={<ProtectedRoute element={<EditProduct />} roleRequired={1} />} />
-                <Route path="/admin/user" element={<ProtectedRoute element={<User />} roleRequired={1} />} />
-                <Route path="/admin/addUser" element={<ProtectedRoute element={<AddUser />} roleRequired={1} />} />
-                <Route path="/admin/editUser" element={<ProtectedRoute element={<EditUser />} roleRequired={1} />} /> */}
-
-                {/* /admin */}
                 <Route path="/admin" element={<Layout />} />
                 <Route path="/admin/profile" element={<Profile />} />
                 <Route path="/admin/category" element={<Categories />}/>
+                {/* <Route path="/admin/category/thongke" element={<ListCategorys />} /> */}
                 <Route path="/admin/editCategory"  element={<EditCategories />}/>
                 <Route path="/admin/addCategory" element={<AddCategories />}   />
                 <Route path="/admin/product"  element={<Product />} />
@@ -97,7 +77,7 @@ const ProtectedRoute = ({ element, roleRequired }) => {
                 <Route path="/admin/editProduct"  element={<EditProduct />} />
                 <Route path="/admin/user" element={<User />} />
                 <Route path="/admin/addUser" element={<AddUser />} />
-                <Route path="/admin/editUser"  element={<EditUser />}/>
+                <Route path="/admin/editUser/:id"  element={<EditUser />}/>
             </Route>
       )
     );
