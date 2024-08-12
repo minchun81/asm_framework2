@@ -1,11 +1,12 @@
+
 import React, { useState, useEffect } from "react";
 import Header from "../layouts/header";
 import Footer from "../layouts/footer";
 import { getProduct, deleteProduct } from "../../../services/product";
+
 import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer và toast
 import 'react-toastify/dist/ReactToastify.css'; // Import css cho toast
 
-// Hàm để lấy tên hiển thị của trạng thái và lớp CSS
 const getStatusDisplay = (status) => {
   switch (status) {
     case 1:

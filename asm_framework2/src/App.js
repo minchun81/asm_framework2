@@ -1,6 +1,6 @@
 import React from "react";
   import './App.css';
-  import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
+  import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements,  Outlet,  Navigate  } from "react-router-dom";
 
   import Home from './component/client/home';
   import About from './component/client/about'
@@ -41,10 +41,10 @@ import User from "./component/admin/user/list";
 import EditUser from "./component/admin/user/edit";
 import AddUser from "./component/admin/user/add";
 import Layout from './component/admin/index';
-import ListCategory from "./component/admin/categories/list"
-import EditCategory from "./component/admin/categories/edit"
+import Login from "./component/client/login";
+import Register from "./component/client/register";
+import ListCategory from "./component/admin/categories/list";
 import ListCategorys from "./component/admin/thongkedanhmuc";
-
 // css
 // import "./assets/images/favicon.png";
 import './assets/plugins/chartist-js/dist/chartist.min.css';
@@ -54,14 +54,18 @@ import "./assets/plugins/c3-master/c3.min.css";
 // import './assets/plugins/c3-master/c3.min.css';
 import "./assets/css/style.min.css";
 // import './assets/js/pages/dashboards/dashboard1';
+
 import { ToastContainer } from 'react-toastify'
+
 
   function App() {
     <ToastContainer/>
     
     const router = createBrowserRouter(
       createRoutesFromElements(
-        <Route>
+      
+            <Route>
+          
            <Route path="/admin" element={<Layout />} />    
            <Route path="/admin/profile" element={<Profile />} />
 
@@ -69,7 +73,7 @@ import { ToastContainer } from 'react-toastify'
         <Route path="/admin/category" element={<Categories />} />
         <Route path="/admin/category/thongke" element={<ListCategorys />} />
         <Route path="/admin/category/list" element={<ListCategory />} />
-        <Route path="/admin/editCategory/:id" element={<EditCategory />} />
+        <Route path="/admin/editCategory/:id" element={<EditCategories />} />
         <Route path="/admin/addCategory" element={<AddCategories />} />
         {/*product */}
         <Route path="/admin/product" element={<Product />} />
@@ -88,6 +92,8 @@ import { ToastContainer } from 'react-toastify'
           <Route path="/contact" element={<Contact />} />
           {/* <Route path="student-list" element={<StudentList />} /> */}
 
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Route> //chuyển trang
       )
     );

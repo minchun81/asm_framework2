@@ -1,10 +1,7 @@
 import axios from "axios";
 import { Cookies } from "react-cookie";
 
-// Đặt URL cơ bản cho API của bạn
-
 export const BASE_URL = "http://localhost:3001";
-
 
 const request = async ({
   method = "GET",
@@ -18,8 +15,8 @@ const request = async ({
 
     const res = await axios({
       method: method,
-      baseURL: BASE_URL, // Sử dụng URL cơ bản
-      url: path, // Thêm phần path vào URL cơ bản
+      baseURL: BASE_URL,
+      url: path,
       data: data,
       headers: {
         Authorization: `Bearer ${token}`,
@@ -32,9 +29,7 @@ const request = async ({
     console.log(err);
     alert(err?.response?.data?.message);
     return null;
-    
   }
-  
 };
 
 export default request;

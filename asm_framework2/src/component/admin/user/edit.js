@@ -15,6 +15,7 @@ const EditUser = () => {
   const [role, setRole] = useState('');
   const [status, setStatus] = useState('');
   const [loading, setLoading] = useState(true);
+  const [fieldErrors, setFieldErrors] = useState({});
 
   useEffect(() => {
     const fetchUser = () => {
@@ -42,6 +43,19 @@ const EditUser = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    let errors = {};
+    if (!name) {
+      errors.name = 'Tên không được để trống';
+    }
+    if (!email) {
+      errors.email = 'Email không được để trống';
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      return;
+    }
+
     const updatedUser = { name, username, email, role, status };
 
     updateUser(id, updatedUser, (response) => {
@@ -68,13 +82,12 @@ const EditUser = () => {
 
               <form onSubmit={handleSubmit}>
                 <div className="form-group mb-3">
-                  <label className="col-md-12 mb-0">Tên Đăng Nhập</label>
+                  <label className="col-md-12 mb-0" style={{ color: 'red' }}>Tên Đăng Nhập (không được sửa)</label>
                   <input
                     type="text"
                     className="form-control-line border-input"
                     value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
+                    readOnly
                   />
                 </div>
                 <div className="form-group mb-3">
@@ -84,8 +97,11 @@ const EditUser = () => {
                     className="form-control-line border-input"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    required
+                   
                   />
+                  {fieldErrors.name && (
+                    <div style={{ color: 'red' }}>{fieldErrors.name}</div>
+                  )}
                 </div>
                 <div className="form-group mb-3">
                   <label className="col-md-12 mb-0">Email</label>
@@ -94,8 +110,11 @@ const EditUser = () => {
                     className="form-control-line border-input"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    required
+                  
                   />
+                  {fieldErrors.email && (
+                    <div style={{ color: 'red' }}>{fieldErrors.email}</div>
+                  )}
                 </div>
                 <div className="form-group mb-3">
                   <label className="col-md-12 mb-0">Vai Trò</label>
@@ -106,8 +125,8 @@ const EditUser = () => {
                     required
                   >
                     <option value="">Chọn vai trò</option>
-                    <option value="1">Quản trị viên</option>
-                    <option value="0">Người dùng</option>
+                    <option value="1">Admin</option>
+                    <option value="0">User</option>
                   </select>
                 </div>
                 <div className="form-group mb-3">
@@ -119,8 +138,8 @@ const EditUser = () => {
                     required
                   >
                     <option value="">Chọn trạng thái</option>
-                    <option value="1">Đang hoạt động</option>
-                    <option value="0">Không hoạt động</option>
+                    <option value="1">hoạt động</option>
+                    <option value="0">đang hoạt động</option>
                   </select>
                 </div>
                 <button type="submit" className="btn btn-success">Cập Nhật</button>
@@ -131,7 +150,6 @@ const EditUser = () => {
       </div>
 
       <Footer />
-      <ToastContainer />
     </div>
   );
 };

@@ -1,6 +1,10 @@
 const express = require('express');
-const bcrypt = require('bcrypt');
-const User = require('../../models/user')
+const User = require('../../models/user');
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser'); // Import cookie-parser
+
+const app = express();
+app.use(cookieParser());;
 exports.list = async (req, res, next) => {
     var result = await User.fetchAll()
     res.status(200).json({
@@ -104,5 +108,49 @@ exports.fetchUserDetails = async (req, res, next) => {
     } catch (error) {
         console.error('Error fetching user details:', error);
         res.status(500).json({ message: 'Failed to fetch user details', error: error.message });
+    }
+};
+exports.login = async (req, res, next) => {
+    try {
+        const { username, password } = req.body;
+
+        // Find user by username
+        const users = await User.findByUsername(username);
+        if (users.length === 0) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        const user = users[0];
+
+        // Check password
+        const passwordIsValid = await (password, user.password);
+        if (!passwordIsValid) {
+            return res.status(401).json({ message: 'Invalid password' });
+        }
+
+        // Create token
+        const token = jwt.sign({ id: user.id }, process.env.MY_SECRET, {
+            expiresIn: 86400 // 24 hours
+        });
+
+        // Send cookie with token
+        res.cookie('accessToken', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production', // Set to true if using HTTPS
+            maxAge: 86400 * 1000 // 24 hours in milliseconds
+        });
+
+        res.status(200).json({
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            name: user.name,
+            role: user.role,
+            status: user.status,
+            accessToken: token,
+            message: 'Login successful'
+        });
+    } catch (error) {
+        console.error('Error logging in:', error);
+        res.status(500).json({ message: 'Failed to log in', error: error.message });
     }
 };

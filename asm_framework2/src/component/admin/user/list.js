@@ -21,11 +21,11 @@ const getRoleDisplayName = (role) => {
 const getStatusDisplayName = (status) => {
   switch (status) {
     case 1:
-      return "Active";
+      return "hoạt đông";
     case 0:
-      return "Inactive";
+      return "không hoạt động";
     default:
-      return "Unknown";
+      return "chưa nhận dạng";
   }
 };
 
