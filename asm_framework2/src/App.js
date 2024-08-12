@@ -43,6 +43,8 @@ import AddUser from "./component/admin/user/add";
 import Layout from './component/admin/index';
 import Login from "./component/client/login";
 import Register from "./component/client/register";
+import ListCategory from "./component/admin/categories/list";
+import ListCategorys from "./component/admin/thongkedanhmuc";
 // css
 // import "./assets/images/favicon.png";
 import './assets/plugins/chartist-js/dist/chartist.min.css';
@@ -56,29 +58,9 @@ import "./assets/css/style.min.css";
     
     const router = createBrowserRouter(
       createRoutesFromElements(
-        <Route>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/shop" element={<Shop />} />
-                <Route path="/detail" element={<Detail />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                {/* /admin */}
-                <Route path="/admin" element={<Layout />} />
-                <Route path="/admin/profile" element={<Profile />} />
-                <Route path="/admin/category" element={<Categories />}/>
-                {/* <Route path="/admin/category/thongke" element={<ListCategorys />} /> */}
-                <Route path="/admin/editCategory"  element={<EditCategories />}/>
-                <Route path="/admin/addCategory" element={<AddCategories />}   />
-                <Route path="/admin/product"  element={<Product />} />
-                <Route path="/admin/addProduct"  element={<AddProduct />}  />
-                <Route path="/admin/editProduct"  element={<EditProduct />} />
-                <Route path="/admin/user" element={<User />} />
-                <Route path="/admin/addUser" element={<AddUser />} />
-                <Route path="/admin/editUser/:id"  element={<EditUser />}/>
-            </Route>
+      
+            <Route>
+          
            <Route path="/admin" element={<Layout />} />    
            <Route path="/admin/profile" element={<Profile />} />
 
@@ -86,7 +68,7 @@ import "./assets/css/style.min.css";
         <Route path="/admin/category" element={<Categories />} />
         <Route path="/admin/category/thongke" element={<ListCategorys />} />
         <Route path="/admin/category/list" element={<ListCategory />} />
-        <Route path="/admin/editCategory/:id" element={<EditCategory />} />
+        <Route path="/admin/editCategory/:id" element={<EditCategories />} />
         <Route path="/admin/addCategory" element={<AddCategories />} />
         {/*product */}
         <Route path="/admin/product" element={<Product />} />
@@ -105,6 +87,8 @@ import "./assets/css/style.min.css";
           <Route path="/contact" element={<Contact />} />
           {/* <Route path="student-list" element={<StudentList />} /> */}
 
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Route> //chuyển trang
       )
     );

@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Header from "../layouts/header";
 import Footer from "../layouts/footer";
 
-import { getUserById, updateUser } from '../../../services/User';
+import { getUserById, updateUser } from '../../../services/user';
 
 const EditUser = () => {
   const { id } = useParams();
