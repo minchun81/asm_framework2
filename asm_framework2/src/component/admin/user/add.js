@@ -21,19 +21,24 @@ const AddUser = () => {
 
   const validateForm = () => {
     const errors = {};
-    const namePattern = /^[a-zA-Z0-9]*$/;
+    const usernamePattern = /^[a-zA-Z0-9]*$/;  // Chỉ chấp nhận ký tự chữ và số, không có khoảng trắng hoặc dấu
 
-    if (!username) errors.username = "Tên đăng nhập không được để trống!";
+    if (!username) {
+      errors.username = "Tên đăng nhập không được để trống!";
+    } else if (!usernamePattern.test(username)) {
+      errors.username = "Tên đăng nhập chỉ được viết liền không dấu và không có khoảng trắng!";
+    }
+
     if (!name) {
       errors.name = "Tên không được để trống!";
-    } else if (!namePattern.test(name)) {
-      errors.name = "Tên chỉ được viết liền không dấu và không có khoảng trắng!";
     }
+
     if (!email) {
       errors.email = "Email không được để trống!";
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       errors.email = "Email không hợp lệ.";
     }
+
     if (!password) errors.password = "Mật khẩu không được để trống!";
     if (!role) errors.role = "Vui lòng chọn vai trò!";
     if (!status) errors.status = "Vui lòng chọn trạng thái!";
@@ -154,8 +159,8 @@ const AddUser = () => {
                     className="form-control-line border-input"
                   >
                     <option value="">Chọn trạng thái</option>
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
+                    <option value="active">Hoạt động</option>
+                    <option value="inactive">Không hoạt động</option>
                   </select>
                   {formErrors.status && <p className="text-danger">{formErrors.status}</p>}
                 </div>
