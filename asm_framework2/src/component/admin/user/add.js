@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../layouts/header";
 import Footer from "../layouts/footer";
 import "../../../assets/css/styleEdit.css";
-import { useNavigate } from 'react-router-dom';
 import { addUsers } from '../../../services/user';
 import CryptoJS from 'crypto-js';
 
@@ -15,8 +17,6 @@ const AddUser = () => {
   const [role, setRole] = useState('');
   const [status, setStatus] = useState('');
   const [formErrors, setFormErrors] = useState({});
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const validateForm = () => {
@@ -57,15 +57,13 @@ const AddUser = () => {
     // Mã hóa mật khẩu bằng MD5
     const hashedPassword = CryptoJS.MD5(password).toString();
 
-    const userData = {name, username, email, password: hashedPassword, role, status };
+    const userData = { name, username, email, password: hashedPassword, role, status };
 
     addUsers(userData, (response) => {
-      setSuccessMessage('Thêm người dùng thành công!');
-      setErrorMessage('');
+      toast.success('Thêm người dùng thành công!');
       navigate('/admin/user'); // Điều hướng tới trang quản lý người dùng
     }, (error) => {
-      setSuccessMessage('');
-      setErrorMessage(error);
+      toast.error(error);
     });
   };
 
@@ -80,12 +78,12 @@ const AddUser = () => {
               <div className="form-group mb-3">
                 <label className="col-md-12 mb-0">Tên Đăng Nhập</label>
                 <div className="col-md-12">
-                  <input 
-                    type="text" 
-                    id="username" 
+                  <input
+                    type="text"
+                    id="username"
                     value={username}
-                    onChange={(e) => setUsername(e.target.value)} 
-                    className="form-control-line border-input" 
+                    onChange={(e) => setUsername(e.target.value)}
+                    className="form-control-line border-input"
                     placeholder="Nhập tên đăng nhập"
                   />
                   {formErrors.username && <p className="text-danger">{formErrors.username}</p>}
@@ -94,12 +92,12 @@ const AddUser = () => {
               <div className="form-group mb-3">
                 <label className="col-md-12 mb-0">Tên</label>
                 <div className="col-md-12">
-                  <input 
-                    type="text" 
-                    id="name" 
+                  <input
+                    type="text"
+                    id="name"
                     value={name}
-                    onChange={(e) => setName(e.target.value)} 
-                    className="form-control-line border-input" 
+                    onChange={(e) => setName(e.target.value)}
+                    className="form-control-line border-input"
                     placeholder="Nhập tên"
                   />
                   {formErrors.name && <p className="text-danger">{formErrors.name}</p>}
@@ -108,12 +106,12 @@ const AddUser = () => {
               <div className="form-group mb-3">
                 <label className="col-md-12 mb-0">Email</label>
                 <div className="col-md-12">
-                  <input 
-                    type="email" 
-                    id="email" 
+                  <input
+                    type="email"
+                    id="email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)} 
-                    className="form-control-line border-input" 
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="form-control-line border-input"
                     placeholder="Nhập email"
                   />
                   {formErrors.email && <p className="text-danger">{formErrors.email}</p>}
@@ -122,12 +120,12 @@ const AddUser = () => {
               <div className="form-group mb-3">
                 <label className="col-md-12 mb-0">Mật Khẩu</label>
                 <div className="col-md-12">
-                  <input 
-                    type="password" 
-                    id="password" 
+                  <input
+                    type="password"
+                    id="password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)} 
-                    className="form-control-line border-input" 
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="form-control-line border-input"
                     placeholder="Nhập mật khẩu"
                   />
                   {formErrors.password && <p className="text-danger">{formErrors.password}</p>}
@@ -171,12 +169,11 @@ const AddUser = () => {
                 </div>
               </div>
             </form>
-            {successMessage && <p className="text-success">{successMessage}</p>}
-            {errorMessage && <p className="text-danger">{errorMessage}</p>}
           </div>
         </div>
       </div>
       <Footer />
+      <ToastContainer />
     </div>
   );
 };

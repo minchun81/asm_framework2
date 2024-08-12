@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getCategories, updateCategory } from '../../../services/categories';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../layouts/header";
 import Footer from "../layouts/footer";
@@ -12,22 +14,19 @@ const EditCategory = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState('');
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     const fetchCategory = () => {
       getCategories('http://localhost:3001/api', (data) => {
-        // Tìm danh mục theo id
         const category = data.find(cat => cat.id === parseInt(id));
         if (category) {
           setName(category.name);
-          setDescription(category.description || ''); // Nếu không có description thì để trống
-          setStatus(category.status ? '1' : '0'); // Chuyển đổi trạng thái thành chuỗi
+          setDescription(category.description || '');
+          setStatus(category.status ? '1' : '0');
         } else {
-          setError('Danh mục không tồn tại');
+          toast.error('Danh mục không tồn tại');
         }
-      }, setError); // Đảm bảo setError là một hàm
+      }, (error) => toast.error(error));
     };
 
     fetchCategory();
@@ -36,25 +35,16 @@ const EditCategory = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validation
     if (!name || !status) {
-      setError('Tên danh mục và trạng thái không được để trống');
+      toast.error('Tên danh mục và trạng thái không được để trống');
       return;
     }
 
-    // Reset error before making update request
-    setError(null);
-
     updateCategory(id, { name, description, status: parseInt(status) }, () => {
-      setSuccess(true);
-    }, setError); // Đảm bảo setError là một hàm
+      toast.success('Danh mục đã được cập nhật thành công');
+      setTimeout(() => navigate('/admin/category/list'), 2000); // Delay to allow toast to display
+    }, (error) => toast.error(error));
   };
-
-  useEffect(() => {
-    if (success) {
-      navigate('/admin/category/list');
-    }
-  }, [success, navigate]);
 
   return (
     <div className=''>
@@ -97,13 +87,13 @@ const EditCategory = () => {
                     <button type="submit" className="btn btn-success mx-auto mx-md-0 text-white">Cập nhật</button>
                   </div>
                 </div>
-                {error && <p className="text-danger">{error}</p>}
               </form>
             </div>
           </div>
         </div>
       </div>
       <Footer />
+      <ToastContainer /> {/* ToastContainer placed here */}
     </div>
   );
 };

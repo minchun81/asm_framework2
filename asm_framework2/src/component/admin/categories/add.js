@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { addCategory } from '../../../services/categories';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../layouts/header";
 import Footer from "../layouts/footer";
@@ -11,7 +13,6 @@ const AddCategory = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState('');
-  const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
   const validateForm = () => {
@@ -25,25 +26,25 @@ const AddCategory = () => {
 
     const formError = validateForm();
     if (formError) {
-      setError(formError);
+      toast.error(formError);
       return;
     }
 
     addCategory(
       { name, description, status: parseInt(status) },
-      (response) => {
+      () => {
         setSuccess(true);
-        alert('Thêm danh mục thành công!');
+        toast.success('Thêm danh mục thành công!');
       },
       (err) => {
-        setError(err || 'Đã xảy ra lỗi khi thêm danh mục.');
+        toast.error(err || 'Đã xảy ra lỗi khi thêm danh mục.');
       }
     );
   };
 
   useEffect(() => {
     if (success) {
-      navigate('/admin/category/list');
+      setTimeout(() => navigate('/admin/category/list'), 2000); // Delay navigation to show success toast
     }
   }, [success, navigate]);
 
@@ -89,13 +90,13 @@ const AddCategory = () => {
                     <button type="submit" className="btn btn-success mx-auto mx-md-0 text-white">Thêm</button>
                   </div>
                 </div>
-                {error && <p className="text-danger">{error}</p>}
               </form>
             </div>
           </div>
         </div>
       </div>
       <Footer />
+      <ToastContainer /> {/* Add ToastContainer to display toast notifications */}
     </div>
   );
 };

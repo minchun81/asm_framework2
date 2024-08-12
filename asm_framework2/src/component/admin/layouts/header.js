@@ -133,7 +133,7 @@ const Header = () => {
                     aria-expanded="false"
                   >
                     <i className="mdi me-2 mdi-chart-bar"></i>
-                    <span className="hide-menu"> Thống Kê Danh Mục</span>
+                    <span className="hide-menu"> Thống Kê </span>
                   </a>
                 </li>
                 <li className="sidebar-item">
@@ -142,10 +142,12 @@ const Header = () => {
                     href="/admin/product"
                     aria-expanded="false"
                   >
-                    <i className="mdi me-2 mdi-emoticon"></i>
+                    <i className="mdi me-2 mdi-cart-outline"></i>{" "}
+                    {/* Updated icon */}
                     <span className="hide-menu">Sản Phẩm</span>
                   </a>
                 </li>
+
                 <li className="sidebar-item">
                   <a
                     className="sidebar-link waves-effect waves-dark sidebar-link"
