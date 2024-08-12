@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Header from "../layouts/header";
 import Footer from "../layouts/footer";
 import { getUsers, deleteUser } from "../../../services/user";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Hàm để lấy tên hiển thị của vai trò
 const getRoleDisplayName = (role) => {
@@ -30,7 +32,6 @@ const getStatusDisplayName = (status) => {
 const ListUser = () => {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [usersPerPage] = useState(5); // Number of users per page
 
@@ -43,18 +44,17 @@ const ListUser = () => {
   }, []);
 
   const handleDelete = (id) => {
-    if (window.confirm("Are you sure you want to delete this user?")) {
+    if (window.confirm("Bạn có chắc chắn muốn xóa ?")) {
       deleteUser(
         id,
-        (response) => {
-          setSuccessMessage("User deleted successfully");
-          setError(""); // Xóa bất kỳ lỗi nào trước đó
-          // Làm mới danh sách người dùng sau khi xóa thành công
-          getUsers("http://localhost:3001/api", setUsers, setError); // Đảm bảo đúng URL API
+        () => {
+          toast.success("Xóa người dùng thành công !");
+          setError(""); // Clear any previous errors
+          // Refresh the user list after a successful delete
+          getUsers("http://localhost:3001/api", setUsers, setError); // Ensure correct API URL
         },
         (error) => {
-          setSuccessMessage(""); // Xóa bất kỳ thông báo thành công nào trước đó
-          setError(error);
+          toast.error(error || "An error occurred while deleting the user.");
         }
       );
     }
@@ -73,17 +73,10 @@ const ListUser = () => {
       <Header />
 
       <div className="row">
-        <div
-          className="col-sm-11"
-          style={{ position: "relative", left: "241px" }}
-        >
+        <div className="col-sm-11" style={{ position: "relative", left: "241px" }}>
           <div className="card">
             <div className="card-body">
               <h4 className="card-title">Danh Sách Người Dùng</h4>
-              {successMessage && (
-                <div className="alert alert-success">{successMessage}</div>
-              )}
-              {error && <div className="alert alert-danger">{error}</div>}
               <span>
                 <a href="/admin/addUser" className="btn btn-primary mb-3">
                   Thêm Người Dùng
@@ -166,6 +159,7 @@ const ListUser = () => {
       </div>
 
       <Footer />
+      <ToastContainer /> {/* Add ToastContainer to display toast notifications */}
     </div>
   );
 };

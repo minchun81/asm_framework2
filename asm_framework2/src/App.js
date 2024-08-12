@@ -54,8 +54,10 @@ import "./assets/plugins/c3-master/c3.min.css";
 // import './assets/plugins/c3-master/c3.min.css';
 import "./assets/css/style.min.css";
 // import './assets/js/pages/dashboards/dashboard1';
+import { ToastContainer } from 'react-toastify'
 
   function App() {
+    <ToastContainer/>
     
     const router = createBrowserRouter(
       createRoutesFromElements(

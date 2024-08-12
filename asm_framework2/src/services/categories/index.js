@@ -96,3 +96,25 @@ export const updateCategory = (id, data, setSuccess, setError) => {
 
   xhr.send(JSON.stringify(data));
 };
+///xoa danh muc
+
+export const deleteCategory = (categoryId, onSuccess, onError) => {
+  fetch(`${apiUrl}/category/${categoryId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('HTTP error! status: ' + response.status);
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (onSuccess) onSuccess(data);
+    })
+    .catch(error => {
+      if (onError) onError(error.message);
+    });
+};

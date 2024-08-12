@@ -1,28 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Header from "../layouts/header";
 import Footer from "../layouts/footer";
-
 import { getUserById, updateUser } from '../../../services/user';
 
 const EditUser = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
   const [username, setUsername] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('');
   const [status, setStatus] = useState('');
-  const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = () => {
       getUserById(id, (userData) => {
         if (userData) {
-          setUser(userData);
           setUsername(userData.username);
           setName(userData.name);
           setEmail(userData.email);
@@ -30,11 +27,11 @@ const EditUser = () => {
           setStatus(userData.status);
           setLoading(false);
         } else {
-          setError('User not found');
+          toast.error('Không tìm thấy người dùng');
           setLoading(false);
         }
       }, (error) => {
-        setError(error);
+        toast.error(error);
         setLoading(false);
       });
     };
@@ -45,20 +42,18 @@ const EditUser = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const updatedUser = {name, username, email, role, status };
+    const updatedUser = { name, username, email, role, status };
 
     updateUser(id, updatedUser, (response) => {
-      setSuccessMessage('User updated successfully');
-      setError('');
+      toast.success('Cập nhật người dùng thành công');
       navigate('/admin/user');
     }, (error) => {
-      setSuccessMessage('');
-      setError(error);
+      toast.error(error);
     });
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Đang tải...</div>;
   }
 
   return (
@@ -70,9 +65,6 @@ const EditUser = () => {
           <div className="card">
             <div className="card-body">
               <h4 className="card-title">Chỉnh Sửa Người Dùng</h4>
-
-              {error && <div className="alert alert-danger">{error}</div>}
-              {successMessage && <div className="alert alert-success">{successMessage}</div>}
 
               <form onSubmit={handleSubmit}>
                 <div className="form-group mb-3">
@@ -92,7 +84,7 @@ const EditUser = () => {
                     className="form-control-line border-input"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    require
+                    required
                   />
                 </div>
                 <div className="form-group mb-3">
@@ -102,44 +94,46 @@ const EditUser = () => {
                     className="form-control-line border-input"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    required/>
-                    </div>
-                    <div className="form-group mb-3">
-                      <label className="col-md-12 mb-0">Vai Trò</label>
-                      <select
-                        className="form-control-line border-input"
-                        value={role}
-                        onChange={(e) => setRole(e.target.value)}
-                        required
-                      >
-                        <option value="">Chọn vai trò</option>
-                        <option value="1">Admin</option>
-                        <option value="0">User</option>
-                      </select>
-                    </div>
-                    <div className="form-group mb-3">
-                      <label className="col-md-12 mb-0">Trạng Thái</label>
-                      <select
-                        className="form-control-line border-input"
-                        value={status}
-                        onChange={(e) => setStatus(e.target.value)}
-                        required
-                      >
-                        <option value="">Chọn trạng thái</option>
-                        <option value="1">Active</option>
-                        <option value="0">Inactive</option>
-                      </select>
-                    </div>
-                    <button type="submit" className="btn btn-success">Cập Nhật</button>
-                  </form>
+                    required
+                  />
                 </div>
-              </div>
+                <div className="form-group mb-3">
+                  <label className="col-md-12 mb-0">Vai Trò</label>
+                  <select
+                    className="form-control-line border-input"
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                    required
+                  >
+                    <option value="">Chọn vai trò</option>
+                    <option value="1">Quản trị viên</option>
+                    <option value="0">Người dùng</option>
+                  </select>
+                </div>
+                <div className="form-group mb-3">
+                  <label className="col-md-12 mb-0">Trạng Thái</label>
+                  <select
+                    className="form-control-line border-input"
+                    value={status}
+                    onChange={(e) => setStatus(e.target.value)}
+                    required
+                  >
+                    <option value="">Chọn trạng thái</option>
+                    <option value="1">Đang hoạt động</option>
+                    <option value="0">Không hoạt động</option>
+                  </select>
+                </div>
+                <button type="submit" className="btn btn-success">Cập Nhật</button>
+              </form>
             </div>
           </div>
-    
-          <Footer />
         </div>
-      );
-    }
-    
-    export default EditUser;
+      </div>
+
+      <Footer />
+      <ToastContainer />
+    </div>
+  );
+};
+
+export default EditUser;

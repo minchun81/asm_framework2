@@ -135,8 +135,8 @@ const EditProduct = () => {
                     required
                   >
                     <option value="">Chọn trạng thái</option>
-                    <option value="1">Active</option>
-                    <option value="0">Inactive</option>
+                    <option value="1">Còn hàng</option>
+                    <option value="0">Hết hàng</option>
                   </select>
                 </div>
                 <div className="form-group">

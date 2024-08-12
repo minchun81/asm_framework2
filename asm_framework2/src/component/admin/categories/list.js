@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Header from "../layouts/header";
 import Footer from "../layouts/footer";
 import { getCategories, deleteCategory } from '../../../services/categories';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS
 
 const ListCategory = () => {
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [categoriesPerPage] = useState(5); // Số lượng danh mục mỗi trang
+  const [categoriesPerPage] = useState(5); // Number of categories per page
 
   useEffect(() => {
     const fetchCategories = () => {
@@ -17,18 +19,32 @@ const ListCategory = () => {
     fetchCategories();
   }, []);
 
+  const handleDelete = (id) => {
+    if (window.confirm("Bạn có chắc chắn muốn xóa danh mục này không?")) {
+      deleteCategory(
+        id,
+        (data) => {
+          toast.success("Danh mục đã được xóa thành công.");
+          // Refresh the list of categories after successful deletion
+          getCategories('http://localhost:3001/api', setCategories, setError);
+        },
+        (errorMessage) => {
+          toast.error(errorMessage);
+        }
+      );
+    }
+  };
 
-  // Tính toán các danh mục hiển thị cho trang hiện tại
+  // Calculate the categories to display for the current page
   const indexOfLastCategory = currentPage * categoriesPerPage;
   const indexOfFirstCategory = indexOfLastCategory - categoriesPerPage;
   const currentCategories = categories.slice(indexOfFirstCategory, indexOfLastCategory);
 
-  // Tính tổng số trang
+  // Calculate total pages
   const totalPages = Math.ceil(categories.length / categoriesPerPage);
 
   return (
-    <div className="">
-      {/* <!-- Bắt đầu nội dung trang --> */}
+    <div>
       <Header />
 
       <div className="row">
@@ -57,7 +73,7 @@ const ListCategory = () => {
                           <td>
                             <span 
                               className={`badge mb-2 mt-2 ${
-                                category.status === 1 ? 'bg-success ' : 'bg-danger'
+                                category.status === 1 ? 'bg-success' : 'bg-danger'
                               }`}
                             >
                               {category.status === 1 ? 'Đang hoạt động' : 'Không hoạt động'}
@@ -67,7 +83,12 @@ const ListCategory = () => {
                             <div className="d-flex gap-2">
                               <span><a href={`/admin/editCategory/${category.id}`} className="btn btn-primary">Sửa</a></span>
                               <span>
-                               
+                                <button
+                                  className="btn btn-danger"
+                                  onClick={() => handleDelete(category.id)}
+                                >
+                                  Xóa
+                                </button>
                               </span>
                             </div>
                           </td>
@@ -83,7 +104,7 @@ const ListCategory = () => {
               </div>
 
               {/* Pagination Controls */}
-              <div className="pagination ">
+              <div className="pagination">
                 <button 
                   className="btn btn-primary mx-3" 
                   onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
@@ -101,14 +122,13 @@ const ListCategory = () => {
                 </button>
               </div>
 
-              {error && <p className="text-danger">{error}</p>}
             </div>
           </div>
         </div>
       </div>
 
-      {/* Kết thúc nội dung trang */}
       <Footer />
+      <ToastContainer /> {/* ToastContainer placed here */}
     </div>
   );
 };

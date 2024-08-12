@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useState, useEffect } from 'react';
 import Header from "../layouts/header";
 import Footer from "../layouts/footer";
 import "../../../assets/css/styleEdit.css";
 import { useNavigate } from 'react-router-dom';
 import { addProduct } from '../../../services/product'; // Import hàm addProduct từ service
+import { getCategories } from '../../../services/categories'; // Import hàm getCategories từ service
+import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer và toast
+import 'react-toastify/dist/ReactToastify.css'; // Import css cho toast
 
 const AddProduct = () => {
   const [name, setProductName] = useState('');
@@ -12,18 +14,25 @@ const AddProduct = () => {
   const [price, setPrice] = useState('');
   const [category_id, setCategoryId] = useState('');
   const [description, setDescription] = useState('');
-  const [status, setStatus] = useState(''); // Thêm state cho trạng thái
+  const [status, setStatus] = useState('');
   const [formErrors, setFormErrors] = useState({});
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [categories, setCategories] = useState([]); // State to store categories
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Fetch categories when the component mounts
+    getCategories('http://localhost:3001/api', setCategories, (error) => {
+      toast.error('Failed to fetch categories');
+    });
+  }, []);
 
   const validateForm = () => {
     const errors = {};
 
     if (!name) errors.name = "Tên sản phẩm không được để trống!";
     if (!price) errors.price = "Giá không được để trống!";
-    if (!status) errors.status = "Vui lòng chọn trạng thái!"; // Kiểm tra trạng thái
+    if (!status) errors.status = "Vui lòng chọn trạng thái!";
+    if (!category_id) errors.category_id = "Vui lòng chọn danh mục!";
     return errors;
   };
 
@@ -39,12 +48,10 @@ const AddProduct = () => {
     const productData = { name, image, price, category_id, description, status };
 
     addProduct(productData, (response) => {
-      setSuccessMessage('Thêm sản phẩm thành công!');
-      setErrorMessage('');
+      toast.success('Thêm sản phẩm thành công!');
       navigate('/admin/product'); // Điều hướng tới trang quản lý sản phẩm
     }, (error) => {
-      setSuccessMessage('');
-      setErrorMessage(error);
+      toast.error(error);
     });
   };
 
@@ -94,15 +101,21 @@ const AddProduct = () => {
                 </div>
               </div>
               <div className="form-group mb-3">
-                <label className="col-md-12 mb-0">ID Danh Mục</label>
+                <label className="col-md-12 mb-0">Danh Mục</label>
                 <div className="col-md-12">
-                  <input 
-                    type="text" 
+                  <select
+                    id="category_id"
                     value={category_id}
                     onChange={(e) => setCategoryId(e.target.value)}
-                    className="form-control-line border-input" 
-                    placeholder="Nhập ID danh mục"
-                  />
+                    className="form-control-line border-input"
+                  >
+                    <option value="">Chọn danh mục</option>
+                    {categories.map((category) => (
+                      <option key={category.id} value={category.id}>
+                        {category.name}
+                      </option>
+                    ))}
+                  </select>
                   {formErrors.category_id && <p className="text-danger">{formErrors.category_id}</p>}
                 </div>
               </div>
@@ -140,8 +153,7 @@ const AddProduct = () => {
                 </div>
               </div>
             </form>
-            {successMessage && <p className="text-success">{successMessage}</p>}
-            {errorMessage && <p className="text-danger">{errorMessage}</p>}
+            <ToastContainer />
           </div>
         </div>
       </div>
