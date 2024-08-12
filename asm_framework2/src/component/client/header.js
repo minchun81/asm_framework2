@@ -52,6 +52,7 @@ const Header = () => {
                                         </li>
                                         <li>
                                             <div className="header-icons">
+                                            <a className="" href="/login"><i className="fas fa-sign-in-alt"></i></a>
                                                 <a className="shopping-cart" href="/cart"><i className="fas fa-shopping-cart"></i></a>
                                                 <a className="mobile-hide search-bar-icon" href="#"><i className="fas fa-search"></i></a>
                                             </div>

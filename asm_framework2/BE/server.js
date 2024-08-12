@@ -4,9 +4,10 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv'); // Import dotenv
-const port = 3001;
-// Gọi hàm config từ dotenv để tải các biến môi trường
-dotenv.config();
+
+dotenv.config(); // Nạp biến môi trường
+
+console.log('MY_SECRET:', process.env.MY_SECRET);
 app.use(express.json()); // 
 // Call db
 // const mydb = require("./config/db");
@@ -19,14 +20,10 @@ app.use(express.static('assets')); // Chỉ định thư mục gốc cho tài ng
 app.set('view engine', 'ejs'); // Thiết lập view engine
 app.use(cors()); // Sử dụng cors
 
-
-// const adminRoutes = require('./routes/admin');
-// app.use('/admin', adminRoutes); // Sử dụng router admin
-
 const apiRoutes = require('./routes/api');
 app.use('/api', apiRoutes); // Sử dụng router api
 
 // Khởi động server
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-})
+app.listen(3001, () => {
+    console.log("Server is running on port 3001"); // Thông báo server đang chạy
+});

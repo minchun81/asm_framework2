@@ -93,4 +93,30 @@ module.exports = class User {
       });
     });
   }
-};
+
+    // 1 sản phẩm
+    static async fetchUserDetails(id) {
+        return new Promise((resolve, reject) => {
+            let sql = `SELECT * FROM users WHERE id = ?`;
+            db.query(sql, id, function (err, data) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(data);
+                }
+            });
+        });
+    }
+    static async findByUsername(username) {
+        return new Promise((resolve, reject) => {
+            let sql = `SELECT * FROM users WHERE username = ?`;
+            db.query(sql, [username], function (err, data) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(data);
+                }
+            });
+        });
+    }
+}

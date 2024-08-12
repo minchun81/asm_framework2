@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "../layouts/header";
 import Footer from "../layouts/footer";
-import { getUsers, deleteUser } from "../../../services/user";
+import { getUsers, deleteUser } from "../../../services/User";
 
 // Hàm để lấy tên hiển thị của vai trò
 const getRoleDisplayName = (role) => {

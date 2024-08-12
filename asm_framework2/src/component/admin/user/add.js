@@ -4,7 +4,7 @@ import Header from "../layouts/header";
 import Footer from "../layouts/footer";
 import "../../../assets/css/styleEdit.css";
 import { useNavigate } from 'react-router-dom';
-import { addUsers } from '../../../services/user';
+import { addUsers } from '../../../services/User';
 import CryptoJS from 'crypto-js';
 
 const AddUser = () => {
