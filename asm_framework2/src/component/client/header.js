@@ -1,5 +1,4 @@
-// src/Header.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../assets/bootstrap/css/bootstrap.min.css'; // Gộp các tệp CSS Bootstrap
 import '../../assets/css/all.min.css';
 import '../../assets/css/animate.css';
@@ -11,6 +10,16 @@ import '../../assets/css/responsive.css';
 import logo from "../../assets/img/logo.png";
 
 const Header = () => {
+    const [userName, setUserName] = useState(null);
+
+    useEffect(() => {
+        // Lấy thông tin người dùng từ localStorage
+        const userData = JSON.parse(localStorage.getItem("userData"));
+        if (userData && userData.name) {
+            setUserName(userData.name);
+        }
+    }, []);
+
     return (
         <>
             <div className="top-header-area" id="sticker">
@@ -52,9 +61,14 @@ const Header = () => {
                                         </li>
                                         <li>
                                             <div className="header-icons">
-                                            <a className="" href="/login"><i className="fas fa-sign-in-alt"></i></a>
+                                                <a className="" href="/login"><i className="fas fa-sign-in-alt"></i></a>
                                                 <a className="shopping-cart" href="/cart"><i className="fas fa-shopping-cart"></i></a>
                                                 <a className="mobile-hide search-bar-icon" href="#"><i className="fas fa-search"></i></a>
+                                                {userName ? (
+                                                    <span className="user-name">Hi, {userName}</span>
+                                                ) : (
+                                                    <a href="/login">Đăng nhập</a>
+                                                )}
                                             </div>
                                         </li>
                                     </ul>

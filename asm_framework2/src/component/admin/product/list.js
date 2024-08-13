@@ -1,8 +1,5 @@
 
-import React, { useState, useEffect } from "react";
-import Header from "../layouts/header";
-import Footer from "../layouts/footer";
-import { getProduct, deleteProduct } from "../../../services/product";
+
 
 import React, { useState, useEffect } from "react";
 import Header from "../layouts/header";

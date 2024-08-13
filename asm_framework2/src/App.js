@@ -45,6 +45,8 @@ import Login from "./component/client/login";
 import Register from "./component/client/register";
 import ListCategory from "./component/admin/categories/list";
 import ListCategorys from "./component/admin/thongkedanhmuc";
+import Checkout from "./component/client/checkout";
+import PaymentHistory from "./component/client/payment-history";
 // css
 // import "./assets/images/favicon.png";
 import './assets/plugins/chartist-js/dist/chartist.min.css';
@@ -83,12 +85,14 @@ import { ToastContainer } from 'react-toastify'
         <Route path="/admin/user" element={<User />} />
         <Route path="/admin/addUser" element={<AddUser />} />
         <Route path="/admin/editUser/:id" element={<EditUser />} />
-
+        <Route path="/checkout" element={<Checkout />} />
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/shop" element={<Shop />} />
-          <Route path="/detail" element={<Detail />} />
+          <Route path="/detail/:id" element={<Detail />} /> 
+          <Route path="/cart/:id" element={<Cart />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/payment-history" element={<PaymentHistory />} />
           <Route path="/contact" element={<Contact />} />
           {/* <Route path="student-list" element={<StudentList />} /> */}
 

@@ -97,7 +97,6 @@ const EditUser = () => {
                     className="form-control-line border-input"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                   
                   />
                   {fieldErrors.name && (
                     <div style={{ color: 'red' }}>{fieldErrors.name}</div>
@@ -110,7 +109,6 @@ const EditUser = () => {
                     className="form-control-line border-input"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                  
                   />
                   {fieldErrors.email && (
                     <div style={{ color: 'red' }}>{fieldErrors.email}</div>
@@ -150,6 +148,9 @@ const EditUser = () => {
       </div>
 
       <Footer />
+
+      {/* Thêm ToastContainer vào đây */}
+      <ToastContainer />
     </div>
   );
 };
