@@ -3,19 +3,38 @@ import { useNavigate } from "react-router-dom";
 import Header from "./header";
 import Footer from "./footer";
 import { getProduct } from "../../services/product";
-import { getComments, addComment } from "../../services/comment"; // Import các dịch vụ cho comment
+import { getComments, addComment } from "../../services/comment";
 import a from "../../assets/img/a.jpg";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
-  const [comments, setComments] = useState([]); // State cho danh sách bình luận
-  const [newComment, setNewComment] = useState(""); // State cho bình luận mới
-  const [commentError, setCommentError] = useState(null); // State cho lỗi của bình luận
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
+  const [commentError, setCommentError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate(); // Để sử dụng điều hướng
 
   useEffect(() => {
-    getProduct("http://localhost:3001/api", setProducts, setError);
-    getComments("http://localhost:3001/api", setComments, setCommentError); // Lấy danh sách bình luận
+    setLoading(true);
+    getProduct(
+      "http://localhost:3001/api",
+      (data) => {
+        setProducts(data);
+        setLoading(false);
+      },
+      (error) => {
+        setError(error.message || "Đã xảy ra lỗi khi tải sản phẩm.");
+        setLoading(false);
+      }
+    );
+
+    getComments(
+      "http://localhost:3001/api",
+      (data) => setComments(data),
+      (error) => setCommentError(error.message || "Đã xảy ra lỗi khi tải bình luận.")
+    );
   }, []);
 
   const handleAddComment = () => {
@@ -23,15 +42,23 @@ const Home = () => {
       addComment(
         { content: newComment },
         (response) => {
-          setComments([...comments, response]); // Cập nhật danh sách bình luận
-          setNewComment(""); // Xóa nội dung bình luận mới
+          setComments([...comments, response]);
+          setNewComment("");
+          setCommentError(null);
         },
-        (error) => setCommentError(error)
+        (error) => setCommentError(error.message || "Đã xảy ra lỗi khi gửi bình luận.")
       );
     } else {
       setCommentError("Nội dung bình luận không được để trống.");
     }
   };
+
+  const addToCart = (product) => {
+    // Thêm sản phẩm vào giỏ hàng, bạn cần xử lý điều này theo nhu cầu của bạn
+    // Ví dụ: lưu sản phẩm vào state hoặc gọi một dịch vụ khác
+    navigate("/cart"); // Điều hướng đến trang giỏ hàng (giả định bạn có trang này)
+  };
+
   return (
     <>
       <Header />
@@ -135,43 +162,52 @@ const Home = () => {
             </div>
           </div>
           <div className="row">
-      {products.length > 0 ? (
-        products.map((product) => (
-          <div key={product.id} className="col-lg-4 col-md-6 text-center">
-            <div className="single-product-item">
-              <div className="product-image">
-                <a href={`/detail/${product.id}`}>
-                  <img 
-                    src={`http://localhost:3001/uploads/${product.image}`} 
-                    alt={product.name} 
-                    style={{ width: '100%', height: 'auto' }} // đảm bảo hình ảnh hiển thị đúng kích thước
-                  />
-                </a>
+            {loading ? (
+              <div className="col-12 text-center">
+                <p>Đang tải sản phẩm...</p>
               </div>
-              <h3>{product.name}</h3>
-              <p className="product-price">
-                <span>Trên mỗi Kg</span> {product.price}đ
-              </p>
-              <a
-                onClick={() => addToCart(product)}
-                className="cart-btn mt-3"
-              >
-                <i className="fas fa-shopping-cart"></i> Thêm vào giỏ hàng
-              </a>
-            </div>
+            ) : error ? (
+              <div className="col-12 text-center">
+                <p>{error}</p>
+              </div>
+            ) : products.length > 0 ? (
+              products.map((product) => (
+                <div key={product.id} className="col-lg-4 col-md-6 text-center">
+                  <div className="single-product-item">
+                    <div className="product-image">
+                      <a href={`/detail/${product.id}`}>
+                        <img
+                          src={`http://localhost:3001/uploads/${product.image}`}
+                          alt={product.name}
+                          style={{ width: "100%", height: "auto" }}
+                        />
+                      </a>
+                    </div>
+                    <h3>{product.name}</h3>
+                    <p className="product-price">
+                      <span>Trên mỗi Kg</span> {product.price}đ
+                    </p>
+                    <a
+                      onClick={() => addToCart(product)}
+                      className="cart-btn mt-3"
+                    >
+                      <i className="fas fa-shopping-cart"></i> Thêm vào giỏ hàng
+                    </a>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="col-12 text-center">
+                <p>Không có sản phẩm nào để hiển thị.</p>
+              </div>
+            )}
           </div>
-        ))
-      ) : (
-        <div className="col-12 text-center">
-          <p>Không có sản phẩm nào để hiển thị.</p>
-        </div>
-      )}
-    </div>
         </div>
       </div>
       {/* Kết thúc phần sản phẩm */}
-     {/* hiển thị bình luận ở đây và cho phép bình luận ở đây */}
-     <div className="comment-section mt-50 mb-50">
+
+      {/* Phần bình luận */}
+      <div className="comment-section mt-50 mb-50">
         <div className="container">
           <div className="row">
             <div className="col-lg-8 offset-lg-2">
@@ -180,13 +216,19 @@ const Home = () => {
               </div>
               <div className="comment-form">
                 <h4>Thêm bình luận của bạn</h4>
-                <textarea className=" form-textarea"
+                <textarea
+                  className="form-textarea"
                   value={newComment}
                   onChange={(e) => setNewComment(e.target.value)}
                   placeholder="Viết bình luận của bạn..."
-                  rows="4" cols="80"
-                ></textarea> <br></br>
-                <button onClick={handleAddComment} className="boxed-btn btn btn-primary">
+                  rows="4"
+                  cols="80"
+                ></textarea>
+                <br />
+                <button
+                  onClick={handleAddComment}
+                  className="boxed-btn btn btn-primary"
+                >
                   Gửi bình luận
                 </button>
                 {commentError && <p className="error">{commentError}</p>}
@@ -194,23 +236,21 @@ const Home = () => {
               <div className="comments-list mt-5 border">
                 {comments.length > 0 ? (
                   comments.map((comment) => (
-                    
                     <div key={comment.id} className="single-comment">
-  <div className="row">
-    <div className="col-12 d-flex align-items-center">
-      <div className="comment-avatar me-2">
-        <img
-          width={30}
-          src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="
-          alt="Avatar"
-        />
-      </div>
-      <div className="fw-bold">Người bình luận</div>
-    </div>
-  </div>
-  <p>{comment.content}</p>
-</div>
-
+                      <div className="row">
+                        <div className="col-12 d-flex align-items-center">
+                          <div className="comment-avatar me-2">
+                            <img
+                              width={30}
+                              src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="
+                              alt="Avatar"
+                            />
+                          </div>
+                          <div className="fw-bold">Người bình luận</div>
+                        </div>
+                      </div>
+                      <p>{comment.content}</p>
+                    </div>
                   ))
                 ) : (
                   <p className="text-center">Chưa có bình luận nào.</p>
@@ -220,6 +260,8 @@ const Home = () => {
           </div>
         </div>
       </div>
+      {/* Kết thúc phần bình luận */}
+
       {/* Phần banner giỏ hàng */}
       <section className="cart-banner pt-100 pb-100">
         <div className="container">

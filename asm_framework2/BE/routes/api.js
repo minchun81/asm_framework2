@@ -20,7 +20,7 @@ const categoryAPIController = require('../controllers/api/category');
 const userAPIController = require('../controllers/api/user')
 const commentAPIController = require('../controllers/api/comment')
 const productAPIController = require ('../controllers/api/product');
-const commentAPIController = require ('../controllers/api/comment');
+// const commentAPIController = require ('../controllers/api/comment');
 const router = express.Router();
 
 //router category
