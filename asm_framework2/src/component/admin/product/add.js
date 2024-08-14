@@ -8,9 +8,8 @@ import { addProduct } from '../../../services/product'; // Import hàm addProduc
 
 const AddProduct = () => {
   const [name, setProductName] = useState('');
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState('');
   const [price, setPrice] = useState('');
-  const [category_id, setCategoryId] = useState('');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState(''); // Thêm state cho trạng thái
   const [formErrors, setFormErrors] = useState({});
@@ -36,7 +35,7 @@ const AddProduct = () => {
     }
     setFormErrors({});
 
-    const productData = { name, image, price, category_id, description, status };
+    const productData = { name, image, price, description, status };
 
     addProduct(productData, (response) => {
       setSuccessMessage('Thêm sản phẩm thành công!');
@@ -74,9 +73,9 @@ const AddProduct = () => {
                 <label className="col-md-12 font-weight-bold">Hình Ảnh</label>
                 <div className="col-md-12">
                   <input 
-                    type="file" 
+                    type="text" 
                     className="form-control-line border-input" 
-                    onChange={(e) => setImage(e.target.files[0])}
+                    onChange={(e) => setImage(e.target.value)}
                   />
                 </div>
               </div>
@@ -93,19 +92,7 @@ const AddProduct = () => {
                   {formErrors.price && <p className="text-danger">{formErrors.price}</p>}
                 </div>
               </div>
-              <div className="form-group mb-3">
-                <label className="col-md-12 mb-0">ID Danh Mục</label>
-                <div className="col-md-12">
-                  <input 
-                    type="text" 
-                    value={category_id}
-                    onChange={(e) => setCategoryId(e.target.value)}
-                    className="form-control-line border-input" 
-                    placeholder="Nhập ID danh mục"
-                  />
-                  {formErrors.category_id && <p className="text-danger">{formErrors.category_id}</p>}
-                </div>
-              </div>
+            
               <div className="form-group mb-3">
                 <label className="col-md-12 mb-0">Mô Tả</label>
                 <div className="col-md-12">

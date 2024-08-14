@@ -77,7 +77,7 @@
                       <tr>
                         <th className="border-top-0">ID</th>
                         <th className="border-top-0">Tên</th>
-                        <th className="border-top-0">category_id</th>
+                        
                         <th className="border-top-0">Giá</th>
                         <th className="border-top-0">Trạng Thái</th>
                         <th className="border-top-0">hình ảnh</th>
@@ -91,7 +91,7 @@
                           <tr key={product.id}>
                             <td>{product.id}</td>
                             <td>{product.name}</td>
-                            <td>{product.category_id}</td>
+                            
                             <td>{product.price}</td>
                             <td>{getStatusDisplayName(product.status)}</td>
                             <td><img src={product.image} alt={product.name} style={{ width: '100px', height: 'auto' }} /></td>

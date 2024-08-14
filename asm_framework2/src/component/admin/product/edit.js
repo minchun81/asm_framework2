@@ -11,7 +11,7 @@ const EditProduct = () => {
   const [product, setProduct] = useState(null);
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
-  const [categoryId, setCategoryId] = useState('');
+
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
   const [status, setStatus] = useState('');
@@ -26,7 +26,7 @@ const EditProduct = () => {
           setProduct(productData);
           setName(productData.name);
           setPrice(productData.price);
-          setCategoryId(productData.category_id);
+         
           setDescription(productData.description);
           setImage(productData.image);
           setStatus(productData.status);
@@ -47,7 +47,7 @@ const EditProduct = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const updatedProduct = { name, price, category_id: categoryId, description, image, status };
+    const updatedProduct = { name, price, description, image, status };
 
     updateProduct(id, updatedProduct, (response) => {
       setSuccessMessage('Sản phẩm đã được cập nhật thành công');
@@ -97,16 +97,7 @@ const EditProduct = () => {
                     required
                   />
                 </div>
-                <div className="form-group mb-3">
-                  <label className="col-md-12 mb-0">ID Danh Mục</label>
-                  <input
-                    type="text"
-                    className="form-control-line border-input"
-                    value={categoryId}
-                    onChange={(e) => setCategoryId(e.target.value)}
-                    required
-                  />
-                </div>
+
                 <div className="form-group mb-3">
                   <label className="col-md-12 mb-0">Mô Tả</label>
                   <textarea

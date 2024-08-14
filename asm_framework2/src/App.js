@@ -44,7 +44,7 @@ import Layout from './component/admin/index';
 import ListCategory from "./component/admin/categories/list"
 import EditCategory from "./component/admin/categories/edit"
 import ListCategorys from "./component/admin/thongkedanhmuc";
-
+import Comment  from "./component/admin/comment/list";
 // css
 // import "./assets/images/favicon.png";
 import './assets/plugins/chartist-js/dist/chartist.min.css';
@@ -77,6 +77,8 @@ import "./assets/css/style.min.css";
         <Route path="/admin/user" element={<User />} />
         <Route path="/admin/addUser" element={<AddUser />} />
         <Route path="/admin/editUser/:id" element={<EditUser />} />
+        {/* comments */}
+        <Route path="/admin/comment" element={<Comment />} />
 
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
