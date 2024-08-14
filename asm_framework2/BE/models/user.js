@@ -119,4 +119,35 @@ module.exports = class User {
             });
         });
     }
+    // models/user.js
+
+// Kiểm tra sự tồn tại của username
+static async checkUsernameExists(username) {
+  return new Promise((resolve, reject) => {
+      let sql = `SELECT * FROM users WHERE username = ?`;
+      db.query(sql, [username], function (err, data) {
+          if (err) {
+              reject(err);
+          } else {
+              resolve(data.length > 0); // Trả về true nếu có kết quả
+          }
+      });
+  });
 }
+
+// Kiểm tra sự tồn tại của email
+static async checkEmailExists(email) {
+  return new Promise((resolve, reject) => {
+      let sql = `SELECT * FROM users WHERE email = ?`;
+      db.query(sql, [email], function (err, data) {
+          if (err) {
+              reject(err);
+          } else {
+              resolve(data.length > 0); // Trả về true nếu có kết quả
+          }
+      });
+  });
+}
+
+}
+

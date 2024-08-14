@@ -9,8 +9,21 @@ import '../../assets/css/owl.carousel.css';
 import '../../assets/css/meanmenu.min.css';
 import '../../assets/css/responsive.css';
 import logo from "../../assets/img/logo.png";
-
+import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 const Header = () => {
+    
+  const [, , removeCookie] = useCookies(['token', 'role']);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Xóa cookie
+    removeCookie('token');
+    removeCookie('role');
+
+    // Điều hướng đến trang đăng nhập
+    navigate('/login');
+  };
     return (
         <>
             <div className="top-header-area" id="sticker">
@@ -53,8 +66,11 @@ const Header = () => {
                                         <li>
                                             <div className="header-icons">
                                             <a className="" href="/login"><i className="fas fa-sign-in-alt"></i></a>
-                                                <a className="shopping-cart" href="/cart"><i className="fas fa-shopping-cart"></i></a>
-                                                <a className="mobile-hide search-bar-icon" href="#"><i className="fas fa-search"></i></a>
+                                            <a className="profile-icon" href="/profile"><i className="fas fa-user"></i></a>
+                                            <a className="shopping-cart" href="/cart"><i className="fas fa-shopping-cart"></i></a>
+                                            <a className="mobile-hide search-bar-icon" href="#"><i className="fas fa-search"></i></a>
+                                            <button onClick={handleLogout} className="btn btn-danger">Logout</button>
+    
                                             </div>
                                         </li>
                                     </ul>

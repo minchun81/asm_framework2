@@ -51,6 +51,7 @@ import './assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-too
 import "./assets/plugins/c3-master/c3.min.css";
 // import './assets/plugins/c3-master/c3.min.css';
 import "./assets/css/style.min.css";
+import ProfileClient from "./component/client/profile";
 // import './assets/js/pages/dashboards/dashboard1';
   function App() {
     
@@ -64,6 +65,7 @@ import "./assets/css/style.min.css";
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/profile" element={<ProfileClient />} />
                 <Route path="/register" element={<Register />} />
                 {/* /admin */}
                 <Route path="/admin" element={<Layout />} />
