@@ -3,36 +3,36 @@ import { useParams, useNavigate } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Header from './header';
 import Footer from './footer';
+import { getProductById } from '../../services/product'; // Đảm bảo đường dẫn đúng
 
 const Detail = () => {
   const { id } = useParams(); // Lấy id từ URL
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
+  const [quantity, setQuantity] = useState(1);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Giả sử bạn có một danh sách sản phẩm tĩnh hoặc lấy từ API
     const fetchProduct = async () => {
-      // Thay thế bằng API call hoặc dữ liệu tĩnh
-      const products = [
-        { id: 1, name: 'dây tây không hạt', image: '/path/to/image1.jpg', price: 50 },
-        { id: 2, name: 'Berry', image: '/path/to/image2.jpg', price: 70 },
-        // Add more products as needed
-      ];
-
-      const foundProduct = products.find(p => p.id === parseInt(id));
-      setProduct(foundProduct);
+      getProductById(id, setProduct, setError);
     };
 
     fetchProduct();
   }, [id]);
 
   const handleAddToCart = () => {
-    // Check if product is available
     if (!product) return;
 
     const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
-    const updatedCart = [...existingCart, { ...product, quantity: 1 }];
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    const productIndex = existingCart.findIndex(p => p.id === product.id);
+
+    if (productIndex > -1) {
+      existingCart[productIndex].quantity += quantity;
+    } else {
+      existingCart.push({ ...product, quantity });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(existingCart));
     navigate('/cart');
   };
 
@@ -57,7 +57,11 @@ const Detail = () => {
           <div className="row">
             <div className="col-md-5">
               <div className="single-product-img">
-                {product && <img src={product.image} alt={product.name} />}
+                {product ? (
+                  <img src={`http://localhost:3001/uploads/${product.image}`} alt={product.name} />
+                ) : (
+                  <p>Loading...</p>
+                )}
               </div>
             </div>
             <div className="col-md-7">
@@ -68,7 +72,12 @@ const Detail = () => {
                 </p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta sint dignissimos, rem commodi cum voluptatem quae reprehenderit repudiandae ea tempora incidunt ipsa, quisquam animi perferendis eos eum modi! Tempora, earum.</p>
                 <div className="single-product-form">
-                  <input type="number" placeholder="0" />
+                  <input 
+                    type="number" 
+                    value={quantity} 
+                    min="1" 
+                    onChange={(e) => setQuantity(Number(e.target.value))}
+                  />
                   <a href="#" onClick={handleAddToCart} className="cart-btn mt-3">
                     <i className="fas fa-shopping-cart"></i> Add to Cart
                   </a>
@@ -76,10 +85,10 @@ const Detail = () => {
                 </div>
                 <h4>Share:</h4>
                 <ul className="product-share">
-                  <li><a href=""><i className="fab fa-facebook-f"></i></a></li>
-                  <li><a href=""><i className="fab fa-twitter"></i></a></li>
-                  <li><a href=""><i className="fab fa-google-plus-g"></i></a></li>
-                  <li><a href=""><i className="fab fa-linkedin"></i></a></li>
+                  <li><a href="#"><i className="fab fa-facebook-f"></i></a></li>
+                  <li><a href="#"><i className="fab fa-twitter"></i></a></li>
+                  <li><a href="#"><i className="fab fa-google-plus-g"></i></a></li>
+                  <li><a href="#"><i className="fab fa-linkedin"></i></a></li>
                 </ul>
               </div>
             </div>

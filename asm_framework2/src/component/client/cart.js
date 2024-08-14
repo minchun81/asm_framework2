@@ -159,7 +159,7 @@ const Cart = () => {
                               <i className="far fa-window-close"></i>
                             </RemoveButton>
                           </td>
-                          <td className="product-image"><img src={item.image} alt={item.name} width="100" /></td>
+                          <td className="product-image"> <img src={`http://localhost:3001/uploads/${item.image}`} alt={item.name} /></td>
                           <td className="product-name">{item.name}</td>
                           <td className="product-price">{item.price}đ</td>
                           <td className="product-quantity">
