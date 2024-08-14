@@ -3,24 +3,35 @@ import { useNavigate } from "react-router-dom";
 import Header from "./header";
 import Footer from "./footer";
 import { getProduct } from "../../services/product";
+import { getComments, addComment } from "../../services/comment"; // Import các dịch vụ cho comment
 import a from "../../assets/img/a.jpg";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  const [comments, setComments] = useState([]); // State cho danh sách bình luận
+  const [newComment, setNewComment] = useState(""); // State cho bình luận mới
+  const [commentError, setCommentError] = useState(null); // State cho lỗi của bình luận
 
   useEffect(() => {
     getProduct("http://localhost:3001/api", setProducts, setError);
+    getComments("http://localhost:3001/api", setComments, setCommentError); // Lấy danh sách bình luận
   }, []);
 
-  const addToCart = (product) => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    cart.push(product);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    navigate("/cart");
+  const handleAddComment = () => {
+    if (newComment.trim()) {
+      addComment(
+        { content: newComment },
+        (response) => {
+          setComments([...comments, response]); // Cập nhật danh sách bình luận
+          setNewComment(""); // Xóa nội dung bình luận mới
+        },
+        (error) => setCommentError(error)
+      );
+    } else {
+      setCommentError("Nội dung bình luận không được để trống.");
+    }
   };
-
   return (
     <>
       <Header />
@@ -159,7 +170,56 @@ const Home = () => {
         </div>
       </div>
       {/* Kết thúc phần sản phẩm */}
+     {/* hiển thị bình luận ở đây và cho phép bình luận ở đây */}
+     <div className="comment-section mt-50 mb-50">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-8 offset-lg-2">
+              <div className="section-title text-center">
+                <h3>Bình luận</h3>
+              </div>
+              <div className="comment-form">
+                <h4>Thêm bình luận của bạn</h4>
+                <textarea className=" form-textarea"
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                  placeholder="Viết bình luận của bạn..."
+                  rows="4" cols="80"
+                ></textarea> <br></br>
+                <button onClick={handleAddComment} className="boxed-btn btn btn-primary">
+                  Gửi bình luận
+                </button>
+                {commentError && <p className="error">{commentError}</p>}
+              </div>
+              <div className="comments-list mt-5 border">
+                {comments.length > 0 ? (
+                  comments.map((comment) => (
+                    
+                    <div key={comment.id} className="single-comment">
+  <div className="row">
+    <div className="col-12 d-flex align-items-center">
+      <div className="comment-avatar me-2">
+        <img
+          width={30}
+          src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="
+          alt="Avatar"
+        />
+      </div>
+      <div className="fw-bold">Người bình luận</div>
+    </div>
+  </div>
+  <p>{comment.content}</p>
+</div>
 
+                  ))
+                ) : (
+                  <p className="text-center">Chưa có bình luận nào.</p>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       {/* Phần banner giỏ hàng */}
       <section className="cart-banner pt-100 pb-100">
         <div className="container">

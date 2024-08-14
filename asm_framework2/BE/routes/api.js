@@ -20,6 +20,7 @@ const categoryAPIController = require('../controllers/api/category');
 const userAPIController = require('../controllers/api/user')
 const commentAPIController = require('../controllers/api/comment')
 const productAPIController = require ('../controllers/api/product');
+const commentAPIController = require ('../controllers/api/comment');
 const router = express.Router();
 
 //router category
@@ -52,13 +53,10 @@ router.get('/product/:id',productAPIController.fetchProductDetails);
 router.put('/product/:id', upload.single('image'),productAPIController.update);
 router.delete('/product/:id',productAPIController.delete);
 
+// router comments
 //comment
 router.get('/comment', commentAPIController.list);
 router.post('/comment', commentAPIController.create);
 router.get('/comment/:id', commentAPIController.fetchId);
 router.delete('/comment/:id', commentAPIController.delete);
-
-
-
-
 module.exports = router;
