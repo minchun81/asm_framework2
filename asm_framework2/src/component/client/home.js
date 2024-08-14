@@ -124,34 +124,38 @@ const Home = () => {
             </div>
           </div>
           <div className="row">
-            {products.length > 0 ? (
-              products.map((product) => (
-                <div key={product.id} className="col-lg-4 col-md-6 text-center">
-                  <div className="single-product-item">
-                    <div className="product-image">
-                      <a href={`/detail/${product.id}`}>
-                        <img src={product.image} alt={product.name} />
-                      </a>
-                    </div>
-                    <h3>{product.name}</h3>
-                    <p className="product-price">
-                      <span>Trên mỗi Kg</span> {product.price}đ
-                    </p>
-                    <a
-                      onClick={() => addToCart(product)}
-                      className="cart-btn mt-3"
-                    >
-                      <i className="fas fa-shopping-cart"></i> Thêm vào giỏ hàng
-                    </a>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className="col-12 text-center">
-                <p>Không có sản phẩm nào để hiển thị.</p>
+      {products.length > 0 ? (
+        products.map((product) => (
+          <div key={product.id} className="col-lg-4 col-md-6 text-center">
+            <div className="single-product-item">
+              <div className="product-image">
+                <a href={`/detail/${product.id}`}>
+                  <img 
+                    src={`http://localhost:3001/uploads/${product.image}`} 
+                    alt={product.name} 
+                    style={{ width: '100%', height: 'auto' }} // đảm bảo hình ảnh hiển thị đúng kích thước
+                  />
+                </a>
               </div>
-            )}
+              <h3>{product.name}</h3>
+              <p className="product-price">
+                <span>Trên mỗi Kg</span> {product.price}đ
+              </p>
+              <a
+                onClick={() => addToCart(product)}
+                className="cart-btn mt-3"
+              >
+                <i className="fas fa-shopping-cart"></i> Thêm vào giỏ hàng
+              </a>
+            </div>
           </div>
+        ))
+      ) : (
+        <div className="col-12 text-center">
+          <p>Không có sản phẩm nào để hiển thị.</p>
+        </div>
+      )}
+    </div>
         </div>
       </div>
       {/* Kết thúc phần sản phẩm */}

@@ -113,9 +113,11 @@ const ListProduct = () => {
                               <td>{product.name}</td>
                               <td>{product.category_id}</td>
                               <td>{formatPrice(product.price)}</td>
-                              <td>
-                                <img src={product.image} alt={product.name} style={{ width: '100px', height: 'auto' }} />
-                              </td>
+                                 <img 
+                                  src={`http://localhost:3001/uploads/${product.image}`} 
+                                  alt={product.name} 
+                                  style={{ width: '100px', height: 'auto' }} 
+                                />
                               <td>{product.description}</td>
                               <td className={className}>{text}</td>
                               <td>
