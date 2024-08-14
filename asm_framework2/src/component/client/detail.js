@@ -44,8 +44,8 @@ const Detail = () => {
           <div className="row">
             <div className="col-lg-8 offset-lg-2 text-center">
               <div className="breadcrumb-text">
-                <p>See more Details</p>
-                <h1>Single Product</h1>
+                <p>Xem thêm chi tiết</p>
+                <h1>Sản phẩm đơn lẻ</h1>
               </div>
             </div>
           </div>
@@ -60,17 +60,25 @@ const Detail = () => {
                 {product ? (
                   <img src={`http://localhost:3001/uploads/${product.image}`} alt={product.name} />
                 ) : (
-                  <p>Loading...</p>
+                  <p>Đang tải...</p>
                 )}
               </div>
             </div>
             <div className="col-md-7">
               <div className="single-product-content">
-                <h3>{product ? product.name : 'Loading...'}</h3>
+                <h3>{product ? product.name : 'Đang tải...'}</h3>
                 <p className="single-product-pricing">
-                  <span>Per Kg</span> {product ? product.price : 'Loading...'}đ
+                  <span>Giá mỗi Kg</span> {product ? product.price : 'Đang tải...'}đ
                 </p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta sint dignissimos, rem commodi cum voluptatem quae reprehenderit repudiandae ea tempora incidunt ipsa, quisquam animi perferendis eos eum modi! Tempora, earum.</p>
+                <p>
+  Chúng tôi cam kết mang đến cho bạn những sản phẩm thực phẩm sạch và chất lượng nhất.
+   Mỗi sản phẩm của chúng tôi đều được chọn lọc kỹ càng từ những nguồn nguyên liệu tự nhiên,
+    không chứa hóa chất độc hại hoặc phẩm màu nhân tạo. Với quy trình sản xuất nghiêm ngặt và
+     kiểm tra chất lượng thường xuyên, chúng tôi đảm bảo rằng mỗi sản phẩm không chỉ an toàn cho
+      sức khỏe mà còn giữ nguyên hương vị tự nhiên và giá trị dinh dưỡng tối ưu. Hãy trải nghiệm
+       sự khác biệt với thực phẩm sạch và chất lượng của chúng tôi, để bạn và gia đình luôn được
+        thưởng thức những bữa ăn ngon miệng và bổ dưỡng.
+</p>
                 <div className="single-product-form">
                   <input 
                     type="number" 
@@ -79,11 +87,11 @@ const Detail = () => {
                     onChange={(e) => setQuantity(Number(e.target.value))}
                   />
                   <a href="#" onClick={handleAddToCart} className="cart-btn mt-3">
-                    <i className="fas fa-shopping-cart"></i> Add to Cart
+                    <i className="fas fa-shopping-cart"></i> Thêm vào giỏ hàng
                   </a>
-                  <p><strong>Categories: </strong>Fruits, Organic</p>
+                  <p><strong>Danh mục: </strong>Trái cây, Hữu cơ</p>
                 </div>
-                <h4>Share:</h4>
+                <h4>Chia sẻ:</h4>
                 <ul className="product-share">
                   <li><a href="#"><i className="fab fa-facebook-f"></i></a></li>
                   <li><a href="#"><i className="fab fa-twitter"></i></a></li>

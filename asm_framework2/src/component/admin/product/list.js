@@ -1,6 +1,3 @@
-
-
-
 import React, { useState, useEffect } from "react";
 import Header from "../layouts/header";
 import Footer from "../layouts/footer";
@@ -28,18 +25,28 @@ const formatPrice = (price) => {
 };
 
 const ListProduct = () => {
-  const [product, setProduct] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
+  const [searchTerm, setSearchTerm] = useState(""); // Từ khóa tìm kiếm
   const [currentPage, setCurrentPage] = useState(1);
-  const [productPerPage] = useState(5); // Number of products per page
+  const [productsPerPage] = useState(5); // Số sản phẩm mỗi trang
 
   useEffect(() => {
-    getProduct("http://localhost:3001/api", setProduct, (error) => {
+    getProduct("http://localhost:3001/api", setProducts, (error) => {
       toast.error('Failed to fetch products'); // Show error message
       setError(error);
     });
   }, []);
+
+  useEffect(() => {
+    // Lọc sản phẩm dựa trên từ khóa tìm kiếm
+    const results = products.filter(product =>
+      product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredProducts(results);
+  }, [searchTerm, products]);
 
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this product?")) {
@@ -48,7 +55,7 @@ const ListProduct = () => {
         (response) => {
           toast.success('Product deleted successfully'); // Show success message
           // Làm mới danh sách sản phẩm sau khi xóa thành công
-          getProduct("http://localhost:3001/api", setProduct, (error) => {
+          getProduct("http://localhost:3001/api", setProducts, (error) => {
             toast.error('Failed to refresh products'); // Show error message
             setError(error);
           });
@@ -63,12 +70,12 @@ const ListProduct = () => {
   };
 
   // Get current products
-  const indexOfLastProduct = currentPage * productPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productPerPage;
-  const currentProduct = product.slice(indexOfFirstProduct, indexOfLastProduct);
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProduct = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
   // Tính tổng số trang
-  const totalPages = Math.ceil(product.length / productPerPage);
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
   return (
     <div>
@@ -83,6 +90,22 @@ const ListProduct = () => {
                   <div className="alert alert-success">{successMessage}</div>
                 )}
                 {error && <div className="alert alert-danger">{error}</div>}
+                
+                {/* Thêm trường tìm kiếm */}
+                <div className="search-bar mb-3">
+                  <input
+                    type="text"  className="form-control"
+                    placeholder="Tìm kiếm sản phẩm..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)} style={{
+                      padding: "0.25rem 0.5rem",  // Thay đổi kích thước padding
+                      fontSize: "0.875rem",        // Thay đổi kích thước font
+                      borderRadius: "0.2rem",      // Thay đổi bo tròn góc nếu cần
+                      width: "200px"               // Đặt kích thước chiều rộng cho input
+                    }}
+                  />
+                </div>
+
                 <span>
                   <a href="/admin/addProduct" className="btn btn-primary mb-3">
                     Thêm Sản Phẩm
@@ -113,11 +136,13 @@ const ListProduct = () => {
                               <td>{product.name}</td>
                               <td>{product.category_id}</td>
                               <td>{formatPrice(product.price)}</td>
-                                 <img 
+                              <td>
+                                <img 
                                   src={`http://localhost:3001/uploads/${product.image}`} 
                                   alt={product.name} 
                                   style={{ width: '100px', height: 'auto' }} 
                                 />
+                              </td>
                               <td>{product.description}</td>
                               <td className={className}>{text}</td>
                               <td>

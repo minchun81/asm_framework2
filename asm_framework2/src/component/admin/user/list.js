@@ -21,7 +21,7 @@ const getRoleDisplayName = (role) => {
 const getStatusDisplayName = (status) => {
   switch (status) {
     case 1:
-      return "hoạt đông";
+      return "hoạt động";
     case 0:
       return "không hoạt động";
     default:
@@ -31,7 +31,9 @@ const getStatusDisplayName = (status) => {
 
 const ListUser = () => {
   const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
   const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [usersPerPage] = useState(5); // Number of users per page
 
@@ -42,6 +44,17 @@ const ListUser = () => {
 
     fetchUsers();
   }, []);
+
+  useEffect(() => {
+    // Filter users based on searchTerm
+    const results = users.filter(user =>
+      user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredUsers(results);
+    setCurrentPage(1); // Reset to first page when search term changes
+  }, [searchTerm, users]);
 
   const handleDelete = (id) => {
     if (window.confirm("Bạn có chắc chắn muốn xóa ?")) {
@@ -63,10 +76,10 @@ const ListUser = () => {
   // Get current users
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+  const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
 
   // Tính tổng số trang
-  const totalPages = Math.ceil(users.length / usersPerPage);
+  const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
 
   return (
     <div>
@@ -82,6 +95,23 @@ const ListUser = () => {
                   Thêm Người Dùng
                 </a>
               </span>
+
+              <div className="mb-3">
+              <input
+  type="text"
+  className="form-control"
+  placeholder="Tìm kiếm người dùng"
+  value={searchTerm}
+  onChange={(e) => setSearchTerm(e.target.value)}
+  style={{
+    padding: "0.25rem 0.5rem",  // Thay đổi kích thước padding
+    fontSize: "0.875rem",        // Thay đổi kích thước font
+    borderRadius: "0.2rem",      // Thay đổi bo tròn góc nếu cần
+    width: "200px"               // Đặt kích thước chiều rộng cho input
+  }}
+/>
+
+              </div>
 
               <div className="table-responsive">
                 <table className="table user-table">

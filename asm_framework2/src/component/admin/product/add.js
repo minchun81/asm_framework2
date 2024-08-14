@@ -71,8 +71,8 @@ const AddProduct = () => {
                     id="name" 
                     value={name}
                     onChange={(e) => setProductName(e.target.value)} 
-                    className="form-control-line border-input" 
-                    placeholder="Nhập tên sản phẩm"
+                    className="form-control-line border-input"
+placeholder="Nhập tên sản phẩm"
                   />
                   {formErrors.name && <p className="text-danger">{formErrors.name}</p>}
                 </div>
@@ -139,7 +139,7 @@ const AddProduct = () => {
                     value={status}
                     onChange={(e) => setStatus(e.target.value)}
                     className="form-control-line border-input"
-                  >
+>
                     <option value="">Chọn trạng thái</option>
                     <option value="active">Active</option>
                     <option value="inactive">Inactive</option>

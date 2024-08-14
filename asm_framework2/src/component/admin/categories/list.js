@@ -10,6 +10,7 @@ const ListCategory = () => {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [categoriesPerPage] = useState(5); // Number of categories per page
+  const [searchQuery, setSearchQuery] = useState(''); // State for search query
 
   useEffect(() => {
     const fetchCategories = () => {
@@ -35,13 +36,23 @@ const ListCategory = () => {
     }
   };
 
+  // Handle search input change
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  // Filter categories based on search query
+  const filteredCategories = categories.filter(category =>
+    category.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   // Calculate the categories to display for the current page
   const indexOfLastCategory = currentPage * categoriesPerPage;
   const indexOfFirstCategory = indexOfLastCategory - categoriesPerPage;
-  const currentCategories = categories.slice(indexOfFirstCategory, indexOfLastCategory);
+  const currentCategories = filteredCategories.slice(indexOfFirstCategory, indexOfLastCategory);
 
   // Calculate total pages
-  const totalPages = Math.ceil(categories.length / categoriesPerPage);
+  const totalPages = Math.ceil(filteredCategories.length / categoriesPerPage);
 
   return (
     <div>
@@ -54,11 +65,26 @@ const ListCategory = () => {
               <h4 className="card-title">Danh Sách Danh Mục</h4>
               <span><a href='/admin/addCategory' className="btn btn-primary mb-3">Thêm Danh Mục</a></span>
 
+              {/* Search Input */}
+              <div className="search-bar mb-3">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                  className="form-control "
+                  placeholder="Tìm kiếm danh mục..."   style={{
+                    padding: "0.25rem 0.5rem",  // Thay đổi kích thước padding
+                    fontSize: "0.875rem",        // Thay đổi kích thước font
+                    borderRadius: "0.2rem",      // Thay đổi bo tròn góc nếu cần
+                    width: "200px"               // Đặt kích thước chiều rộng cho input
+                  }}
+                />
+              </div>
+
               <div className="table-responsive">
                 <table className="table user-table">
                   <thead>
-                    <tr>
-                      <th className="border-top-0">ID</th>
+<tr><th className="border-top-0">ID</th>
                       <th className="border-top-0">Tên danh mục</th>
                       <th className="border-top-0">Trạng Thái</th>
                       <th className="border-top-0">Hành Động</th>

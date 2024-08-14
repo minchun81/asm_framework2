@@ -137,7 +137,7 @@ const EditUser = () => {
                   >
                     <option value="">Chọn trạng thái</option>
                     <option value="1">hoạt động</option>
-                    <option value="0">đang hoạt động</option>
+                    <option value="0">không hoạt động</option>
                   </select>
                 </div>
                 <button type="submit" className="btn btn-success">Cập Nhật</button>
