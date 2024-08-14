@@ -15,8 +15,10 @@ const storage = multer.diskStorage({
 // Khởi tạo middleware upload
 const upload = multer({ storage: storage });
 
+
 const categoryAPIController = require('../controllers/api/category');
 const userAPIController = require('../controllers/api/user')
+const commentAPIController = require('../controllers/api/comment')
 const productAPIController = require ('../controllers/api/product');
 const router = express.Router();
 
@@ -38,7 +40,10 @@ router.put('/user/:id',userAPIController.update);
 router.delete('/user/:id',userAPIController.delete);
 
 //login
+router.post('/register', userAPIController.register);
 router.post('/login', userAPIController.login);
+router.post('/logout', userAPIController.logout);
+router.get('/profile', userAPIController.getProfile);
 
 //router product
 router.get('/product',productAPIController.list);
@@ -46,5 +51,14 @@ router.post('/product', upload.single('image'),productAPIController.create);
 router.get('/product/:id',productAPIController.fetchProductDetails);
 router.put('/product/:id', upload.single('image'),productAPIController.update);
 router.delete('/product/:id',productAPIController.delete);
+
+//comment
+router.get('/comment', commentAPIController.list);
+router.post('/comment', commentAPIController.create);
+router.get('/comment/:id', commentAPIController.fetchId);
+router.delete('/comment/:id', commentAPIController.delete);
+
+
+
 
 module.exports = router;

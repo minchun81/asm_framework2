@@ -1,10 +1,10 @@
-import {
-    all
-  } from 'redux-saga/effects';
-  import authWatch from './Auth';
+// import {
+//     all
+//   } from 'redux-saga/effects';
+//   import authWatch from './Auth';
   
-  function* middleware() {
-    yield all([authWatch(), ]);
-  }
+//   function* middleware() {
+//     yield all([authWatch(), ]);
+//   }
   
-  export default middleware;
+//   export default middleware;

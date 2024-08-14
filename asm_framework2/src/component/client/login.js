@@ -1,29 +1,46 @@
 import React from 'react';
-import Header from './header';
-import Footer from './footer';
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import '../../assets/css/login.css';
-import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { Login } from "../../redux/actions/Auth";
-
+import { login } from '../../services/Auth'; // Import hàm login từ services
+import { useCookies } from 'react-cookie';
 const LoginForm = () => {
-  const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState,
+  } = useForm();
   const navigate = useNavigate();
-
-  const onSubmit = (data) => {
-    dispatch(Login(data)); // Dispatch action login
-    navigate("/"); // Chuyển hướng đến trang admin sau khi đăng nhập thành công
+  const [cookies, setCookie] = useCookies(['token', 'role']);
+  const onSubmit = async (data) => {
+    try {
+      const result = await login(data.username, data.password);
+      console.log('Kết quả đăng nhập:', result);
+  
+      if (result && result.token && result.role !== undefined) {
+        const { token, role } = result;
+  
+        // Lưu trữ token và role vào cookie
+        setCookie('token', token);
+        setCookie('role', role.toString());
+  
+          navigate('/'); // Hoặc điều hướng đến trang khác nếu cần
+      } else {
+        console.error('Không tìm thấy token hoặc role trong phản hồi');
+        setError('username', { type: 'manual', message: 'Lỗi hệ thống: Không tìm thấy token hoặc role' });
+      }
+    } catch (error) {
+      console.error('Lỗi khi đăng nhập:', error);
+      setError('username', { type: 'manual', message: 'Tài khoản hoặc mật khẩu không đúng' });
+    }
   };
-
+  
 
   return (
     <div className='container'>
       <section className="ftco-section">
         <div className="container">
-          <div className="row justify-content-center">
+          <div className="row justify-content-center">  
             <div className="col-md-6 text-center mb-5">
               <h2 className="heading-section">Login</h2>
             </div>
@@ -36,28 +53,60 @@ const LoginForm = () => {
                     <div className="w-100">
                       <h3 className="mb-4">Sign In</h3>
                     </div>
+                    
                     <div className="w-100">
                       <p className="social-media d-flex justify-content-end">
                         <a href="#1" className="social-icon d-flex align-items-center justify-content-center">
-                          <span className="fas fa-facebook"><i className="bi bi-facebook"></i></span>
+                          <i className="bi bi-facebook"></i>
                         </a>
                         <a href="#2" className="social-icon d-flex align-items-center justify-content-center">
-                          <span className="fas fa-google"><i className="bi bi-google"></i></span>
+                          <i className="bi bi-google"></i>
                         </a>
                       </p>
                     </div>
+
                   </div>
-                  <form  className="signin-form">
+                  <form action="#" className="signin-form" onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-group mb-3">
-                      <label className="label" htmlFor="name">Username</label>
-                      <input type="text" className="form-control" placeholder="Username" required {...register("username")} />
+                      <label className="label" htmlFor="username">Username</label>
+                      <input type="text" className="form-control" placeholder="Username" {...register("username", {
+                        required: {
+                          value: true,
+                          message: "Username cannot be empty!"
+                        },
+                        minLength: {
+                          value: 5,
+                          message: "Username has at least 5 characters!"
+                        }
+                      })}/>
+                      {formState.errors.username && (
+                        <small className='text-danger'>
+                          {formState.errors.username.message}
+                        </small>
+                      )}
                     </div>
                     <div className="form-group mb-3">
                       <label className="label" htmlFor="password">Password</label>
-                      <input type="password" className="form-control" placeholder="Password" required {...register("password")} />
+                      <input type="password" className="form-control" placeholder="Password" {...register("password", {
+                        required: {
+                          value: true,
+                          message: "Password cannot be empty!"
+                        },
+                        minLength: {
+                          value: 5,
+                          message: "Password has at least 5 characters!"
+                        }
+                      })}/>
+                      {formState.errors.password && (
+                        <small className='text-danger'>
+                          {formState.errors.password.message}
+                        </small>
+                      )}
                     </div>
                     <div className="form-group">
-                      <button type="submit" onClick={handleSubmit(onSubmit)} className="form-control btn btn-primary rounded submit px-3">Sign In</button>
+                      <button type="submit" className="form-control btn btn-primary rounded submit px-3">
+                        Sign In
+                      </button>
                     </div>
                     <div className="form-group d-md-flex">
                       <div className="w-50 text-left">
