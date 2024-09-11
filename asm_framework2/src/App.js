@@ -1,13 +1,14 @@
 import React from "react";
   import './App.css';
   import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements,  Outlet,  Navigate  } from "react-router-dom";
-
+  import { useCookies } from 'react-cookie';
   import Home from './component/client/home';
   import About from './component/client/about'
   import Shop from './component/client/shop';
   import Detail from './component/client/detail';
   import Cart from './component/client/cart';
   import Contact from './component/client/contact';
+
 
   import './assets/bootstrap/css/bootstrap-grid.css.map'
   import './assets/bootstrap/css/bootstrap-grid.css'
@@ -43,6 +44,8 @@ import AddUser from "./component/admin/user/add";
 import Layout from './component/admin/index';
 import Login from "./component/client/login";
 import Register from "./component/client/register";
+// import ListCategory from "./component/admin/categories/list";
+import AdminRoute from "./PrivateRoute";
 // css
 // import "./assets/images/favicon.png";
 import './assets/plugins/chartist-js/dist/chartist.min.css';
@@ -58,29 +61,74 @@ import ProfileClient from "./component/client/profile";
     const router = createBrowserRouter(
       createRoutesFromElements(
         <Route>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/shop" element={<Shop />} />
-                <Route path="/detail" element={<Detail />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/profile" element={<ProfileClient />} />
-                <Route path="/register" element={<Register />} />
-                {/* /admin */}
-                <Route path="/admin" element={<Layout />} />
-                <Route path="/admin/profile" element={<Profile />} />
-                <Route path="/admin/category" element={<Categories />}/>
-                {/* <Route path="/admin/category/thongke" element={<ListCategorys />} /> */}
-                <Route path="/admin/editCategory"  element={<EditCategories />}/>
-                <Route path="/admin/addCategory" element={<AddCategories />}   />
-                <Route path="/admin/product"  element={<Product />} />
-                <Route path="/admin/addProduct"  element={<AddProduct />}  />
-                <Route path="/admin/editProduct"  element={<EditProduct />} />
-                <Route path="/admin/user" element={<User />} />
-                <Route path="/admin/addUser" element={<AddUser />} />
-                <Route path="/admin/editUser/:id"  element={<EditUser />}/>
-            </Route>
+        {/* Các route public */}
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/detail" element={<Detail />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<ProfileClient />} />
+
+        {/* Các route admin cần bảo vệ */}
+        <Route path="/admin" element={
+          <AdminRoute>
+            <Layout />
+          </AdminRoute>
+        } />
+        <Route path="/admin/profile" element={
+          <AdminRoute>
+            <Profile />
+          </AdminRoute>
+        } />
+        <Route path="/admin/category" element={
+          <AdminRoute>
+            <Categories />
+          </AdminRoute>
+        } />
+        <Route path="/admin/editCategory" element={
+          <AdminRoute>
+            <EditCategories />
+          </AdminRoute>
+        } />
+        <Route path="/admin/addCategory" element={
+          <AdminRoute>
+            <AddCategories />
+          </AdminRoute>
+        } />
+        <Route path="/admin/product" element={
+          <AdminRoute>
+            <Product />
+          </AdminRoute>
+        } />
+        <Route path="/admin/addProduct" element={
+          <AdminRoute>
+            <AddProduct />
+          </AdminRoute>
+        } />
+        <Route path="/admin/editProduct" element={
+          <AdminRoute>
+            <EditProduct />
+          </AdminRoute>
+        } />
+        <Route path="/admin/user" element={
+          <AdminRoute>
+            <User />
+          </AdminRoute>
+        } />
+        <Route path="/admin/addUser" element={
+          <AdminRoute>
+            <AddUser />
+          </AdminRoute>
+        } />
+        <Route path="/admin/editUser/:id" element={
+          <AdminRoute>
+            <EditUser />
+          </AdminRoute>
+        } />
+      </Route>
       )
     );
     return (

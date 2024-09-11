@@ -15,20 +15,3 @@ export const login = async (username, password) => {
     }
   }
 };
-
-// Lấy thông tin người dùng từ API
-export const getProfile = async () => {
-  try {
-    const response = await axios.get('http://localhost:3001/api/profile', {
-      withCredentials: true // Đảm bảo gửi cookie với yêu cầu
-    });
-    return response.data;
-  } catch (error) {
-    if (error.response) {
-      const errorMessage = error.response.data.message || 'Lỗi khi lấy thông tin người dùng';
-      throw new Error(errorMessage);
-    } else {
-      throw new Error('Lỗi kết nối mạng');
-    }
-  }
-};

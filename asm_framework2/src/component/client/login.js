@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { login } from '../../services/Auth'; // Import hàm login từ services
 import { useCookies } from 'react-cookie';
+import Header from "./header";
+import Footer from "./footer";
 const LoginForm = () => {
   const {
     register,
@@ -17,14 +19,17 @@ const LoginForm = () => {
       const result = await login(data.username, data.password);
       console.log('Kết quả đăng nhập:', result);
   
-      if (result && result.token && result.role !== undefined) {
-        const { token, role } = result;
+      if (result && result.token && result.role && result.username !== undefined) {
+        const { token, role, name, email, username } = result;
   
-        // Lưu trữ token và role vào cookie
+        // Lưu trữ token, role, name và email vào cookie
         setCookie('token', token);
         setCookie('role', role.toString());
+        setCookie('name', name);
+        setCookie('email', email);
+        setCookie('username', username);
   
-          navigate('/'); // Hoặc điều hướng đến trang khác nếu cần
+          navigate('/'); 
       } else {
         console.error('Không tìm thấy token hoặc role trong phản hồi');
         setError('username', { type: 'manual', message: 'Lỗi hệ thống: Không tìm thấy token hoặc role' });
@@ -37,7 +42,20 @@ const LoginForm = () => {
   
 
   return (
-    <div className='container'>
+    <div className=''>
+    <Header/>
+    <div className="breadcrumb-section breadcrumb-bg">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-8 offset-lg-2 text-center">
+              <div className="breadcrumb-text">
+                <h1>Giỏ hàng</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <section className="ftco-section">
         <div className="container">
           <div className="row justify-content-center">  
@@ -56,11 +74,11 @@ const LoginForm = () => {
                     
                     <div className="w-100">
                       <p className="social-media d-flex justify-content-end">
-                        <a href="#1" className="social-icon d-flex align-items-center justify-content-center">
-                          <i className="bi bi-facebook"></i>
+                        <a href="#" className="social-icon d-flex align-items-center justify-content-center">
+                          <span className="fas fa-facebook"><i className="bi bi-facebook"></i></span>
                         </a>
-                        <a href="#2" className="social-icon d-flex align-items-center justify-content-center">
-                          <i className="bi bi-google"></i>
+                        <a href="#" className="social-icon d-flex align-items-center justify-content-center">
+                          <span className="fas fa-google"><i className="bi bi-google"></i></span>
                         </a>
                       </p>
                     </div>

@@ -13,13 +13,16 @@ import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 const Header = () => {
     
-  const [, , removeCookie] = useCookies(['token', 'role']);
+  const [, , removeCookie] = useCookies(['token', 'role' ,'name', 'username', 'email']);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     // Xóa cookie
     removeCookie('token');
     removeCookie('role');
+    removeCookie('name');
+    removeCookie('username');
+    removeCookie('email');
 
     // Điều hướng đến trang đăng nhập
     navigate('/login');
